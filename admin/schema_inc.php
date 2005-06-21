@@ -48,8 +48,8 @@ $gBitInstaller->registerPackageInfo( NEXUS_PKG_NAME, array(
 
 // ### Default UserPermissions
 $gBitInstaller->registerUserPermissions( NEXUS_PKG_NAME, array(
-	array('bit_p_insert_nexus_item', 'Can insert menu item in a menu while editing a page', 'editor', NEXUS_PKG_NAME),
-	array('bit_p_create_nexus_menus', 'Can create new menus using Nexus', 'editor', NEXUS_PKG_NAME),
+	array('bit_p_insert_nexus_item', 'Can insert menu item in a menu while editing a page', 'editors', NEXUS_PKG_NAME),
+	array('bit_p_create_nexus_menus', 'Can create new menus using Nexus', 'editors', NEXUS_PKG_NAME),
 ) );
 
 // ### Default Preferences
