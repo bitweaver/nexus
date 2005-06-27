@@ -1,10 +1,14 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.1 $
- * @package  Nexus
+ * @version  $Revision: 1.1.1.1.2.2 $
+ * @package  nexus
  * @subpackage functions
  */
+
+/**
+* required setup
+*/
 require_once( NEXUS_PKG_PATH.'Nexus.php');
 include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
 

@@ -6,13 +6,15 @@
  * @abstract implements javascript menu using form elements
  * @author   william@elan.net
  * @copied   copied from menu.suckerfish.php originally by xing
- * @version  $Revision: 1.1.1.1.2.1 $
- * @package  Nexus
+ * @version  $Revision: 1.1.1.1.2.2 $
+ * @package  nexus
  * @subpackage plugins
  */
-
 global $gNexusSystem;
 
+/**
+* definitions
+*/
 define( 'NEXUS_PLUGIN_GUID_FORMELEMENTSMENU', 'formelements' );
 
 $pluginParams = array(

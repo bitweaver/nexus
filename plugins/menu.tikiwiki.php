@@ -4,12 +4,15 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.1.1.1.2.1 $
- * @package  Nexus
+ * @version  $Revision: 1.1.1.1.2.2 $
+ * @package  nexus
  * @subpackage plugins
  */
 global $gNexusSystem;
 
+/**
+* definitions
+*/
 // GUID should be a maximum of 16 chars
 define( 'NEXUS_PLUGIN_GUID_TIKIWIKI', 'tikiwiki' );
 

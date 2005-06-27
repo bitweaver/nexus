@@ -5,16 +5,26 @@
 * @abstract
 * @author   xing <xing@synapse.plus.com>
 * @copied   copied from LibertySystem.php
-* @version  $Revision: 1.1 $
-* @package  Nexus
+* @version  $Revision: 1.1.1.1.2.1 $
+* @package  nexus
 */
 
 // for menus that use regular HTML as output
+/**
+* definitions
+*/
 define( 'NEXUS_HTML_PLUGIN', 'nexushtml' );
 define( 'NEXUS_DEFAULT_GUID', 'suckerfish' );
 
+/**
+* required setup
+*/
 require_once( KERNEL_PKG_PATH.'BitBase.php' );
 
+/**
+* @package  nexus
+* @subpackage  NexusSystem
+*/
 class NexusSystem extends BitBase {
 
 	var $mPlugins;

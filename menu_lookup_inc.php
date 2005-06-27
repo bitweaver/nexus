@@ -1,8 +1,8 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.1 $
- * @package  Nexus
+ * @version  $Revision: 1.1.1.1.2.2 $
+ * @package  nexus
  * @subpackage functions
  */
 global $gNexus;
