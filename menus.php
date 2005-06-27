@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author   xing <xing@synapse.plus.com>
+ * @version  $Revision: 1.1.1.1.2.1 $
+ * @package  Nexus
+ * @subpackage functions
+ */
 require_once( '../bit_setup_inc.php' );
 global $gBitSystem;
 require_once( NEXUS_PKG_PATH.'Nexus.php');

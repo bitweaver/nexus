@@ -1,14 +1,15 @@
 <?php
 /**
-* Plugin for Nexus for handling menus that are based on form elements
-* such as drop-down menu using select
-*
-* @abstract implements javascript menu using form elements
-* @author   william@elan.net
-* @copied   copied from menu.suckerfish.php originally by xing
-* @version  $Revision: 1.1 $
-* @package  Nexus Plugin
-*/
+ * Plugin for Nexus for handling menus that are based on form elements
+ * such as drop-down menu using select
+ *
+ * @abstract implements javascript menu using form elements
+ * @author   william@elan.net
+ * @copied   copied from menu.suckerfish.php originally by xing
+ * @version  $Revision: 1.1.1.1.2.1 $
+ * @package  Nexus
+ * @subpackage plugins
+ */
 
 global $gNexusSystem;
 
