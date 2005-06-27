@@ -4,8 +4,8 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @copied   copied from LibertySystem.php
-* @version  $Revision: 1.1.1.1.2.1 $
+* copied   copied from LibertySystem.php
+* @version  $Revision: 1.1.1.1.2.2 $
 * @package  nexus
 */
 
