@@ -1,15 +1,19 @@
 <?php
 /**
-* Plugin for Nexus creating a hierarchial set of items using <ul> and <li> items.
-* using the appropriate css settings, this can be transformed into a dropdown menu
-*
-* @abstract creates a simple <ul> and <li> based list of items
-* @author   xing@synapse.plus.com
-* @version  $Revision: 1.1 $
-* @package  Nexus Plugin
-*/
+ * Plugin for Nexus creating a hierarchial set of items using &lt;ul&gt; and &lt;li&gt; items.
+ * using the appropriate css settings, this can be transformed into a dropdown menu
+ *
+ * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
+ * @author   xing@synapse.plus.com
+ * @version  $Revision: 1.2 $
+ * @package  nexus
+ * @subpackage plugins
+ */
 global $gNexusSystem;
 
+/**
+* definitions
+*/
 // GUID should be a maximum of 16 chars
 define( 'NEXUS_PLUGIN_GUID_SUCKERFISH', 'suckerfish' );
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author   xing <xing@synapse.plus.com>
+ * @version  $Revision: 1.2 $
+ * @package  Nexus
+ * @subpackage functions
+ */
 global $gBitSystem, $gBitUser;
 $gBitSystem->registerPackage( 'nexus', dirname( __FILE__).'/' );
 

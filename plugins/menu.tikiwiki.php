@@ -1,14 +1,18 @@
 <?php
 /**
-* Plugin for Nexus creating a tikiwiki style menu with the difference of multiple levels being available
-*
-* @abstract creates a javascript expandable menu
-* @author   xing@synapse.plus.com
-* @version  $Revision: 1.1 $
-* @package  Nexus Plugin
-*/
+ * Plugin for Nexus creating a tikiwiki style menu with the difference of multiple levels being available
+ *
+ * @abstract creates a javascript expandable menu
+ * @author   xing@synapse.plus.com
+ * @version  $Revision: 1.2 $
+ * @package  nexus
+ * @subpackage plugins
+ */
 global $gNexusSystem;
 
+/**
+* definitions
+*/
 // GUID should be a maximum of 16 chars
 define( 'NEXUS_PLUGIN_GUID_TIKIWIKI', 'tikiwiki' );
 

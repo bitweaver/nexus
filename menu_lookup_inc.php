@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author   xing <xing@synapse.plus.com>
+ * @version  $Revision: 1.2 $
+ * @package  nexus
+ * @subpackage functions
+ */
 global $gNexus;
 
 if ( !empty( $_REQUEST['menu_id'] ) && is_numeric( $_REQUEST['menu_id'] ) ) {
