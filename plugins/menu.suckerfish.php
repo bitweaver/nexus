@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.2 $
+ * @version  $Revision: 1.3 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -26,7 +26,7 @@ $pluginParams = array(
 	'menu_types' => array(
 		'nor' => array( 'label' => 'Normal', 'note' => 'Nested list of menu items using "ul" and "li" HTML tags.' ),
 		'ver' => array( 'label' => 'Vertical', 'note' => 'Vertical dropdown menu that usually resides in one of the side modules.' ),
-		'hor' => array( 'label' => 'Horizontal', 'note' => 'Horizontal menu with dropdowns similar to the top bar menu (positioning of this hasn\'t been implemented yet).' ),
+		'hor' => array( 'label' => 'Horizontal', 'note' => 'Horizontal menu with dropdowns similar to the top bar menu. If you choose this, the created menu will appear to any user who isn\'t an administrator.' ),
 	),
 	'plugin_type' => NEXUS_HTML_PLUGIN,
 	'include_js_in_head' => FALSE,
@@ -43,8 +43,13 @@ function writeSuckerfishCache( $pMenuHash ) {
 	global $smarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
-	$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
-	$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
+	if( $pMenuHash->mInfo['type'] != 'hor' ) {
+		$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
+		$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
+	} else {
+		$data = '';
+		$menu_file = 'top_bar_inc.tpl';
+	}
 	// if a permission has been set, we need to work out when to close the {if} clause
 	$permCloseIds = array();
 	$perm_close = FALSE;
@@ -91,7 +96,9 @@ function writeSuckerfishCache( $pMenuHash ) {
 	if( $pMenuHash->mInfo['type'] == 'ver' || $pMenuHash->mInfo['type'] == 'hor' ) {
 		$data .= '<div class="clear"></div>';
 	}
-	$data .= '{/bitmodule}';
+	if( $pMenuHash->mInfo['type'] != 'hor' ) {
+		$data .= '{/bitmodule}';
+	}
 	$ret[$menu_file] = $data;
 	return $ret;
 }

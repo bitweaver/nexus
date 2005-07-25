@@ -56,7 +56,11 @@
 								&nbsp;
 								<select name="type_{$plugin.plugin_guid}" id="type_{$plugin.plugin_guid}">
 									{foreach from=$plugin.menu_types key=type item=menu_type}
-										<option value="{$type}"{if $type eq $editMenu.type} selected="selected"{/if}>{$menu_type.label}</option>
+										{if $type == hor and $use_custom_top_bar}
+											<option value="">{tr}Only one horizontal menu can exist.{/tr}</option>
+										{else}
+											<option value="{$type}"{if $type eq $editMenu.type} selected="selected"{/if}>{$menu_type.label}</option>
+										{/if}
 									{/foreach}
 								</select>
 								{formhelp note=$plugin.plugin_description}
