@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.2 $
+ * @version  $Revision: 1.1.1.1.2.3 $
  * @package  nexus
  * @subpackage functions
  */
@@ -18,7 +18,7 @@ $gBitSystem->verifyPermission( 'bit_p_create_nexus_menus' );
 
 if( isset( $_REQUEST['action'] ) ) {
 	if( $_REQUEST['action'] == 'edit' ) {
-		$smarty->assign( 'editMenu', $gNexus->getMenu() );
+		$gBitSmarty->assign( 'editMenu', $gNexus->getMenu() );
 	}
 	if( $_REQUEST['action'] == 'remove' ) {
 		$formHash['remove'] = TRUE;
@@ -70,9 +70,9 @@ if( isset( $_REQUEST['store_menu'] ) ) {
 	$formfeedback['success'] = 'The menu \''.$gNexus->mInfo['title'].'\' was updated successfully.';
 }
 
-$smarty->assign( 'menuList', $gNexus->getMenuList() );
+$gBitSmarty->assign( 'menuList', $gNexus->getMenuList() );
 if( isset( $formfeedback ) ) {
-	$smarty->assign( 'formfeedback', $formfeedback );
+	$gBitSmarty->assign( 'formfeedback', $formfeedback );
 }
 
 $gBitSystem->setBrowserTitle( 'Nexus Menus' );

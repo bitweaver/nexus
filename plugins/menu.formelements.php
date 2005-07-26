@@ -6,7 +6,7 @@
  * @abstract implements javascript menu using form elements
  * @author   william@elan.net
  * copied   copied from menu.suckerfish.php originally by xing
- * @version  $Revision: 1.1.1.1.2.3 $
+ * @version  $Revision: 1.1.1.1.2.4 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -43,7 +43,7 @@ $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_FORMELEMENTSMENU, $pluginParams
 * @public
 */
 function writeFormMenuCache( $pMenuHash ) {
-	global $smarty;
+	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
 	$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
@@ -64,7 +64,7 @@ function writeFormMenuCache( $pMenuHash ) {
 		if( $item['first'] ) {
 			$data .= '<form id="menu_nexus'.$pMenuHash->mInfo['menu_id'].'" action="">';
 			if ( $pMenuHash->mInfo['type'] == 'qdd' ) {
-				$data .= $smarty->fetch( NEXUS_PKG_PATH.'templates/formelements/start_center.tpl' );
+				$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/formelements/start_center.tpl' );
 			}
 			$data .= '<select ';
 			if ( $pMenuHash->mInfo['type'] == 's3' ) {
@@ -105,7 +105,7 @@ function writeFormMenuCache( $pMenuHash ) {
 		if( $item['last'] ) {
 			$data .= '</select>' ;
 			if ( $pMenuHash->mInfo['type'] == 'qdd' ) {
-				$data .= $smarty->fetch( NEXUS_PKG_PATH.'templates/formelements/finish_center.tpl' );
+				$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/formelements/finish_center.tpl' );
 			}
 			$data .= '</form>' ;
 		} else {
@@ -118,8 +118,8 @@ function writeFormMenuCache( $pMenuHash ) {
 					$permCloseIds[] = $item['item_id'];
 				}
 			}
-			$smarty->assign( 'item', $item );
-			$data .= $smarty->fetch( NEXUS_PKG_PATH.'templates/formelements/item.tpl' );
+			$gBitSmarty->assign( 'item', $item );
+			$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/formelements/item.tpl' );
 		}
 	}
 	$data .= '{/bitmodule}';

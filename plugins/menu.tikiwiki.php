@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.1.1.1.2.2 $
+ * @version  $Revision: 1.1.1.1.2.3 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -40,7 +40,7 @@ $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_TIKIWIKI, $pluginParams );
 * @return full menu string ready for printing (key serves as cache file path)
 */
 function writeTikiWikiCache( $pMenuHash ) {
-	global $smarty;
+	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
 	$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
@@ -55,7 +55,7 @@ function writeTikiWikiCache( $pMenuHash ) {
 		if( $item['first'] ) {
 			$togid = 'togid'.$item['item_id'];
 			$data .= '<div id="'.$togid.'" ';
-			$data .= 'style="display:{if $smarty.cookies.'.$togid.' eq \'c\'}none{elseif $smarty.cookies.'.$togid.' eq \'o\'}block{else}';
+			$data .= 'style="display:{if $gBitSmarty.cookies.'.$togid.' eq \'c\'}none{elseif $gBitSmarty.cookies.'.$togid.' eq \'o\'}block{else}';
 			if( $key != 0 && preg_match( "/c$/", $type ) ) {
 				$data .= 'none';
 			} else {
@@ -95,11 +95,11 @@ function writeTikiWikiCache( $pMenuHash ) {
 				} elseif( $type == 'ieo' || $type == 'iec' ) {
 					$item['expand_url'] = "javascript:icntoggle('".$tog_next."');";
 				}
-				$smarty->assign( 'tog_next', $tog_next );
+				$gBitSmarty->assign( 'tog_next', $tog_next );
 			}
-			$smarty->assign( 'item', $item );
-			$smarty->assign( 'type', $type );
-			$data .= $smarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_TIKIWIKI.'/item.tpl' );
+			$gBitSmarty->assign( 'item', $item );
+			$gBitSmarty->assign( 'type', $type );
+			$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_TIKIWIKI.'/item.tpl' );
 		}
 	}
 	$data .= '</div><!-- end .menu -->';

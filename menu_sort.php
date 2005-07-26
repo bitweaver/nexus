@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.2 $
+ * @version  $Revision: 1.1.1.1.2.3 $
  * @package  nexus
  * @subpackage functions
  */
@@ -36,11 +36,11 @@ if( isset( $_REQUEST['move_item'] ) && isset( $_REQUEST['item_id'] ) ) {
 }
 
 if( isset( $_REQUEST['tab'] ) ) {
-	$smarty->assign( $_REQUEST['tab'].'TabSelect', 'tdefault' );
+	$gBitSmarty->assign( $_REQUEST['tab'].'TabSelect', 'tdefault' );
 }
 
 // this is the module filename
-$smarty->assign( 'nexus_file', strtolower( 'mod_'.preg_replace( "/ /", "_", $gNexus->mInfo['title'] ).'_'.$gNexus->mInfo['menu_id'].'.tpl' ) );
+$gBitSmarty->assign( 'nexus_file', strtolower( 'mod_'.preg_replace( "/ /", "_", $gNexus->mInfo['title'] ).'_'.$gNexus->mInfo['menu_id'].'.tpl' ) );
 
 $gBitSystem->setBrowserTitle( 'Nexus Menus' );
 $gBitSystem->display( 'bitpackage:nexus/menu_sort.tpl' );

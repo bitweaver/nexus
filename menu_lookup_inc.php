@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.2 $
+ * @version  $Revision: 1.1.1.1.2.3 $
  * @package  nexus
  * @subpackage functions
  */
@@ -15,6 +15,6 @@ if ( !empty( $_REQUEST['menu_id'] ) && is_numeric( $_REQUEST['menu_id'] ) ) {
 	$menuId = NULL;
 }
 
-$smarty->assign_by_ref( 'gNexus', $gNexus );
-$smarty->assign_by_ref( 'menuId', $menuId );
+$gBitSmarty->assign_by_ref( 'gNexus', $gNexus );
+$gBitSmarty->assign_by_ref( 'menuId', $menuId );
 ?>

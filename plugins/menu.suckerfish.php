@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.1.1.1.2.4 $
+ * @version  $Revision: 1.1.1.1.2.5 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -40,7 +40,7 @@ $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_SUCKERFISH, $pluginParams );
 * @return full menu string ready for printing (key serves as cache file path)
 */
 function writeSuckerfishCache( $pMenuHash ) {
-	global $smarty;
+	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
 	if( $pMenuHash->mInfo['type'] != 'hor' ) {
@@ -89,8 +89,8 @@ function writeSuckerfishCache( $pMenuHash ) {
 				}
 			}
 			$data .= '<li>';
-			$smarty->assign( 'item', $item );
-			$data .= $smarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_SUCKERFISH.'/item.tpl' );
+			$gBitSmarty->assign( 'item', $item );
+			$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_SUCKERFISH.'/item.tpl' );
 		}
 	}
 	if( $pMenuHash->mInfo['type'] == 'ver' || $pMenuHash->mInfo['type'] == 'hor' ) {
