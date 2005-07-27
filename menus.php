@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.3 $
+ * @version  $Revision: 1.1.1.1.2.4 $
  * @package  nexus
  * @subpackage functions
  */
@@ -20,6 +20,7 @@ if( isset( $_REQUEST['action'] ) ) {
 	if( $_REQUEST['action'] == 'edit' ) {
 		$gBitSmarty->assign( 'editMenu', $gNexus->getMenu() );
 	}
+
 	if( $_REQUEST['action'] == 'remove' ) {
 		$formHash['remove'] = TRUE;
 		$formHash['menu_id'] = $menuId;
@@ -30,6 +31,7 @@ if( isset( $_REQUEST['action'] ) ) {
 		);
 		$gBitSystem->confirmDialog( $formHash,$msgHash );
 	}
+
 	if( $_REQUEST['action'] == 'remove_dead' ) {
 		if( $deadLinks = $gNexus->expungeDeadItems( $menuId ) ) {
 			$deadHtml = '<ul>';
@@ -42,6 +44,7 @@ if( isset( $_REQUEST['action'] ) ) {
 			$formfeedback['success'] = 'No dead links were found for this menu.';
 		}
 	}
+
 	if( $_REQUEST['action'] == 'convert_structure' ) {
 		if( $gNexus->importStructure( $_REQUEST['structure_id'] ) ) {
 			$formfeedback['success'] = 'The structure was successfully imported as menu.';
@@ -50,6 +53,7 @@ if( isset( $_REQUEST['action'] ) ) {
 		}
 	}
 }
+
 if( isset( $_REQUEST['confirm'] ) ) {
 	if( $gNexus->expungeMenu( $menuId ) ) {
 		header ("Location: ".NEXUS_PKG_URL."menus.php");

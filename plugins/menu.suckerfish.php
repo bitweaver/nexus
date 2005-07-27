@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.1.1.1.2.5 $
+ * @version  $Revision: 1.1.1.1.2.6 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -26,7 +26,7 @@ $pluginParams = array(
 	'menu_types' => array(
 		'nor' => array( 'label' => 'Normal', 'note' => 'Nested list of menu items using "ul" and "li" HTML tags.' ),
 		'ver' => array( 'label' => 'Vertical', 'note' => 'Vertical dropdown menu that usually resides in one of the side modules.' ),
-		'hor' => array( 'label' => 'Horizontal', 'note' => 'Horizontal menu with dropdowns similar to the top bar menu. If you choose this, the created menu will appear to any user who isn\'t an administrator.' ),
+		'hor' => array( 'label' => 'Horizontal', 'note' => 'Horizontal menu with dropdowns similar to the top bar menu. Using this setting will <strong>replace</strong> the top menu bar with this menu for any non-admin user.' ),
 	),
 	'plugin_type' => NEXUS_HTML_PLUGIN,
 	'include_js_in_head' => FALSE,

@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.1.1.1.2.3 $
+ * @version  $Revision: 1.1.1.1.2.4 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -24,9 +24,11 @@ $pluginParams = array(
 	'edit_label' => 'TikiWiki menus',
 	'menu_types' => array(
 		'heo' => array( 'label' => 'head expands - open', 'note' => 'Head item serves merely as container and clicking on it will expand the underlying items (initial setting is open).' ),
-		'hec' => array( 'label' => 'head expands - closed', 'note' => 'Initial setting is closed' ),
+		'iho' => array( 'label' => 'head expands (with icon) - open', 'note' => 'Head item serves merely as container and clicking on it will expand the underlying items (initial setting is open). Displays an icon along with it.' ),
+		'hec' => array( 'label' => 'head expands - closed', 'note' => 'Initial setting is closed.' ),
+		'ihc' => array( 'label' => 'head expands (with icon) - closed', 'note' => 'Initial setting is closed. Displays an icon along with it.' ),
 		'ieo' => array( 'label' => 'icon expands - open', 'note' => 'Menu head item serves as link and there is an icon to expand the menu (initial setting is open).' ),
-		'iec' => array( 'label' => 'icon expands - closed', 'note' => 'Initial setting is closed' ),
+		'iec' => array( 'label' => 'icon expands - closed', 'note' => 'Initial setting is closed.' ),
 	),
 	'plugin_type' => NEXUS_HTML_PLUGIN,
 	'include_js_in_head' => FALSE,
@@ -55,7 +57,7 @@ function writeTikiWikiCache( $pMenuHash ) {
 		if( $item['first'] ) {
 			$togid = 'togid'.$item['item_id'];
 			$data .= '<div id="'.$togid.'" ';
-			$data .= 'style="display:{if $gBitSmarty.cookies.'.$togid.' eq \'c\'}none{elseif $gBitSmarty.cookies.'.$togid.' eq \'o\'}block{else}';
+			$data .= 'style="display:{if $smarty.cookies.'.$togid.' eq \'c\'}none{elseif $smarty.cookies.'.$togid.' eq \'o\'}block{else}';
 			if( $key != 0 && preg_match( "/c$/", $type ) ) {
 				$data .= 'none';
 			} else {
@@ -92,7 +94,7 @@ function writeTikiWikiCache( $pMenuHash ) {
 				$tog_next = 'togid'.$pMenuHash->mInfo['tree'][$key+1]['item_id'];
 				if( $type == 'heo' || $type == 'hec' ) {
 					$item['display_url'] = "javascript:toggle('".$tog_next."');";
-				} elseif( $type == 'ieo' || $type == 'iec' ) {
+				} else {
 					$item['expand_url'] = "javascript:icntoggle('".$tog_next."');";
 				}
 				$gBitSmarty->assign( 'tog_next', $tog_next );
