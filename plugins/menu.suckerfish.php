@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.1.1.1.2.6 $
+ * @version  $Revision: 1.1.1.1.2.7 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -26,7 +26,7 @@ $pluginParams = array(
 	'menu_types' => array(
 		'nor' => array( 'label' => 'Normal', 'note' => 'Nested list of menu items using "ul" and "li" HTML tags.' ),
 		'ver' => array( 'label' => 'Vertical', 'note' => 'Vertical dropdown menu that usually resides in one of the side modules.' ),
-		'hor' => array( 'label' => 'Horizontal', 'note' => 'Horizontal menu with dropdowns similar to the top bar menu. Using this setting will <strong>replace</strong> the top menu bar with this menu for any non-admin user.' ),
+		'hor' => array( 'label' => 'Horizontal', 'note' => 'Horizontal menu which you can use to insert in or replace the top menu bar.' ),
 	),
 	'plugin_type' => NEXUS_HTML_PLUGIN,
 	'include_js_in_head' => FALSE,
@@ -43,6 +43,7 @@ function writeSuckerfishCache( $pMenuHash ) {
 	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
+
 	if( $pMenuHash->mInfo['type'] != 'hor' ) {
 		$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
 		$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
@@ -54,10 +55,14 @@ function writeSuckerfishCache( $pMenuHash ) {
 	$permCloseIds = array();
 	$perm_close = FALSE;
 	$next_cycle = FALSE;
+
 	foreach( $pMenuHash->mInfo['tree'] as $key => $item ) {
 		if( $item['first'] ) {
 			if( $key == 0 ) {
-				$data .= '<ul id="nexus'.$pMenuHash->mInfo['menu_id'].'" class="menu '.$pMenuHash->mInfo['type'].'">';
+				// don't print the first ul if it's a horizontal menu - needed to insert in top bar
+				if( $pMenuHash->mInfo['type'] != 'hor' ) {
+					$data .= '<ul id="nexus'.$pMenuHash->mInfo['menu_id'].'" class="menu '.$pMenuHash->mInfo['type'].'">';
+				}
 			} else {
 				$data .= '<ul>';
 			}
@@ -76,6 +81,7 @@ function writeSuckerfishCache( $pMenuHash ) {
 				$perm_close = FALSE;
 			}
 		}
+
 		if( $item['last'] ) {
 			$data .= '</ul>';
 		} else {
@@ -93,13 +99,22 @@ function writeSuckerfishCache( $pMenuHash ) {
 			$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_SUCKERFISH.'/item.tpl' );
 		}
 	}
-	if( $pMenuHash->mInfo['type'] == 'ver' || $pMenuHash->mInfo['type'] == 'hor' ) {
+
+	// remove last </ul>
+	if( $pMenuHash->mInfo['type'] == 'hor' ) {
+		$data = preg_replace( "/<\/ul>$/", '', $data );
+	}
+
+	if( $pMenuHash->mInfo['type'] == 'ver' ) {
 		$data .= '<div class="clear"></div>';
 	}
+
 	if( $pMenuHash->mInfo['type'] != 'hor' ) {
 		$data .= '{/bitmodule}';
 	}
+
 	$ret[$menu_file] = $data;
+
 	return $ret;
 }
 ?>

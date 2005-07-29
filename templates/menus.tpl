@@ -56,7 +56,7 @@
 								&nbsp;
 								<select name="type_{$plugin.plugin_guid}" id="type_{$plugin.plugin_guid}">
 									{foreach from=$plugin.menu_types key=type item=menu_type}
-										{if $type == hor and $use_custom_top_bar}
+										{if $type eq hor and $use_custom_top_bar and !$editMenu.type eq 'hor'}
 											<option value="">{tr}Only one horizontal menu can exist.{/tr}</option>
 										{else}
 											<option value="{$type}"{if $type eq $editMenu.type} selected="selected"{/if}>{$menu_type.label}</option>
@@ -81,6 +81,26 @@
 				<input type="submit" name="store_menu" value="Save Settings" />
 			</div>
 		{/form}
+
+		{if $use_custom_top_bar}
+			{form legend="Top Bar Menu Position"}
+				<div class="row">
+					{formlabel label="Position" for="top_bar_position"}
+					{forminput}
+						<select name="top_bar_position" id="top_bar_position">
+							<option value="right" {if $gBitSystemPrefs.top_bar_position eq 'right'}selected="selected"{/if}>{tr}To the right of the bitweaver menu{/tr}</option>
+							<option value="left" {if $gBitSystemPrefs.top_bar_position eq 'left'}selected="selected"{/if}>{tr}To the left of the bitweaver menu{/tr}</option>
+							<option value="replace" {if $gBitSystemPrefs.top_bar_position eq 'replace'}selected="selected"{/if}>{tr}Replace the bitweaver menu{/tr}</option>
+						</select>
+						{formhelp note="Here you can set the position of where your custom top bar menu should be."}
+					{/forminput}
+				</div>
+
+				<div class="row submit">
+					<input type="submit" name="store_pos" value="Save Settings" />
+				</div>
+			{/form}
+		{/if}
 
 		<table class="data" summary="{tr}List of menus that can be used on this site{/tr}">
 			<caption>{tr}Existing menus{/tr}</caption>
@@ -127,6 +147,16 @@
 				</tr>
 			{/foreach}
 		</table>
+
+		{if $menuList}
+			<div class="row">
+				{formlabel label="Menu Cache" for=""}
+				{forminput}
+					{smartlink ititle="Rewrite Menu Cache" action=rewrite_cache}
+					{formhelp note="This will remove any old files in the nexus menu cache directory and rewrite any exiting menus. Useful when you have renamed menus."}
+				{/forminput}
+			</div>
+		{/if}
 	</div><!-- end .body -->
 </div><!-- end .nexus -->
 {/strip}
