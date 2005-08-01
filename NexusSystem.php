@@ -5,7 +5,7 @@
 * @abstract
 * @author   xing <xing@synapse.plus.com>
 * copied   copied from LibertySystem.php
-* @version  $Revision: 1.2 $
+* @version  $Revision: 1.3 $
 * @package  nexus
 */
 
@@ -139,5 +139,5 @@ class NexusSystem extends BitBase {
 global $gNexusSystem;
 $gNexusSystem = new NexusSystem();
 $gNexusSystem->scanPlugins();
-$smarty->assign_by_ref( 'gNexusSystem', $gNexusSystem );
+$gBitSmarty->assign_by_ref( 'gNexusSystem', $gNexusSystem );
 ?>

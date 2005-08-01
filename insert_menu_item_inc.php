@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.2 $
+ * @version  $Revision: 1.3 $
  * @package  nexus
  * @subpackage functions
  */
@@ -13,7 +13,7 @@ require_once( NEXUS_PKG_PATH.'Nexus.php');
 include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
 
 $nexusList = $gNexus->getMenuList();
-$smarty->assign( 'nexusList', $nexusList );
+$gBitSmarty->assign( 'nexusList', $nexusList );
 
 // nexusHash['title'] must already be set before calling this file
 if( isset( $nexusHash ) && !empty( $_REQUEST['nexus']['menu_id'] ) ) {
@@ -32,8 +32,8 @@ if( isset( $nexusHash ) && !empty( $_REQUEST['nexus']['menu_id'] ) ) {
 	foreach( $nexusList as $menu ) {
 		foreach( $menu['items'] as $item ) {
 			if( !empty( $item['rsrc'] ) && $item['rsrc'] == $gContent->mContentId && $item['rsrc_type'] == 'content_id' ) {
-				$smarty->assign( 'inNexusMenu', $menu );
-				$smarty->assign( 'inNexusMenuItem', $item['item_id'] );
+				$gBitSmarty->assign( 'inNexusMenu', $menu );
+				$gBitSmarty->assign( 'inNexusMenuItem', $item['item_id'] );
 			}
 		}
 	}

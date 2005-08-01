@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.2 $
+* @version  $Revision: 1.3 $
 * @package  nexus
 */
 
@@ -709,6 +709,33 @@ class Nexus extends NexusSystem {
 	* @param $pMenuId menu id of the menu for which we want to create a cache file
 	* @return number of errors encountered
 	*/
+	function rewriteModuleCache() {
+		if( is_dir( $path = TEMP_PKG_PATH.'nexus/modules' ) ) {
+			$handle = opendir( $path );
+			while( false!== ( $cache_file = readdir( $handle ) ) ) {
+				if( $cache_file != "." && $cache_file != ".." ) {
+					unlink( $path.'/'.$cache_file );
+				}
+			}
+
+			// get the menus and rewrite the cache, one by one
+			$menuList = $this->getMenuList();
+			if( !empty( $menuList ) ) {
+				foreach( $menuList as $menu ) {
+					$this->writeModuleCache( $menu['menu_id'] );
+				}
+			}
+		} else {
+			$this->mErrors['rewrite'][] = "The cache directory for nexus menus doesn't exist";
+		}
+		return( count( $this->mErrors ) == 0 );
+	}
+
+	/**
+	* writes cache files to where the plugins determine
+	* @param $pMenuId menu id of the menu for which we want to create a cache file
+	* @return number of errors encountered
+	*/
 	function writeModuleCache( $pMenuId=NULL ) {
 		if( $this->isValid() && !isset( $pMenuId ) ) {
 			$pMenuId = $this->mInfo['menu_id'];
@@ -726,7 +753,7 @@ class Nexus extends NexusSystem {
 				$moduleCache = $func( $cacheMenu );
 			}
 		}
-		if( isset( $moduleCache ) ) {
+		if( !empty( $moduleCache ) ) {
 			foreach( $moduleCache as $cache_file => $cache_string ) {
 				$h = fopen( TEMP_PKG_PATH.'nexus/modules/'.$cache_file, 'w' );
 				if( isset( $h ) ) {

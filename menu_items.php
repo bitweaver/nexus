@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.2 $
+ * @version  $Revision: 1.3 $
  * @package  nexus
  * @subpackage functions
  */
@@ -22,14 +22,14 @@ if( empty( $_REQUEST['menu_id'] ) ) {
 
 // get content and pass it on
 include_once( LIBERTY_PKG_PATH.'get_content_list_inc.php' );
-$smarty->assign( 'contentSelect', $contentSelect );
-$smarty->assign( 'contentTypes', $contentTypes );
+$gBitSmarty->assign( 'contentSelect', $contentSelect );
+$gBitSmarty->assign( 'contentTypes', $contentTypes );
 
 $cList[''] = '';
 foreach( $contentList['data'] as $cItem ) {
 	$cList[$contentTypes[$cItem['content_type_guid']]][$cItem['content_id']] = $cItem['title'].' [id: '.$cItem['content_id'].']';
 }
-$smarty->assign( 'contentList', $cList );
+$gBitSmarty->assign( 'contentList', $cList );
 
 // store item
 if( isset( $_REQUEST['store_item'] ) ) {
@@ -59,17 +59,17 @@ if( isset( $_REQUEST['remove_item'] ) && is_array( $_REQUEST['remove_item'] ) ) 
 }
 
 if( !empty( $_REQUEST['item_id'] ) ) {
-	$smarty->assign( 'editItem', $gNexus->mInfo['items'][$_REQUEST['item_id']] );
+	$gBitSmarty->assign( 'editItem', $gNexus->mInfo['items'][$_REQUEST['item_id']] );
 }
 // when we use the content type dropdown or the filter, we need to pass back the information to the tpl
 if( isset( $_REQUEST['find_objects'] ) && !isset( $_REQUEST['store_item'] ) ) {
-	$smarty->assign( 'editItem', $_REQUEST );
+	$gBitSmarty->assign( 'editItem', $_REQUEST );
 }
 if( isset( $_REQUEST['tab'] ) ) {
-	$smarty->assign( $_REQUEST['tab'].'TabSelect', 'tdefault' );
+	$gBitSmarty->assign( $_REQUEST['tab'].'TabSelect', 'tdefault' );
 }
 if( isset( $formfeedback ) ) {
-	$smarty->assign( 'formfeedback', $formfeedback );
+	$gBitSmarty->assign( 'formfeedback', $formfeedback );
 }
 
 // get all available perms only when the admin is visiting here.
@@ -82,7 +82,7 @@ $perms['no permission'][''] = 'none';
 foreach( $tmpPerms as $perm => $info ) {
 	$perms[$info['package']][$perm] = $perm;
 }
-$smarty->assign( 'perms', $perms );
+$gBitSmarty->assign( 'perms', $perms );
 
 // get a list of available resource types
 $rsrcTypes = array(
@@ -92,7 +92,7 @@ $rsrcTypes = array(
 	'menu_id' => 'Menu ID',
 //	'gallery_list' => 'Gallery List', // this is not in use yet - xing
 );
-$smarty->assign( 'rsrcTypes', $rsrcTypes );
+$gBitSmarty->assign( 'rsrcTypes', $rsrcTypes );
 
 // get all available menus that can be included
 $menuHashList = array();
@@ -104,7 +104,7 @@ foreach( $menuHashList as $menu ) {
 	}
 }
 if( count( $menuList ) > 1 ) {
-	$smarty->assign( 'menuList', $menuList );
+	$gBitSmarty->assign( 'menuList', $menuList );
 }
 
 $gBitSystem->setBrowserTitle( 'Nexus Menus' );

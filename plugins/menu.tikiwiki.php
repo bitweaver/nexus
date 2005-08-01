@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.2 $
+ * @version  $Revision: 1.3 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -24,9 +24,11 @@ $pluginParams = array(
 	'edit_label' => 'TikiWiki menus',
 	'menu_types' => array(
 		'heo' => array( 'label' => 'head expands - open', 'note' => 'Head item serves merely as container and clicking on it will expand the underlying items (initial setting is open).' ),
-		'hec' => array( 'label' => 'head expands - closed', 'note' => 'Initial setting is closed' ),
+		'iho' => array( 'label' => 'head expands (with icon) - open', 'note' => 'Head item serves merely as container and clicking on it will expand the underlying items (initial setting is open). Displays an icon along with it.' ),
+		'hec' => array( 'label' => 'head expands - closed', 'note' => 'Initial setting is closed.' ),
+		'ihc' => array( 'label' => 'head expands (with icon) - closed', 'note' => 'Initial setting is closed. Displays an icon along with it.' ),
 		'ieo' => array( 'label' => 'icon expands - open', 'note' => 'Menu head item serves as link and there is an icon to expand the menu (initial setting is open).' ),
-		'iec' => array( 'label' => 'icon expands - closed', 'note' => 'Initial setting is closed' ),
+		'iec' => array( 'label' => 'icon expands - closed', 'note' => 'Initial setting is closed.' ),
 	),
 	'plugin_type' => NEXUS_HTML_PLUGIN,
 	'include_js_in_head' => FALSE,
@@ -40,7 +42,7 @@ $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_TIKIWIKI, $pluginParams );
 * @return full menu string ready for printing (key serves as cache file path)
 */
 function writeTikiWikiCache( $pMenuHash ) {
-	global $smarty;
+	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
 	$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
@@ -92,14 +94,14 @@ function writeTikiWikiCache( $pMenuHash ) {
 				$tog_next = 'togid'.$pMenuHash->mInfo['tree'][$key+1]['item_id'];
 				if( $type == 'heo' || $type == 'hec' ) {
 					$item['display_url'] = "javascript:toggle('".$tog_next."');";
-				} elseif( $type == 'ieo' || $type == 'iec' ) {
+				} else {
 					$item['expand_url'] = "javascript:icntoggle('".$tog_next."');";
 				}
-				$smarty->assign( 'tog_next', $tog_next );
+				$gBitSmarty->assign( 'tog_next', $tog_next );
 			}
-			$smarty->assign( 'item', $item );
-			$smarty->assign( 'type', $type );
-			$data .= $smarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_TIKIWIKI.'/item.tpl' );
+			$gBitSmarty->assign( 'item', $item );
+			$gBitSmarty->assign( 'type', $type );
+			$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_TIKIWIKI.'/item.tpl' );
 		}
 	}
 	$data .= '</div><!-- end .menu -->';
