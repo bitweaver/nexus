@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.5 $
+ * @version  $Revision: 1.1.1.1.2.6 $
  * @package  nexus
  * @subpackage functions
  */
@@ -34,7 +34,7 @@ if( isset( $_REQUEST['action'] ) ) {
 	}
 
 	if( $_REQUEST['action'] == 'rewrite_cache' ) {
-		if( $gNexus->rewriteModuleCache() ) {
+		if( $gNexus->rewriteMenuCache() ) {
 			$formfeedback['success'] = 'The complete menu cache has been rewritten.';
 		}
 	}

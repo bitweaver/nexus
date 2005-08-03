@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.2 $
+* @version  $Revision: 1.1.1.1.2.3 $
 * @package  nexus
 */
 
@@ -249,18 +249,17 @@ class Nexus extends NexusSystem {
 	* @return number of errors encountered
 	*/
 	function expungeMenu( $pMenuId ) {
-		// first we remove the cache file
-		$delMenu = $this->getMenu( $pMenuId );
-		$menu_name = preg_replace( "/ +/", "_", trim( $delMenu['title'] ) );
-		if( !unlink( TEMP_PKG_PATH.'nexus/modules/mod_'.$menu_name.'_'.$pMenuId.'.tpl' ) ) {
-			$this->mErrors['error'] = "There was a problem removing the menu cache file.";
-		}
 		// delete menu items
 		$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `menu_id`=?";
 		$this->query( $query, array( $pMenuId ) );
+
 		// delete menu
 		$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_nexus_menus` WHERE `menu_id`=?";
 		$this->query( $query, array( $pMenuId ) );
+
+		// rewrite the entire cache, just to make sure everything is in order
+		$this->rewriteMenuCache();
+
 		// now that the menu is gone, update the MSIE js file
 		$this->writeMsieJs( $pMenuId );
 		return( count( $this->mErrors ) == 0 );
@@ -451,7 +450,7 @@ class Nexus extends NexusSystem {
 				$ret = $pParamHash['item_id'];
 			}
 			$this->mDb->CompleteTrans();
-			$this->writeModuleCache( $pParamHash['menu_id'] );
+			$this->rewriteMenuCache();
 		} else {
 			return( count( $this->mErrors ) == 0 );
 		}
@@ -705,11 +704,11 @@ class Nexus extends NexusSystem {
 	}
 
 	/**
-	* writes cache files to where the plugins determine
+	* rewrites all menu cache files. particularly important when menus have been renamed or deleted
 	* @param $pMenuId menu id of the menu for which we want to create a cache file
 	* @return number of errors encountered
 	*/
-	function rewriteModuleCache() {
+	function rewriteMenuCache() {
 		if( is_dir( $path = TEMP_PKG_PATH.'nexus/modules' ) ) {
 			$handle = opendir( $path );
 			while( false!== ( $cache_file = readdir( $handle ) ) ) {
