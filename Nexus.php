@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.3 $
+* @version  $Revision: 1.1.1.1.2.4 $
 * @package  nexus
 */
 
@@ -394,7 +394,7 @@ class Nexus extends NexusSystem {
 		if( empty( $pParamHash['menu_id'] ) || !is_numeric( $pParamHash['menu_id'] ) ) {
 			$this->mErrors['error'] = 'Could not store menu item. Invalid menu id. Menu id: '.$pParamHash['menu_id'];
 		} else {
-			$this->mDb->StartTrans();
+			$this->StartTrans();
 			if( empty( $pParamHash['parent_id'] ) || !is_numeric( $pParamHash['parent_id'] ) ) {
 				$pParamHash['parent_id'] = 0;
 				// if no parent_id is not known, but we have an after_ref_id, we use that to work out the parent_id
@@ -411,7 +411,7 @@ class Nexus extends NexusSystem {
 					$result = $this->query( $query, array( (int)$pParamHash['max'], (int)$pParamHash['parent_id'] ) );
 				}
 			}
-			$this->mDb->CompleteTrans();
+			$this->CompleteTrans();
 			$pParamHash['max']++;
 			// if we get passed the position of where the item is to go, we pass it to 'max' -- used for importStructure()
 			if( !empty( $pParamHash['pos'] ) && is_numeric( $pParamHash['pos'] ) && empty( $pParamHash['after_ref_id'] ) ) {
@@ -438,7 +438,7 @@ class Nexus extends NexusSystem {
 	function storeItem( &$pParamHash ) {
 		$ret = FALSE;
 		if ( $this->verifyItem( $pParamHash ) ) {
-			$this->mDb->StartTrans();
+			$this->StartTrans();
 			if( empty( $pParamHash['item_id'] ) ) {
 				$query = "INSERT INTO `".BIT_DB_PREFIX."tiki_nexus_menu_items`( `menu_id`,`parent_id`,`pos`,`title`,`hint`,`rsrc`,`rsrc_type`,`perm` ) VALUES( ?,?,?,?,?,?,?,? )";
 				$result = $this->query( $query, array( (int)$pParamHash['menu_id'], (int)$pParamHash['parent_id'], (int)$pParamHash['max'], $pParamHash['title'], $pParamHash['hint'], $pParamHash['rsrc'], $pParamHash['rsrc_type'], $pParamHash['perm'] ) );
@@ -449,7 +449,7 @@ class Nexus extends NexusSystem {
 				$result = $this->query( $query, array( $pParamHash['title'], $pParamHash['hint'], $pParamHash['rsrc'], $pParamHash['rsrc_type'], $pParamHash['perm'], $pParamHash['item_id'] ) );
 				$ret = $pParamHash['item_id'];
 			}
-			$this->mDb->CompleteTrans();
+			$this->CompleteTrans();
 			$this->rewriteMenuCache();
 		} else {
 			return( count( $this->mErrors ) == 0 );
@@ -467,7 +467,7 @@ class Nexus extends NexusSystem {
 			// get full information of item that we are removing
 			$remItem = $this->getItemList( NULL, $pItemId );
 			$remItem = $remItem[$pItemId];
-			$this->mDb->StartTrans();
+			$this->StartTrans();
 			// get all items that are on the same level
 			$query = "SELECT * FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `parent_id`=? ORDER BY `pos`";
 			$result = $this->query( $query, array( $pItemId ) );
@@ -492,7 +492,7 @@ class Nexus extends NexusSystem {
 			// finally, we are ready do delete remItem
 			$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?";
 			$result = $this->query( $query, array( $pItemId ) );
-			$this->mDb->CompleteTrans();
+			$this->CompleteTrans();
 			return $remItem;
 			if( $pWriteCache ) {
 				$this->writeModuleCache( $remItem['menu_id'] );
@@ -540,7 +540,7 @@ class Nexus extends NexusSystem {
 			if( $item['parent_id'] > 0 ) {
 				$parentItem = $this->getItemList( $this->mMenuId, (int)$item["parent_id"] );
 				$parentItem = $parentItem[$item["parent_id"]];
-				$this->mDb->StartTrans();
+				$this->StartTrans();
 				if( empty( $parentItem["parent_id"] ) ) {
 					$max_row = $this->getOne("SELECT `pos` FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?", array( $item['parent_id'] ) );
 					$parent_item['pos'] = $max_row;
@@ -552,7 +552,7 @@ class Nexus extends NexusSystem {
 				//Move the item up one level
 				$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `parent_id`=?, `pos`=(? + 1) WHERE `item_id`=?";
 				$this->query($query, array( (int)$parentItem["parent_id"], (int)$parentItem["pos"], $pItemId ) );
-				$this->mDb->CompleteTrans();
+				$this->CompleteTrans();
 				$this->writeModuleCache( $item['menu_id'] );
 			}
 		}
@@ -566,7 +566,7 @@ class Nexus extends NexusSystem {
 		if( $this->isValid() && $pItemId ) {
 			// pass current item into managable array
 			$item = $this->mInfo["items"][$pItemId];
-			$this->mDb->StartTrans();
+			$this->StartTrans();
 			$query = "SELECT `item_id`, `pos` FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `pos`<? AND `parent_id`=? AND `menu_id`=? ORDER BY `pos` DESC";
 			$result = $this->query( $query, array( (int)$item["pos"], (int)$item["parent_id"], (int)$item["menu_id"] ) );
 			if( $previous = $result->fetchRow() ) {
@@ -583,7 +583,7 @@ class Nexus extends NexusSystem {
 				//Move items up below that had previous parent and pos
 				$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `pos`=`pos`-1 WHERE `pos`>? AND `parent_id`=? AND `menu_id`=?";
 				$this->query( $query, array( $item["pos"], $item["parent_id"], $item["menu_id"] ) );
-				$this->mDb->CompleteTrans();
+				$this->CompleteTrans();
 				$this->writeModuleCache( $item['menu_id'] );
 			}
 		}
@@ -597,7 +597,7 @@ class Nexus extends NexusSystem {
 		if( $this->isValid() && $pItemId ) {
 			// pass current item into managable array
 			$item = $this->mInfo["items"][$pItemId];
-			$this->mDb->StartTrans();
+			$this->StartTrans();
 			$query = "SELECT `item_id`, `pos` FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `pos`>? AND `parent_id`=? ORDER BY `pos` ASC";
 			$result = $this->query( $query, array( (int)$item["pos"], (int)$item["parent_id"] ) );
 			if( $res = $result->fetchRow() ) {
@@ -606,7 +606,7 @@ class Nexus extends NexusSystem {
 				$this->query( $query, array( (int)$item["pos"], (int)$res["item_id"] ) );
 				$this->query( $query, array( (int)$res["pos"], (int)$item["item_id"] ) );
 			}
-			$this->mDb->CompleteTrans();
+			$this->CompleteTrans();
 			$this->writeModuleCache( $item['menu_id'] );
 		}
 	}
@@ -619,7 +619,7 @@ class Nexus extends NexusSystem {
 		if( $this->isValid() && $pItemId ) {
 			// pass current item into managable array
 			$item = $this->mInfo["items"][$pItemId];
-			$this->mDb->StartTrans();
+			$this->StartTrans();
 			$query = "SELECT `item_id`, `pos` from `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `pos`<? AND `parent_id`=? ORDER BY `pos` desc";
 			$result = $this->query( $query, array((int)$item["pos"], (int)$item["parent_id"] ) );
 			if( $res = $result->fetchRow() ) {
@@ -628,7 +628,7 @@ class Nexus extends NexusSystem {
 				$this->query( $query, array( (int)$res["pos"], (int)$item["item_id"] ) );
 				$this->query( $query, array( (int)$item["pos"], (int)$res["item_id"] ) );
 			}
-			$this->mDb->CompleteTrans();
+			$this->CompleteTrans();
 			$this->writeModuleCache( $item['menu_id'] );
 		}
 	}
