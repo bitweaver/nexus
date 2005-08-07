@@ -5,7 +5,7 @@
 * @abstract
 * @author   xing <xing@synapse.plus.com>
 * copied   copied from LibertySystem.php
-* @version  $Revision: 1.3 $
+* @version  $Revision: 1.4 $
 * @package  nexus
 */
 
@@ -35,7 +35,7 @@ class NexusSystem extends BitBase {
 	}
 
 	function loadPlugins( $pCacheTime=BIT_QUERY_CACHE_TIME ) {
-		$rs = $this->query( "SELECT * FROM `".BIT_DB_PREFIX."tiki_nexus_plugins`", NULL, BIT_QUERY_DEFAULT, BIT_QUERY_DEFAULT );
+		$rs = $this->mDb->query( "SELECT * FROM `".BIT_DB_PREFIX."tiki_nexus_plugins`", NULL, BIT_QUERY_DEFAULT, BIT_QUERY_DEFAULT );
 		while( $rs && !$rs->EOF ) {
 			$this->mPlugins[$rs->fields['plugin_guid']] = $rs->fields;
 			$rs->MoveNext();
@@ -59,17 +59,17 @@ class NexusSystem extends BitBase {
 			if( !isset( $handler['verified'] ) && $handler['is_active'] =='y' ) {
 				// We are missing a plugin!
 				$sql = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_plugins` SET `is_active`='x' WHERE `plugin_guid`=?";
-				$this->query( $sql, array( $guid ) );
+				$this->mDb->query( $sql, array( $guid ) );
 				$handler['is_active'] = 'n';
 			} elseif( !empty( $handler['verified'] ) && $handler['is_active'] =='x' ) {
 				//We found a formally missing plugin - re-enable it
 				$sql = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_plugins` SET `is_active`='y' WHERE `plugin_guid`=?";
-				$this->query( $sql, array( $guid ) );
+				$this->mDb->query( $sql, array( $guid ) );
 				$handler['is_active'] = 'y';
 			} elseif( empty( $handler['verified'] ) && !isset( $handler['is_active'] ) ) {
 				//We found a missing plugin - insert it
 				$sql = "INSERT INTO `".BIT_DB_PREFIX."tiki_nexus_plugins` ( `plugin_guid`, `plugin_type`, `plugin_description`, `is_active` ) VALUES ( ?, ?, ?, 'y' )";
-				$this->query( $sql, array( $guid, $handler['plugin_type'], $handler['description'] ) );
+				$this->mDb->query( $sql, array( $guid, $handler['plugin_type'], $handler['description'] ) );
 				$handler['is_active'] = 'y';
 			}
 		}
@@ -93,14 +93,14 @@ class NexusSystem extends BitBase {
 	function setActivePlugins( $pPluginGuids ) {
 		if( is_array( $pPluginGuids ) ) {
 			$sql = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_plugins` SET `is_active`='n' WHERE `is_active`!='x'";
-			$this->query( $sql );
+			$this->mDb->query( $sql );
 			foreach( array_keys( $this->mPlugins ) as $guid ) {
 				$this->mPlugins[$guid]['is_active'] = 'n';
 			}
 
 			foreach( array_keys( $pPluginGuids ) as $guid ) {
 				$sql = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_plugins` SET `is_active`='y' WHERE `plugin_guid`=?";
-				$this->query( $sql, array( $guid ) );
+				$this->mDb->query( $sql, array( $guid ) );
 				$this->mPlugins[$guid]['is_active'] = 'y';
 			}
 			// we just ran some SQL - let's flush the loadPlugins query cache
@@ -127,7 +127,7 @@ class NexusSystem extends BitBase {
 	 */
 	function storePluginSettings( $pParamHash ) {
 		// first get all values from tiki_nexus_plugin_settings to see which ones need updating and which ones are added for the first time
-		$rs = $this->query( "SELECT * FROM `".BIT_DB_PREFIX."tiki_nexus_plugin_settings`", NULL );
+		$rs = $this->mDb->query( "SELECT * FROM `".BIT_DB_PREFIX."tiki_nexus_plugin_settings`", NULL );
 		while( $rs && !$rs->EOF ) {
 			$settings[] = $rs->fields;
 			$rs->MoveNext();
