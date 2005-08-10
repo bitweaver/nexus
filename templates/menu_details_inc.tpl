@@ -3,14 +3,14 @@
 	<div class="row">
 		{formlabel label="Title"}
 		{forminput}
-			{formfeedback note=$gNexus->mInfo.title}
+			{$gNexus->mInfo.title}
 		{/forminput}
 	</div>
 
 	<div class="row">
 		{formlabel label="Description"}
 		{forminput}
-			{formfeedback note=$gNexus->mInfo.description}
+			{$gNexus->mInfo.description}
 		{/forminput}
 	</div>
 
@@ -18,9 +18,9 @@
 		{formlabel label="Editable"}
 		{forminput}
 			{if $gNexus->mInfo.editable}
-				{formfeedback note='yes'}
+				{biticon ipackage=liberty iname=active iexplain="Editable"}
 			{else}
-				{formfeedback note='no'}
+				{biticon ipackage=liberty iname=inactive iexplain="Not editable"}
 			{/if}
 		{/forminput}
 	</div>
@@ -28,7 +28,7 @@
 	<div class="row">
 		{formlabel label="Menu Type"}
 		{forminput}
-			{formfeedback note=$gNexus->mInfo.plugin_guid}
+			{$gNexus->mInfo.plugin_guid}
 		{/forminput}
 	</div>
 
