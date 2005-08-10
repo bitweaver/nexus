@@ -7,9 +7,9 @@
 	{formfeedback hash=$formfeedback}
 
 	<div class="row">
-		{formlabel label="Link to content" for="content"}
+		{formlabel label="Link to content" for="content_type_guid"}
 		{forminput}
-			{html_options onchange="submit();" values=$contentTypes options=$contentTypes name=content_type id=content_type selected=$contentSelect}
+			{html_options values=$contentTypes options=$contentTypes name=content_type_guid id=content_type_guid selected=$smarty.request.content_type_guid}
 		{/forminput}
 
 		{forminput}
