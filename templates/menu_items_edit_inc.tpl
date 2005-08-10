@@ -10,9 +10,6 @@
 		{formlabel label="Link to content" for="content"}
 		{forminput}
 			{html_options onchange="submit();" values=$contentTypes options=$contentTypes name=content_type id=content_type selected=$contentSelect}
-			<noscript>
-				<div><input type="submit" name="content_switch" value="{tr}change content type{/tr}" /></div>
-			</noscript>
 		{/forminput}
 
 		{forminput}
@@ -23,7 +20,7 @@
 		{/forminput}
 
 		{forminput}
-			<input type="text" name="find_objects" /> 
+			<input type="text" name="find_objects" value="{$smarty.request.find_objects}" /> 
 			<input type="submit" value="{tr}filter{/tr}" name="search_objects" />
 			{formhelp note=""}
 		{/forminput}
