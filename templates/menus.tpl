@@ -122,8 +122,7 @@
 		<table class="data" summary="{tr}List of menus that can be used on this site{/tr}">
 			<caption>{tr}Existing menus{/tr}</caption>
 			<tr>
-				<th scope="col">{tr}Title{/tr}</th>
-				<th scope="col">{tr}Description{/tr}</th>
+				<th scope="col">{tr}Title{/tr} / {tr}Description{/tr}</th>
 				<th scope="col">{tr}GUID{/tr}</th>
 				<th scope="col">{tr}Type{/tr}</th>
 				<th scope="col">{tr}# of Items{/tr}</th>
@@ -132,8 +131,10 @@
 			</tr>
 			{foreach from=$menuList item=menu}
 				<tr class="{cycle values="even,odd"}">
-					<td>{$menu.title}</td>
-					<td>{$menu.description}</td>
+					<td>
+						<h2>{$menu.title}</h2>
+						{$menu.description}
+					</td>
 					<td>{$menu.plugin_guid}</td>
 					<td>
 						{assign var=plugin_guid value=$menu.plugin_guid}
