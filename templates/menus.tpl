@@ -122,8 +122,7 @@
 		<table class="data" summary="{tr}List of menus that can be used on this site{/tr}">
 			<caption>{tr}Existing menus{/tr}</caption>
 			<tr>
-				<th scope="col">{tr}Title{/tr}</th>
-				<th scope="col">{tr}Description{/tr}</th>
+				<th scope="col">{tr}Title{/tr} / {tr}Description{/tr}</th>
 				<th scope="col">{tr}GUID{/tr}</th>
 				<th scope="col">{tr}Type{/tr}</th>
 				<th scope="col">{tr}# of Items{/tr}</th>
@@ -132,8 +131,10 @@
 			</tr>
 			{foreach from=$menuList item=menu}
 				<tr class="{cycle values="even,odd"}">
-					<td>{$menu.title}</td>
-					<td>{$menu.description}</td>
+					<td>
+						<h2>{$menu.title}</h2>
+						{$menu.description}
+					</td>
 					<td>{$menu.plugin_guid}</td>
 					<td>
 						{assign var=plugin_guid value=$menu.plugin_guid}
@@ -150,12 +151,12 @@
 						{/if}
 					</td>
 					<td class="actionicon">
-						<a href="{$smarty.const.PKG_NEXUS_URL}menu_sort.php?menu_id={$menu.menu_id}">{biticon ipackage=nexus iname=organise iexplain='sort menu items'}</a>
-						<a href="{$smarty.const.PKG_NEXUS_URL}menu_items.php?menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=edit iexplain='create and edit menu items'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menu_sort.php?menu_id={$menu.menu_id}">{biticon ipackage=nexus iname=organise iexplain='sort menu items'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menu_items.php?menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=edit iexplain='create and edit menu items'}</a>
 						<a href="{$smarty.const.KERNEL_PKG_URL}admin/index.php?page=layout&amp;module_name=bitpackage%3Atemp%2Fnexus%2Fmod_{$menu.title|replace:' ':'_'|lower}_{$menu.menu_id}.tpl">{biticon ipackage=liberty iname=assign iexplain=assign}</a>
-						<a href="{$smarty.const.PKG_NEXUS_URL}menus.php?action=remove_dead&amp;menu_id={$menu.menu_id}">{biticon ipackage=nexus iname=remove_dead iexplain='remove dead links'}</a>
-						<a href="{$smarty.const.PKG_NEXUS_URL}menus.php?action=edit&amp;menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=config iexplain='configure menu'}</a>
-						<a href="{$smarty.const.PKG_NEXUS_URL}menus.php?action=remove&amp;menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=delete iexplain='remove menu'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=remove_dead&amp;menu_id={$menu.menu_id}">{biticon ipackage=nexus iname=remove_dead iexplain='remove dead links'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=edit&amp;menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=config iexplain='configure menu'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=remove&amp;menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=delete iexplain='remove menu'}</a>
 					</td>
 				</tr>
 			{foreachelse}

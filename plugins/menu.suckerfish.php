@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.4 $
+ * @version  $Revision: 1.5 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -47,6 +47,7 @@ function writeSuckerfishCache( $pMenuHash ) {
 	if( $pMenuHash->mInfo['type'] != 'hor' ) {
 		$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
 		$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
+		$data .= '<div class="suckerfish">';
 	} else {
 		$data = '';
 		$menu_file = 'top_bar_inc.tpl';
@@ -110,6 +111,7 @@ function writeSuckerfishCache( $pMenuHash ) {
 	}
 
 	if( $pMenuHash->mInfo['type'] != 'hor' ) {
+		$data .= '</div>';
 		$data .= '{/bitmodule}';
 	}
 
