@@ -8,27 +8,15 @@
 				<div class="row">
 					{formlabel label="Menu"}
 					{forminput}
-						{$menu.title}
+						{$menu.title} <small>( {$menu.description} )</small>
 					{/forminput}
 				</div>
 
 				<div class="row">
-					{formlabel label="Menu description"}
-					{forminput}
-						{$menu.description}
-					{/forminput}
-				</div>
-
-				<div class="row">
-					{formlabel label="Insert in this menu" for="nexus`$menu.menu_id`"}
+					{formlabel label="Insert here" for="nexus`$menu.menu_id`"}
 					{forminput}
 						<input type="radio" value="{$menu.menu_id}" name="nexus[menu_id]" id="nexus{$menu.menu_id}" />
-					{/forminput}
-				</div>
-
-				<div class="row">
-					{formlabel label="Insert after" for="after_ref_id`$menu.menu_id`"}
-					{forminput}
+						&nbsp; {tr}after{/tr} &nbsp;
 						<select name="nexus[after_ref_id]" id="after_ref_id{$menu.menu_id}">
 							{foreach from=$menu.tree item=item}
 								{if !$item.last}<option {if $item.head}style="font-weight:bold;" {/if}value="{$item.item_id}">{$item.title}</option>{/if}
@@ -44,7 +32,7 @@
 		{/foreach}
 	{else}
 		<div class="row">
-			{formfeedback note="This `$gContent->mType.content_description` is already part of the menu <strong>`$inNexusMenu.title`</strong>."}
+			<p>{tr}This {$gContent->mType.content_description} is already part of the menu <strong>{$inNexusMenu.title}</strong>.{/tr}</p>
 			{formlabel label="Remove" for="nexusRemove"}
 			{forminput}
 				<input type="checkbox" name="nexus[remove_item]" id="nexusRemove" value="{$inNexusMenuItem.item_id}" />
@@ -55,14 +43,14 @@
 
 	{if $nexusList and $nexusAssign}
 		<div class="row">
-			{formlabel label="Don't insert into any menu" for="nexus-no-insert"}
+			{formlabel label="Don't insert" for="nexus-no-insert"}
 			{forminput}
 				<input type="radio" value="" name="nexus[menu_id]" id="nexus-no-insert" checked="checked" />
 			{/forminput}
 		</div>
 	{elseif !$inNexusMenu}
 		<div class="row">
-			{formfeedback note="Currently there is no menu available where you can insert this `$gContent->mType.content_description`."}
+			{formfeedback note="Currently there is no menu available where you can insert this item."}
 		</div>
 	{/if}
 {/if}

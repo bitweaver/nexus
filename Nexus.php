@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.7 $
+* @version  $Revision: 1.1.1.1.2.8 $
 * @package  nexus
 */
 
@@ -439,36 +439,38 @@ class Nexus extends NexusSystem {
 		if( isset( $pItemId ) && is_numeric( $pItemId ) ) {
 			// get full information of item that we are removing
 			$remItem = $this->getItemList( NULL, $pItemId );
-			$remItem = $remItem[$pItemId];
-			$this->mDb->StartTrans();
-			// get all items that are on the same level
-			$query = "SELECT * FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `parent_id`=? ORDER BY `pos`";
-			$result = $this->mDb->query( $query, array( $pItemId ) );
-			// this value is needed to correclty position items that are moved up a level
-			$pos_count = 0;
-			// first we move children up one level
-			while( !$result->EOF ) {
-				$item = $result->fields;
-				//Make a space for the item after its parent
-				$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `pos`=`pos`+1 WHERE `pos`>?+".$pos_count." AND `parent_id`=? AND `menu_id`=?";
-				$res = $this->mDb->query( $query, array( (int)$remItem['pos'], (int)$remItem['parent_id'], (int)$remItem['menu_id'] ) );
-				// increase insertion count here
-				$pos_count++;
-				// move item up one level
-				$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `parent_id`=?, `pos`=?+".$pos_count." WHERE `item_id`=?";
-				$this->mDb->query( $query, array( (int)$remItem['parent_id'], (int)$remItem['pos'], (int)$item['item_id'] ) );
-				$result->MoveNext();
-			}
-			// all items below remItem have to be shifted up by one
-			$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `pos`=`pos`-1 WHERE `pos`>? AND `parent_id`=? AND `menu_id`=?";
-			$this->mDb->query( $query, array( (int)$remItem['pos'], (int)$remItem['parent_id'], (int)$remItem['menu_id'] ) );
-			// finally, we are ready do delete remItem
-			$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?";
-			$result = $this->mDb->query( $query, array( $pItemId ) );
-			$this->mDb->CompleteTrans();
-			return $remItem;
-			if( $pWriteCache ) {
-				$this->writeModuleCache( $remItem['menu_id'] );
+			if( !empty( $remItem[$pItemId] ) ) {
+				$remItem = $remItem[$pItemId];
+				$this->mDb->StartTrans();
+				// get all items that are on the same level
+				$query = "SELECT * FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `parent_id`=? ORDER BY `pos`";
+				$result = $this->mDb->query( $query, array( $pItemId ) );
+				// this value is needed to correclty position items that are moved up a level
+				$pos_count = 0;
+				// first we move children up one level
+				while( !$result->EOF ) {
+					$item = $result->fields;
+					//Make a space for the item after its parent
+					$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `pos`=`pos`+1 WHERE `pos`>?+".$pos_count." AND `parent_id`=? AND `menu_id`=?";
+					$res = $this->mDb->query( $query, array( (int)$remItem['pos'], (int)$remItem['parent_id'], (int)$remItem['menu_id'] ) );
+					// increase insertion count here
+					$pos_count++;
+					// move item up one level
+					$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `parent_id`=?, `pos`=?+".$pos_count." WHERE `item_id`=?";
+					$this->mDb->query( $query, array( (int)$remItem['parent_id'], (int)$remItem['pos'], (int)$item['item_id'] ) );
+					$result->MoveNext();
+				}
+				// all items below remItem have to be shifted up by one
+				$query = "UPDATE `".BIT_DB_PREFIX."tiki_nexus_menu_items` SET `pos`=`pos`-1 WHERE `pos`>? AND `parent_id`=? AND `menu_id`=?";
+				$this->mDb->query( $query, array( (int)$remItem['pos'], (int)$remItem['parent_id'], (int)$remItem['menu_id'] ) );
+				// finally, we are ready do delete remItem
+				$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?";
+				$result = $this->mDb->query( $query, array( $pItemId ) );
+				$this->mDb->CompleteTrans();
+				return $remItem;
+				if( $pWriteCache ) {
+					$this->writeModuleCache( $remItem['menu_id'] );
+				}
 			}
 		} else {
 			$this->mErrors['error'] = "The menu item could not be removed because no valid item id was given";
