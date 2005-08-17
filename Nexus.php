@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.6 $
+* @version  $Revision: 1.1.1.1.2.7 $
 * @package  nexus
 */
 
@@ -290,8 +290,6 @@ class Nexus extends NexusSystem {
 			$ret[$item['item_id']] = $item;
 			$result->MoveNext();
 		}
-		// recursively add included menus
-/**/
 		// this version of the loop inserts the submenu at the point of choice
 		foreach( $ret as $item ) {
 			if( $item['rsrc_type'] == 'menu_id' ) {
@@ -305,31 +303,6 @@ class Nexus extends NexusSystem {
 				}
 			}
 		}
-/** /
-		// this version of the loop inserts the submenu at the point of choice but removes the insersion node and adjusts the pos accordingly
-		// this isn't working the way it should.
-		foreach( $ret as $item ) {
-			if( $item['rsrc_type'] == 'menu_id' ) {
-				$tmp = $this->getItemList( $item['rsrc'] );
-				// reposition items that are inserted in parent level
-				$pos = $item['pos'];
-				foreach( $tmp as $i ) {
-					if( $i['parent_id'] == 0 ) {
-//						vd($i);
-						$tmp[$i['item_id']]['parent_id'] = $item['parent_id'];
-						$tmp[$i['item_id']]['pos'] = $pos++;
-//						vd($pid);
-					}
-//					vd($pid);
-					// pass all items on to ret using correct key
-					$ret[$i['item_id']] = $tmp[$i['item_id']];
-					// remove the item where we inserted the menu
-					unset( $ret[$item['item_id']] );
-				}
-			}
-		}
-/**/
-//		vd($ret);
 		return $ret;
 	}
 
