@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.5 $
+* @version  $Revision: 1.6 $
 * @package  nexus
 */
 
@@ -260,8 +260,6 @@ class Nexus extends NexusSystem {
 		// rewrite the entire cache, just to make sure everything is in order
 		$this->rewriteMenuCache();
 
-		// now that the menu is gone, update the MSIE js file
-		$this->writeMsieJs( $pMenuId );
 		return( count( $this->mErrors ) == 0 );
 	}
 
@@ -699,6 +697,9 @@ class Nexus extends NexusSystem {
 					$this->writeModuleCache( $menu['menu_id'] );
 				}
 			}
+
+			// now that the menus have been rewritten, update the MSIE js file
+			$this->writeMsieJs( $pMenuId );
 		} else {
 			$this->mErrors['rewrite'][] = "The cache directory for nexus menus doesn't exist";
 		}
