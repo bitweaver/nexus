@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.6 $
+* @version  $Revision: 1.7 $
 * @package  nexus
 */
 
@@ -699,7 +699,7 @@ class Nexus extends NexusSystem {
 			}
 
 			// now that the menus have been rewritten, update the MSIE js file
-			$this->writeMsieJs( $pMenuId );
+			$this->writeMsieJs();
 		} else {
 			$this->mErrors['rewrite'][] = "The cache directory for nexus menus doesn't exist";
 		}
