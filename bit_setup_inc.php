@@ -1,19 +1,21 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.6 $
+ * @version  $Revision: 1.1.1.1.2.7 $
  * @package  Nexus
  * @subpackage functions
  */
 global $gBitSystem, $gBitUser;
 $gBitSystem->registerPackage( 'nexus', dirname( __FILE__).'/' );
 
-$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
-	'content_store_function' => 'nexus_store_content',
-	'content_edit_function' => 'nexus_input_content',
-	'content_preview_function' => 'nexus_preview_content',
-	'content_edit_tpl' => 'bitpackage:nexus/insert_menu_item_inc.tpl',
-) );
+if( !empty( $gLibertySystem ) ) {
+	$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
+		'content_store_function' => 'nexus_store_content',
+		'content_edit_function' => 'nexus_input_content',
+		'content_preview_function' => 'nexus_preview_content',
+		'content_edit_tpl' => 'bitpackage:nexus/insert_menu_item_inc.tpl',
+	) );
+}
 
 if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	// include service functions
