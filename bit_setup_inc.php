@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.8 $
+ * @version  $Revision: 1.1.1.1.2.9 $
  * @package  Nexus
  * @subpackage functions
  */
@@ -13,7 +13,7 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 		'content_store_function' => 'nexus_store_content',
 		'content_edit_function' => 'nexus_input_content',
 		'content_preview_function' => 'nexus_preview_content',
-		'content_edit_tpl' => 'bitpackage:nexus/insert_menu_item_inc.tpl',
+		'content_edit_tab_tpl' => 'bitpackage:nexus/insert_menu_item_inc.tpl',
 	) );
 
 	// include service functions
