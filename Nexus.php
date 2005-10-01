@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.10 $
+* @version  $Revision: 1.1.1.1.2.11 $
 * @package  nexus
 */
 
@@ -31,6 +31,11 @@ class Nexus extends NexusSystem {
 		$this->mMenuId = $pMenuId;
 		if ( $pAutoLoad ) {
 			$this->load();
+		}
+		// if the cache folder doesn't exist yet, create item
+		if( !is_dir( TEMP_PKG_PATH.'nexus' ) ) {
+			mkdir( TEMP_PKG_PATH.'nexus', 0777 );
+			mkdir( TEMP_PKG_PATH.'nexus/modules', 0777 );
 		}
 	}
 
@@ -714,11 +719,6 @@ class Nexus extends NexusSystem {
 	function writeModuleCache( $pMenuId=NULL ) {
 		if( $this->isValid() && !isset( $pMenuId ) ) {
 			$pMenuId = $this->mInfo['menu_id'];
-		}
-		// if the cache folder doesn't exist yet, create item
-		if( !is_dir( TEMP_PKG_PATH.'nexus' ) ) {
-			mkdir( TEMP_PKG_PATH.'nexus', 0777 );
-			mkdir( TEMP_PKG_PATH.'nexus/modules', 0777 );
 		}
 		// load the menu to make sure we have the latest version
 		$cacheMenu = new Nexus( $pMenuId );
