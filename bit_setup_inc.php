@@ -1,27 +1,19 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.6 $
+ * @version  $Revision: 1.7 $
  * @package  Nexus
  * @subpackage functions
  */
 global $gBitSystem, $gBitUser;
-$gBitSystem->registerPackage( 'nexus', dirname( __FILE__).'/' );
+$gBitSystem->registerPackage( 'nexus', dirname( __FILE__).'/', TRUE, LIBERTY_SERVICE_MENU );
 
 if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
-		//'content_display_function' => 'display_pigeonholes',
-		//'content_preview_function' => 'pigeonholes_preview_content',
-		//'content_edit_function' => 'pigeonholes_input_content',
-		//'content_store_function' => 'pigeonholes_store_content',
-		//'content_edit_tpl' => 'bitpackage:pigeonholes/pigeonholes_input_inc.tpl',
-		//'content_view_tpl' => 'bitpackage:pigeonholes/display_members.tpl',
-		//'content_nav_tpl' => 'bitpackage:pigeonholes/display_paths.tpl',
-
 		'content_store_function' => 'nexus_store_content',
 		'content_edit_function' => 'nexus_input_content',
 		'content_preview_function' => 'nexus_preview_content',
-		'content_edit_tpl' => 'bitpackage:nexus/insert_menu_item_inc.tpl',
+		'content_edit_tab_tpl' => 'bitpackage:nexus/insert_menu_item_inc.tpl',
 	) );
 
 	// include service functions
