@@ -2,33 +2,33 @@
 
 $tables = array(
 'tiki_nexus_plugins' => "
-  plugin_guid C(16) PRIMARY,
-  plugin_type C(16) NOTNULL,
-  is_active C(1) NOTNULL DEFAULT 'y',
-  plugin_description C(250),
-  maintainer_url C(250)
+	plugin_guid C(16) PRIMARY,
+	plugin_type C(16) NOTNULL,
+	is_active C(1) NOTNULL DEFAULT 'y',
+	plugin_description C(250),
+	maintainer_url C(250)
 ",
 
 'tiki_nexus_menus' => "
-  menu_id I4 AUTO PRIMARY,
-  plugin_guid C(16) NOTNULL,
-  title C(128),
-  description C(255),
-  type C(16),
-  editable I4 DEFAULT 0
+	menu_id I4 AUTO PRIMARY,
+	plugin_guid C(16) NOTNULL,
+	title C(128),
+	description C(255),
+	type C(16),
+	editable I4 DEFAULT 0
 ",
 
 'tiki_nexus_menu_items' => "
-  item_id I4 AUTO PRIMARY,
-  menu_id I4 DEFAULT 0,
-  parent_id I4,
-  ext_menu I4,
-  pos I4,
-  title C(128),
-  hint C(255),
-  rsrc C(255),
-  rsrc_type C(16),
-  perm C(128)
+	item_id I4 AUTO PRIMARY,
+	menu_id I4 DEFAULT 0,
+	parent_id I4,
+	ext_menu I4,
+	pos I4,
+	title C(128),
+	hint C(255),
+	rsrc C(255),
+	rsrc_type C(16),
+	perm C(128)
 ",
 );
 

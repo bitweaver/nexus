@@ -9,7 +9,9 @@
 	</div>
 
 	<div class="body">
-		{jstabs}
+		{include file="bitpackage:nexus/menu_items_organise_inc.tpl"}
+
+		{*jstabs}
 			{jstab title="Organise Items"}
 				{include file="bitpackage:nexus/menu_items_organise_inc.tpl"}
 			{/jstab}
@@ -17,7 +19,7 @@
 			{jstab title="Preview Menu"}
 				{include file="bitpackage:nexus/menu_items_preview_inc.tpl"}
 			{/jstab}
-		{/jstabs}
+		{/jstabs*}
 	</div><!-- end .body -->
 </div><!-- end .nexus -->
 {/strip}

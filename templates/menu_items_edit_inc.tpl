@@ -53,7 +53,7 @@
 	<div class="row">
 		{formlabel label="Hint" for="hint"}
 		{forminput}
-			<textarea name="hint" id="hint" cols="80" rows="2">{$editItem.hint}</textarea>
+			<textarea name="hint" id="hint" cols="50" rows="2">{$editItem.hint}</textarea>
 			{formhelp note="A hint for this item. This hint is visible when you hover over the menu item - hint is set as 'title' attribute for link (for menu plugins that support this feature)."}
 		{/forminput}
 	</div>

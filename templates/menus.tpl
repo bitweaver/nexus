@@ -30,7 +30,7 @@
 					<div class="row">
 						{formlabel label="Description" for="description"}
 						{forminput}
-							<textarea name="description" id="description" cols="80" rows="3">{$editMenu.description}</textarea>
+							<textarea name="description" id="description" cols="50" rows="3">{$editMenu.description}</textarea>
 							{formhelp note="A description of this menu. This description is visible to users that can add items to this menu."}
 						{/forminput}
 					</div>
