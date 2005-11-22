@@ -13,16 +13,16 @@
 		{/forminput}
 
 		{forminput}
+			<input type="text" name="find_objects" value="{$smarty.request.find_objects}" /> 
+			<input type="submit" value="{tr}filter{/tr}" name="search_objects" />
+			{formhelp note=""}
+		{/forminput}
+
+		{forminput}
 			{html_options name="content" options=$contentList onchange="document.getElementById('rsrc').value=options[selectedIndex].value;document.getElementById('title').value=options[selectedIndex].label.replace(/ \[id.*?\]/,'');document.getElementById('rsrc_type').value='content_id';"}
 			<noscript>
 				{formhelp note="Since you don't have javascript (enabled), please insert the appropriate information from the dropdown manually. The content ID is the number associated with the item in the dropdown list."}
 			</noscript>
-		{/forminput}
-
-		{forminput}
-			<input type="text" name="find_objects" value="{$smarty.request.find_objects}" /> 
-			<input type="submit" value="{tr}filter{/tr}" name="search_objects" />
-			{formhelp note=""}
 		{/forminput}
 	</div>
 
