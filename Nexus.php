@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.11 $
+* @version  $Revision: 1.1.1.1.2.12 $
 * @package  nexus
 */
 
@@ -585,7 +585,7 @@ class Nexus extends NexusSystem {
 				$this->mDb->query( $query, array( (int)$res["pos"], (int)$item["item_id"] ) );
 			}
 			$this->mDb->CompleteTrans();
-			$this->mDb->writeModuleCache( $item['menu_id'] );
+			$this->writeModuleCache( $item['menu_id'] );
 		}
 	}
 
