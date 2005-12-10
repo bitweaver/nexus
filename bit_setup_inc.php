@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.9 $
+ * @version  $Revision: 1.1.1.1.2.10 $
  * @package  Nexus
  * @subpackage functions
  */
@@ -20,7 +20,7 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	require_once( NEXUS_PKG_PATH.'servicefunctions_inc.php' );
 
 	if( $gBitUser->isAdmin() ) {
-		$gBitSystem->registerAppMenu( 'nexus', 'Nexus', NEXUS_PKG_URL.'index.php', 'bitpackage:nexus/menu_nexus.tpl', 'Nexus menus');
+		$gBitSystem->registerAppMenu( NEXUS_PKG_DIR, 'Nexus', NEXUS_PKG_URL.'index.php', 'bitpackage:nexus/menu_nexus.tpl', 'Nexus menus');
 	}
 
 	// check if there is a js file for MSIE
