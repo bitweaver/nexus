@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.3 $
+ * @version  $Revision: 1.4 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -55,15 +55,7 @@ function writeTikiWikiCache( $pMenuHash ) {
 	$type = $pMenuHash->mInfo['type'];
 	foreach( $pMenuHash->mInfo['tree'] as $key => $item ) {
 		if( $item['first'] ) {
-			$togid = 'togid'.$item['item_id'];
-			$data .= '<div id="'.$togid.'" ';
-			$data .= 'style="display:{if $smarty.cookies.'.$togid.' eq \'c\'}none{elseif $smarty.cookies.'.$togid.' eq \'o\'}block{else}';
-			if( $key != 0 && preg_match( "/c$/", $type ) ) {
-				$data .= 'none';
-			} else {
-				$data .= 'block';
-			}
-			$data .= '{/if};">';
+			$data .= '<div id="togid'.$item['item_id'].'">';
 		} else {
 			// close permission clauses
 			if( $perm_cycle ) {
@@ -105,6 +97,23 @@ function writeTikiWikiCache( $pMenuHash ) {
 		}
 	}
 	$data .= '</div><!-- end .menu -->';
+
+	// apply state of expandable menus
+	$data .= '<script type="text/javascript">';
+	foreach( $pMenuHash->mInfo['tree'] as $key => $item ) {
+		if( $item['first'] ) {
+			$togid = 'togid'.$item['item_id'];
+			$data .= '$(\''.$togid.'\').style.display = \'{if $smarty.cookies.'.$togid.' eq \'c\'}none{elseif $smarty.cookies.'.$togid.' eq \'o\'}block{else}';
+			if( $key != 0 && preg_match( "/c$/", $type ) ) {
+				$data .= 'none';
+			} else {
+				$data .= 'block';
+			}
+			$data .= '{/if}\';';
+		}
+	}
+	$data .= '</script>';
+
 	$data .= '{/bitmodule}';
 	$ret[$menu_file] = $data;
 	return $ret;
