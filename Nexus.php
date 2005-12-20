@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.12 $
+* @version  $Revision: 1.1.1.1.2.13 $
 * @package  nexus
 */
 
@@ -132,7 +132,7 @@ class Nexus extends NexusSystem {
 				$ret = array_merge( $ret, $subs );
 			}
 			if( $pos == $row_max ) {
-				if( !empty( $item['parent_id'] ) ) {
+				if( @BitBase::verifyId( $item['parent_id'] ) ) {
 					$tmpItem = $this->getItemList( NULL, $item['parent_id'] );
 					$aux = $tmpItem[$item['parent_id']];
 				} else {
@@ -187,7 +187,7 @@ class Nexus extends NexusSystem {
 	* @return TRUE if all is ok
 	*/
 	function isValid() {
-		return( !empty( $this->mMenuId ) );
+		return( BitBase::verifyId( $this->mMenuId ) );
 	}
 
 	/**
@@ -231,7 +231,7 @@ class Nexus extends NexusSystem {
 	function storeMenu( &$pParamHash ) {
 		$ret = FALSE;
 		if( $this->verifyMenu( $pParamHash ) ) {
-			if( empty( $pParamHash['menu_id'] ) ) {
+			if( !@BitBase::verifyId( $pParamHash['menu_id'] ) ) {
 				$query = "INSERT INTO `".BIT_DB_PREFIX."tiki_nexus_menus`( `title`,`description`,`type`,`plugin_guid`,`editable` ) VALUES(?,?,?,?,?)";
 				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['type'], $pParamHash['plugin_guid'], $pParamHash['editable'] ) );
 				$query = "SELECT MAX(`menu_id`) FROM `".BIT_DB_PREFIX."tiki_nexus_menus`";
@@ -367,19 +367,19 @@ class Nexus extends NexusSystem {
 		if( empty( $pParamHash['title'] ) ) {
 			$this->mErrors['error'] = 'Could not store menu item. No item title was given.';
 		}
-		if( empty( $pParamHash['menu_id'] ) || !is_numeric( $pParamHash['menu_id'] ) ) {
+		if( !@BitBase::verifyId( $pParamHash['menu_id'] ) ) {
 			$this->mErrors['error'] = 'Could not store menu item. Invalid menu id. Menu id: '.$pParamHash['menu_id'];
 		} else {
 			$this->mDb->StartTrans();
-			if( empty( $pParamHash['parent_id'] ) || !is_numeric( $pParamHash['parent_id'] ) ) {
+			if( !@BitBase::verifyId( $pParamHash['parent_id'] ) ) {
 				$pParamHash['parent_id'] = 0;
 				// if no parent_id is not known, but we have an after_ref_id, we use that to work out the parent_id
-				if( !empty( $pParamHash['after_ref_id'] ) ) {
+				if( @BitBase::verifyId( $pParamHash['after_ref_id'] ) ) {
 					$pParamHash['parent_id'] = $this->mDb->getOne("SELECT `parent_id` FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?", array( (int)$pParamHash['after_ref_id'] ) );
 				}
 			}
 			$pParamHash['max'] = 0;
-			if( !empty( $pParamHash['after_ref_id'] ) && is_numeric( $pParamHash['after_ref_id'] ) ) {
+			if( @BitBase::verifyId( $pParamHash['after_ref_id'] ) ) {
 				$pParamHash['max'] = $this->mDb->getOne("SELECT `pos` FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?", array( (int)$pParamHash['after_ref_id'] ) );
 				if( $pParamHash['max'] > 0 ) {
 					//If max is 5 then we are inserting after position 5 so we'll insert 5 and move all the others
@@ -390,7 +390,7 @@ class Nexus extends NexusSystem {
 			$this->mDb->CompleteTrans();
 			$pParamHash['max']++;
 			// if we get passed the position of where the item is to go, we pass it to 'max' -- used for importStructure()
-			if( !empty( $pParamHash['pos'] ) && is_numeric( $pParamHash['pos'] ) && empty( $pParamHash['after_ref_id'] ) ) {
+			if( @BitBase::verifyId( $pParamHash['pos'] ) && !@BitBase::verifyId( $pParamHash['after_ref_id'] ) ) {
 				$pParamHash['max'] = $pParamHash['pos'];
 			}
 			// work out what type of rsrc was passed in and fix
@@ -415,7 +415,7 @@ class Nexus extends NexusSystem {
 		$ret = FALSE;
 		if ( $this->verifyItem( $pParamHash ) ) {
 			$this->mDb->StartTrans();
-			if( empty( $pParamHash['item_id'] ) ) {
+			if( !@BitBase::verifyId( $pParamHash['item_id'] ) ) {
 				$query = "INSERT INTO `".BIT_DB_PREFIX."tiki_nexus_menu_items`( `menu_id`,`parent_id`,`pos`,`title`,`hint`,`rsrc`,`rsrc_type`,`perm` ) VALUES( ?,?,?,?,?,?,?,? )";
 				$result = $this->mDb->query( $query, array( (int)$pParamHash['menu_id'], (int)$pParamHash['parent_id'], (int)$pParamHash['max'], $pParamHash['title'], $pParamHash['hint'], $pParamHash['rsrc'], $pParamHash['rsrc_type'], $pParamHash['perm'] ) );
 				$query = "SELECT MAX(`item_id`) FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items`";
@@ -442,7 +442,7 @@ class Nexus extends NexusSystem {
 		if( isset( $pItemId ) && is_numeric( $pItemId ) ) {
 			// get full information of item that we are removing
 			$remItem = $this->getItemList( NULL, $pItemId );
-			if( !empty( $remItem[$pItemId] ) ) {
+			if( @BitBase::verifyId( $remItem[$pItemId] ) ) {
 				$remItem = $remItem[$pItemId];
 				$this->mDb->StartTrans();
 				// get all items that are on the same level
@@ -519,7 +519,7 @@ class Nexus extends NexusSystem {
 				$parentItem = $this->getItemList( $this->mMenuId, (int)$item["parent_id"] );
 				$parentItem = $parentItem[$item["parent_id"]];
 				$this->mDb->StartTrans();
-				if( empty( $parentItem["parent_id"] ) ) {
+				if( !@BitBase::verifyId( $parentItem["parent_id"] ) ) {
 					$max_row = $this->mDb->getOne("SELECT `pos` FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?", array( $item['parent_id'] ) );
 					$parent_item['pos'] = $max_row;
 					$parent_item['parent_id'] = 0;
@@ -771,14 +771,14 @@ class Nexus extends NexusSystem {
 		}
 		return( count( $this->mErrors ) == 0 );
 	}
-	
+
 	/**
 	* This is not in use yet. would be good if this could be updated directly from the db
 	*/
 	function getGalleryListMenu( $pParentId=NULL ) {
 		global $gBitSystem, $gFisheyeGallery;
 		require_once( FISHEYE_PKG_PATH.'FisheyeGallery.php');
-		
+
 		$gFisheyeGallery = new FisheyeGallery();
 
 		$hash['root_only'] = TRUE;
