@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.6 $
+ * @version  $Revision: 1.1.1.1.2.7 $
  * @package  nexus
  * @subpackage functions
  */
@@ -35,7 +35,7 @@ if( isset( $_REQUEST['action'] ) ) {
 
 	if( $_REQUEST['action'] == 'rewrite_cache' ) {
 		if( $gNexus->rewriteMenuCache() ) {
-			$formfeedback['success'] = 'The complete menu cache has been rewritten.';
+			$formfeedback['success'] = tra( 'The complete menu cache has been rewritten.' );
 		}
 	}
 
@@ -46,15 +46,15 @@ if( isset( $_REQUEST['action'] ) ) {
 				$deadHtml .= '<li>'.$dead.'</li>';
 			}
 			$deadHtml .= '</ul>';
-			$formfeedback['warning'] = 'Links that were dead and removed from '.$gNexus->mInfo['title'].$deadHtml;
+			$formfeedback['warning'] = tra( 'Links that were dead and removed from ' ).": ".$gNexus->mInfo['title'].$deadHtml;
 		} else {
-			$formfeedback['success'] = 'No dead links were found for this menu.';
+			$formfeedback['success'] = tra( 'No dead links were found for this menu.' );
 		}
 	}
 
 	if( $_REQUEST['action'] == 'convert_structure' ) {
 		if( $gNexus->importStructure( $_REQUEST['structure_id'] ) ) {
-			$formfeedback['success'] = 'The structure was successfully imported as menu.';
+			$formfeedback['success'] = tra( 'The structure was successfully imported as menu.' );
 		} else {
 			vd( $gNexus->mErrors );
 		}
@@ -78,7 +78,7 @@ if( isset( $_REQUEST['store_menu'] ) ) {
 		die;
 	}
 	$gNexus->load();
-	$formfeedback['success'] = 'The menu \''.$gNexus->mInfo['title'].'\' was updated successfully.';
+	$formfeedback['success'] = tra( "The following menu was updated successfully" ).": ".$gNexus->mInfo['title'] ;
 }
 
 $gBitSmarty->assign( 'menuList', $menuList = $gNexus->getMenuList() );

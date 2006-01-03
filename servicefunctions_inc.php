@@ -1,10 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_nexus/servicefunctions_inc.php,v 1.1.2.1 2005/08/17 23:42:54 squareing Exp $
- *
- * Copyright ( c ) 2004 bitweaver.org
- * All Rights Reserved. See copyright.txt for details and a complete list of authors.
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details
+ * $Header: /cvsroot/bitweaver/_bit_nexus/servicefunctions_inc.php,v 1.1.2.2 2006/01/03 09:32:52 squareing Exp $
  *
  * @package nexus
  * @subpackage functions
@@ -15,7 +11,7 @@
  */
 function nexus_input_content( $pObject=NULL ) {
 	global $gBitSmarty;
-	require_once( NEXUS_PKG_PATH.'Nexus.php');
+	require_once( NEXUS_PKG_PATH.'Nexus.php' );
 	$nexus = new Nexus();
 
 	$nexusList = $nexus->getMenuList();
@@ -44,7 +40,7 @@ function nexus_preview_content( $pObject=NULL ) {
  */
 function nexus_store_content( $pObject, $pParamHash ) {
 	global $gBitSystem, $gBitUser, $gBitSmarty;
-	require_once( NEXUS_PKG_PATH.'Nexus.php');
+	require_once( NEXUS_PKG_PATH.'Nexus.php' );
 	$nexus = new Nexus();
 
 	if( !empty( $pParamHash['content_id'] ) && !empty( $pParamHash['nexus']['menu_id'] ) ) {

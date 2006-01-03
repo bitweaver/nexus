@@ -1,19 +1,20 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.3 $
+ * @version  $Revision: 1.1.1.1.2.4 $
  * @package  nexus
  * @subpackage functions
  */
 global $gNexus;
 
-if ( !empty( $_REQUEST['menu_id'] ) && is_numeric( $_REQUEST['menu_id'] ) ) {
+if( @BitBase::verifyId( $_REQUEST['menu_id'] ) ) {
 	$menuId = $_REQUEST['menu_id'];
 	$gNexus = new Nexus( $menuId );
 } else {
 	$gNexus = new Nexus();
 	$menuId = NULL;
 }
+$gNexus -> load();
 
 $gBitSmarty->assign_by_ref( 'gNexus', $gNexus );
 $gBitSmarty->assign_by_ref( 'menuId', $menuId );

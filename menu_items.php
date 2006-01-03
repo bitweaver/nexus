@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.4 $
+ * @version  $Revision: 1.1.1.1.2.5 $
  * @package  nexus
  * @subpackage functions
  */
@@ -50,7 +50,7 @@ if( isset( $_REQUEST['remove_item'] ) && is_array( $_REQUEST['remove_item'] ) ) 
 		}
 	}
 	if( !empty( $delList ) ) {
-		$formfeedback['success'] = tra( 'The following items were successfully removed from the menu' ).':';
+		$formfeedback['success'] = tra( 'The following items were successfully removed from the menu' ).': ';
 		$gBitSmarty->assign( 'delList', $delList );
 	}
 	$gNexus->load();
