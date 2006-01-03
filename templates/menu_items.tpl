@@ -9,6 +9,15 @@
 	</div>
 
 	<div class="body">
+		{formfeedback hash=$formfeedback}
+		{if $delList}
+			<ul>
+				{foreach from=$delList item=delItem}
+					<li>{$delItem}</li>
+				{/foreach}
+			</ul>
+		{/if}
+
 		{jstabs}
 			{jstab title="Edit Menu Items"}
 				{include file="bitpackage:nexus/menu_items_edit_inc.tpl"}

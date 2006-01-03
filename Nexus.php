@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.13 $
+* @version  $Revision: 1.1.1.1.2.14 $
 * @package  nexus
 */
 
@@ -439,10 +439,10 @@ class Nexus extends NexusSystem {
 	* @return deleted item information
 	*/
 	function expungeItem( $pItemId=NULL, $pWriteCache=TRUE ) {
-		if( isset( $pItemId ) && is_numeric( $pItemId ) ) {
+		if( @BitBase::verifyId( $pItemId ) ) {
 			// get full information of item that we are removing
 			$remItem = $this->getItemList( NULL, $pItemId );
-			if( @BitBase::verifyId( $remItem[$pItemId] ) ) {
+			if( @BitBase::verifyId( $remItem[$pItemId]['item_id'] ) ) {
 				$remItem = $remItem[$pItemId];
 				$this->mDb->StartTrans();
 				// get all items that are on the same level
@@ -470,13 +470,16 @@ class Nexus extends NexusSystem {
 				$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `item_id`=?";
 				$result = $this->mDb->query( $query, array( $pItemId ) );
 				$this->mDb->CompleteTrans();
-				return $remItem;
 				if( $pWriteCache ) {
 					$this->writeModuleCache( $remItem['menu_id'] );
 				}
+				return $remItem;
+			} else {
+				$this->mErrors['remove_item'] = "There was a problem trying to remove the menu item.";
+				return FALSE;
 			}
 		} else {
-			$this->mErrors['error'] = "The menu item could not be removed because no valid item id was given";
+			$this->mErrors['remove_item_id'] = "The menu item could not be removed because no valid item id was given.";
 			return FALSE;
 		}
 	}

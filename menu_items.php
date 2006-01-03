@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.3 $
+ * @version  $Revision: 1.1.1.1.2.4 $
  * @package  nexus
  * @subpackage functions
  */
@@ -36,23 +36,22 @@ if( isset( $_REQUEST['store_item'] ) ) {
 	if( $gNexus->storeItem( $_REQUEST ) ) {
 		$formfeedback['success'] = 'The menu item was saved successfully.';
 	} else {
-		$formfeedback = $gNexus->mErrors;
+		$formfeedback['error'] = $gNexus->mErrors;
 	}
 	$gNexus->load();
 }
 
 if( isset( $_REQUEST['remove_item'] ) && is_array( $_REQUEST['remove_item'] ) ) {
-	$delList = '<ul>';
 	foreach( $_REQUEST['remove_item'] as $rem_id ) {
 		if( $delItem = $gNexus->expungeItem( $rem_id, FALSE ) ) {
-			$delList .= '<li>'.$delItem['title'].'</li>';
+			$delList[] = $delItem['title'];
 		} else {
-			$formfeedback = $gNexus->mErrors;
+			$formfeedback['error'] = $gNexus->mErrors;
 		}
 	}
-	$delList .= '</ul>';
-	if( isset( $delList ) ) {
-		$formfeedback['success'] = 'The following items were successfully removed from the menu'.$delList;
+	if( !empty( $delList ) ) {
+		$formfeedback['success'] = tra( 'The following items were successfully removed from the menu' ).':';
+		$gBitSmarty->assign( 'delList', $delList );
 	}
 	$gNexus->load();
 	$gNexus->writeModuleCache();

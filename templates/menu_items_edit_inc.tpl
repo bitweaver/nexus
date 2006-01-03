@@ -4,8 +4,6 @@
 	<input type="hidden" name="item_id" value="{$editItem.item_id}" />
 	<input type="hidden" name="tab" value="edit" />
 
-	{formfeedback hash=$formfeedback}
-
 	<div class="row">
 		{formlabel label="Link to content" for="content_type_guid"}
 		{forminput}
