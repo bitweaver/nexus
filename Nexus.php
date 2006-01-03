@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.1.1.1.2.15 $
+* @version  $Revision: 1.1.1.1.2.16 $
 * @package  nexus
 */
 
@@ -30,8 +30,8 @@ class Nexus extends NexusSystem {
 		NexusSystem::NexusSystem();
 		$this->mMenuId = $pMenuId;
 		// if the cache folder doesn't exist yet, create it
-		if( !is_dir( TEMP_PKG_PATH.'nexus' ) ) {
-			mkdir_p( TEMP_PKG_PATH.'nexus/modules' );
+		if( !is_dir( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules' ) ) {
+			mkdir_p( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules' );
 		}
 	}
 
@@ -39,7 +39,7 @@ class Nexus extends NexusSystem {
 	* Load the menu
 	*/
 	function load() {
-		if( $this->mMenuId ) {
+		if( @BitBase::verifyId( $this->mMenuId ) ) {
 			$this->mInfo = $this->getMenu( $this->mMenuId );
 			$this->mInfo['items'] = $this->getItemList( $this->mMenuId );
 			$this->mInfo['tree'] = $this->createMenuTree( $this->mInfo['items'] );
@@ -52,9 +52,11 @@ class Nexus extends NexusSystem {
 	* @param $pMenuId menu id of the menu we want information from
 	*/
 	function getMenu( $pMenuId=NULL ) {
-		if( !$pMenuId && $this->isValid() ) {
+		$ret = array();
+		if( !@BitBase::verifyId( $pMenuId ) && $this->isValid() ) {
 			$pMenuId = $this->mMenuId;
 		}
+
 		$bindVars = array();
 		$query = 'SELECT tnm.* FROM `'.BIT_DB_PREFIX.'tiki_nexus_menus` tnm';
 		if( is_numeric( $pMenuId ) ) {
@@ -63,6 +65,9 @@ class Nexus extends NexusSystem {
 		}
 		if( $result = $this->mDb->query( $query, array( $bindVars ) ) ) {
 			$ret = $result->fields;
+			$ret['cache']['file'] = 'mod_'.preg_replace( "/ /", "_", $ret['title'] ).'_'.$pMenuId.'.tpl';
+			$ret['cache']['path'] = TEMP_PKG_PATH.NEXUS_PKG_NAME."/modules/".$ret['cache']['file'];
+			$ret['cache']['module'] = "bitpackage:temp/nexus/".$ret['cache']['file'];
 		}
 		return $ret;
 	}
@@ -251,6 +256,12 @@ class Nexus extends NexusSystem {
 	* @return number of errors encountered
 	*/
 	function expungeMenu( $pMenuId ) {
+		// first off, remove the menu from the layout
+		include_once( KERNEL_PKG_PATH.'mod_lib.php' );
+		global $modlib, $gBitSystem;
+		$menu = $this->getMenu( $this->mMenuId );
+		$modlib->unassignModule( $menu['cache']['module'], ROOT_USER_ID );
+
 		// delete menu items
 		$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_nexus_menu_items` WHERE `menu_id`=?";
 		$this->mDb->query( $query, array( $pMenuId ) );
@@ -687,7 +698,7 @@ class Nexus extends NexusSystem {
 	* @return number of errors encountered
 	*/
 	function rewriteMenuCache() {
-		if( is_dir( $path = TEMP_PKG_PATH.'nexus/modules' ) ) {
+		if( is_dir( $path = TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules' ) ) {
 			$handle = opendir( $path );
 			while( false!== ( $cache_file = readdir( $handle ) ) ) {
 				if( $cache_file != "." && $cache_file != ".." ) {
@@ -731,7 +742,7 @@ class Nexus extends NexusSystem {
 		}
 		if( !empty( $moduleCache ) ) {
 			foreach( $moduleCache as $cache_file => $cache_string ) {
-				$h = fopen( TEMP_PKG_PATH.'nexus/modules/'.$cache_file, 'w' );
+				$h = fopen( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules/'.$cache_file, 'w' );
 				if( isset( $h ) ) {
 			        fwrite( $h, $cache_string );
 					fclose( $h );
@@ -756,7 +767,7 @@ class Nexus extends NexusSystem {
 		foreach( $menuList as $menu ) {
 			$jsMenuIds[] = $menu['menu_id'];
 		}
-		$cache_path = ( TEMP_PKG_PATH.'nexus/modules/hoverfix_array.js' );
+		$cache_path = ( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules/hoverfix_array.js' );
 		$cache_file = fopen( $cache_path, 'w' );
 		if( isset( $cache_file ) ) {
 			$fw = 'nexusMenus.push(';

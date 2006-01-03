@@ -6,7 +6,7 @@
  * @abstract implements javascript menu using form elements
  * @author   william@elan.net
  * copied   copied from menu.suckerfish.php originally by xing
- * @version  $Revision: 1.1.1.1.2.4 $
+ * @version  $Revision: 1.1.1.1.2.5 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -46,7 +46,7 @@ function writeFormMenuCache( $pMenuHash ) {
 	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
-	$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
+	$menu_file = $pMenuHash->mInfo['cache']['file'];
 	if ( $pMenuHash->mInfo['type'] != 'qdd' ) {
 		$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
 	}

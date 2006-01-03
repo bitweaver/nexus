@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.1.1.1.2.5 $
+ * @version  $Revision: 1.1.1.1.2.6 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -45,7 +45,7 @@ function writeTikiWikiCache( $pMenuHash ) {
 	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
-	$menu_file = 'mod_'.$menu_name.'_'.$pMenuHash->mInfo['menu_id'].'.tpl';
+	$menu_file = $pMenuHash->mInfo['cache']['file'];
 	$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
 	$data .= '<div class="tikiwiki menu">';
 	// if a permission has been set, we need to work out when to close the {if} clause
