@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.11 $
+* @version  $Revision: 1.12 $
 * @package  nexus
 */
 
@@ -244,7 +244,6 @@ class Nexus extends NexusSystem {
 				$ret = $pParamHash['menu_id'];
 			}
 			$this->writeModuleCache( $ret );
-			$this->writeMsieJs();
 		} else {
 			vd( $this->mErrors );
 		}
@@ -713,9 +712,6 @@ class Nexus extends NexusSystem {
 					$this->writeModuleCache( $menu['menu_id'] );
 				}
 			}
-
-			// now that the menus have been rewritten, update the MSIE js file
-			$this->writeMsieJs();
 		} else {
 			$this->mErrors['chache_rewrite'] = tra( "The cache directory for nexus menus doesn't exist." );
 		}
@@ -752,34 +748,6 @@ class Nexus extends NexusSystem {
 			}
 		} else {
 			$this->mErrors['write_module_cache'] = tra( "Unable to write the cache file because there was something wrong with the plugin " ).': '.$cacheMenu->mInfo['plugin_guid'];
-		}
-		return( count( $this->mErrors ) == 0 );
-	}
-
-	/**
-	* function to write a js file with an array of menus that require the hoverfix for MSIE
-	* @return number of errors encountered
-	*/
-	function writeMsieJs() {
-		global $gBitSystem;
-		$menuList = $this->getMenuList();
-		$jsMenuIds = array();
-		foreach( $menuList as $menu ) {
-			$jsMenuIds[] = $menu['menu_id'];
-		}
-		$cache_path = ( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules/hoverfix_array.js' );
-		$cache_file = fopen( $cache_path, 'w' );
-		if( isset( $cache_file ) ) {
-			$fw = 'nexusMenus.push(';
-			foreach( $jsMenuIds as $key => $menu_id ) {
-				$fw .= ( $key == 0 ) ? '' : ',';
-				$fw .= '"nexus'.$menu_id.'"';
-			}
-			$fw .= ');';
-	        fwrite( $cache_file, $fw );
-			fclose( $cache_file );
-		} else {
-			$this->mErrors['msie_jsfile'] = tra( "Unable to write to " ).': '.realpath( $cache_path );
 		}
 		return( count( $this->mErrors ) == 0 );
 	}
