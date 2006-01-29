@@ -43,7 +43,7 @@
 	<div class="row">
 		{formlabel label="Title" for="title"}
 		{forminput}
-			<input type="text" name="title" id="title" size="50" value="{$editItem.title}" />
+			<input type="text" name="title" id="title" size="50" value="{$editItem.title|escape}" />
 			{formhelp note="Enter a title for your menu item."}
 		{/forminput}
 	</div>
@@ -51,7 +51,7 @@
 	<div class="row">
 		{formlabel label="Hint" for="hint"}
 		{forminput}
-			<textarea name="hint" id="hint" cols="50" rows="2">{$editItem.hint}</textarea>
+			<textarea name="hint" id="hint" cols="50" rows="2">{$editItem.hint|escape}</textarea>
 			{formhelp note="A hint for this item. This hint is visible when you hover over the menu item - hint is set as 'title' attribute for link (for menu plugins that support this feature)."}
 		{/forminput}
 	</div>
@@ -67,7 +67,7 @@
 	<div class="row">
 		{formlabel label="Resource link" for="rsrc"}
 		{forminput}
-			<input type="text" name="rsrc" id="rsrc" size="50" value="{$editItem.rsrc}" />
+			<input type="text" name="rsrc" id="rsrc" size="50" value="{$editItem.rsrc|escape}" />
 			{formhelp note="<dl><dt>External URL</dt><dd>enter full link. e.g.: <strong>http://www.example.com</strong></dd><dt>Internal URL</dt><dd>enter link beginning from your bitweaver installation directory. e.g.: <strong>wiki/rankings.php</strong></dd><dt>Content ID</dt><dd>enter the number referring to some content (e.g. the number assoctiated with each item in the content dropdown is a content ID). e.g.: <strong>3</strong></dd><dt>Menu ID</dt><dd>Enter the menu ID of the menu you wish to insert.</dd></dl>"}
 		{/forminput}
 	</div>
@@ -86,7 +86,7 @@
 			{forminput}
 				<select name="after_ref_id" id="after_ref_id">
 					{foreach from=$gNexus->mInfo.items item=item}
-						<option value="{$item.item_id}">{$item.title}</option>
+						<option value="{$item.item_id}">{$item.title|escape}</option>
 					{foreachelse}
 						<option value="">{tr}no items found{/tr}</option>
 					{/foreach}

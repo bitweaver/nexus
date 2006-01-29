@@ -10,8 +10,8 @@
 						<a href="{$smarty.const.NEXUS_PKG_URL}menu_items.php?menu_id={$item.menu_id}&amp;item_id={$item.item_id}">{biticon ipackage=liberty iname="edit" iexplain="edit item" style="float:right" iforce=icon}</a>
 
 						<label for="item_{$item.item_id}">
-							<strong>{$item.title}</strong>
-							{if $item.hint}&nbsp;&bull;&nbsp;{$item.hint}{/if}
+							<strong>{$item.title|escape}</strong>
+							{if $item.hint}&nbsp;&bull;&nbsp;{$item.hint|escape}{/if}
 						</label>
 
 						<br />
@@ -20,7 +20,7 @@
 							{foreach from=$rsrcTypes key=key item=rsrc_type}
 								{if $item.rsrc_type eq $key}{$rsrc_type}{/if}
 							{/foreach}
-							: {$item.rsrc}
+							: {$item.rsrc|escape}
 							{if $item.perm}&nbsp;&bull;&nbsp;{tr}Permission{/tr}: {$item.perm}{/if}
 						</small>
 					</div>
