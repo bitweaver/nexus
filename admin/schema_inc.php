@@ -1,7 +1,7 @@
 <?php
 
 $tables = array(
-'tiki_nexus_plugins' => "
+'nexus_plugins' => "
 	plugin_guid C(16) PRIMARY,
 	plugin_type C(16) NOTNULL,
 	is_active C(1) NOTNULL DEFAULT 'y',
@@ -9,7 +9,7 @@ $tables = array(
 	maintainer_url C(250)
 ",
 
-'tiki_nexus_menus' => "
+'nexus_menus' => "
 	menu_id I4 AUTO PRIMARY,
 	plugin_guid C(16) NOTNULL,
 	title C(128),
@@ -18,7 +18,7 @@ $tables = array(
 	editable I4 DEFAULT 0
 ",
 
-'tiki_nexus_menu_items' => "
+'nexus_menu_items' => "
 	item_id I4 AUTO PRIMARY,
 	menu_id I4 DEFAULT 0,
 	parent_id I4,
