@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.13 $
+* @version  $Revision: 1.14 $
 * @package  nexus
 */
 
@@ -622,7 +622,7 @@ class Nexus extends NexusSystem {
 	}
 
 	/**
-	* Imports a structure from tiki_structures to nexus including hierarchy
+	* Imports a structure from liberty_structures to nexus including hierarchy
 	* @return number of errors encountered
 	*/
 	function importStructure( $pStructureId=NULL ) {
