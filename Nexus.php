@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.14 $
+* @version  $Revision: 1.15 $
 * @package  nexus
 */
 
@@ -345,7 +345,7 @@ class Nexus extends NexusSystem {
 	* @return fixed rsrc and corresponding rsrc_type
 	*/
 	function verifyRsrc( &$pParamHash ) {
-		$tiki_root_pattern = "/^".preg_replace( "/\//", "\/", BIT_ROOT_URL )."/i";
+		$bit_root_pattern = "/^".preg_replace( "/\//", "\/", BIT_ROOT_URL )."/i";
 		if( preg_match( "/^(http:\/\/)/i", $pParamHash['rsrc'] ) ) {
 			$pParamHash['rsrc_type'] = 'external';
 		} elseif( is_numeric( $pParamHash['rsrc'] ) ) {
@@ -353,7 +353,7 @@ class Nexus extends NexusSystem {
 			if( !isset( $pParamHash['rsrc_type'] ) ) {
 				$pParamHash['rsrc_type'] = 'content_id';
 			}
-		} elseif( preg_match( $tiki_root_pattern, $pParamHash['rsrc'] ) ) {
+		} elseif( preg_match( $bit_root_pattern, $pParamHash['rsrc'] ) ) {
 			// if BIT_ROOT_URL can be found at the beginning of the string, assume it's an internal link
 			// in most cases this will only be a '/' but hopefully that's enough
 			$pParamHash['rsrc_type'] = 'internal';
