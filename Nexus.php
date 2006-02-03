@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.15 $
+* @version  $Revision: 1.16 $
 * @package  nexus
 */
 
@@ -256,10 +256,9 @@ class Nexus extends NexusSystem {
 	*/
 	function expungeMenu( $pMenuId ) {
 		// first off, remove the menu from the layout
-		include_once( KERNEL_PKG_PATH.'mod_lib.php' );
-		global $modlib, $gBitSystem;
+		global $gBitThemes, $gBitSystem;
 		$menu = $this->getMenu( $this->mMenuId );
-		$modlib->unassignModule( $menu['cache']['module'], ROOT_USER_ID );
+		$gBitThemes->unassignModule( $menu['cache']['module'], ROOT_USER_ID );
 
 		// delete menu items
 		$query = "DELETE FROM `".BIT_DB_PREFIX."nexus_menu_items` WHERE `menu_id`=?";
