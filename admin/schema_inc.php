@@ -41,9 +41,6 @@ foreach( array_keys( $tables ) AS $tableName ) {
 $gBitInstaller->registerPackageInfo( NEXUS_PKG_NAME, array(
 	'description' => 'Nexus allows you to create multi level menus using a simple and intuitive interface. Menus can be of a dropdown style using css.',
 	'license' => '<a href="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</a>',
-	'version' => '0.1',
-	'state' => 'experimental',
-	'dependencies' => '',
 ) );
 
 // ### Default UserPermissions
