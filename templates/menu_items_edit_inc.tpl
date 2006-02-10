@@ -7,7 +7,7 @@
 	<div class="row">
 		{formlabel label="Link to content" for="content_type_guid"}
 		{forminput}
-			{html_options values=$contentTypes options=$contentTypes name=content_type_guid id=content_type_guid selected=$smarty.request.content_type_guid}
+			{html_options options=$contentTypes name=content_type_guid id=content_type_guid selected=$smarty.request.content_type_guid}
 		{/forminput}
 
 		{forminput}
