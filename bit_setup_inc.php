@@ -1,12 +1,18 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.9 $
+ * @version  $Revision: 1.10 $
  * @package  Nexus
  * @subpackage functions
  */
 global $gBitSystem, $gBitUser;
-$gBitSystem->registerPackage( 'nexus', dirname( __FILE__).'/', TRUE, LIBERTY_SERVICE_MENU );
+
+$registerHash = array(
+	'package_name' => 'nexus',
+	'package_path' => dirname( __FILE__ ).'/',
+	'service' => LIBERTY_SERVICE_MENU,
+);
+$gBitSystem->registerPackage( $registerHash );
 
 if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
