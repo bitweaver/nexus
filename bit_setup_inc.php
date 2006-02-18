@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.11 $
+ * @version  $Revision: 1.1.1.1.2.12 $
  * @package  Nexus
  * @subpackage functions
  */
@@ -23,11 +23,18 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 		$gBitSystem->registerAppMenu( NEXUS_PKG_NAME, ucfirst( NEXUS_PKG_DIR ), NEXUS_PKG_URL.'index.php', 'bitpackage:nexus/menu_nexus.tpl', 'Nexus menus');
 	}
 
+	if( $gBitSystem->getPreference( 'top_bar_position') == 'replace' && !file_exists( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules/top_bar_inc.tpl' ) ) {
+		include_once( NEXUS_PKG_PATH."Nexus.php" );
+		include_once( NEXUS_PKG_PATH."menu_lookup_inc.php" );
+		$gNexus->rewriteMenuCache();
+	}
+
 	// check if there is a js file for MSIE
 	if( is_dir( TEMP_PKG_PATH.'nexus/modules/' ) ) {
 		if( is_file( TEMP_PKG_PATH.'nexus/modules/hoverfix_array.js' ) ) {
 			$gBitSmarty->assign( 'hoverfix', TEMP_PKG_PATH.'nexus/modules/hoverfix_array.js' );
 		}
+
 
 		if( is_file( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' ) ) {
 			$gBitSmarty->assign( 'use_custom_top_bar', TRUE );
