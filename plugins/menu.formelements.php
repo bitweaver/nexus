@@ -6,7 +6,7 @@
  * @abstract implements javascript menu using form elements
  * @author   william@elan.net
  * copied   copied from menu.suckerfish.php originally by xing
- * @version  $Revision: 1.4 $
+ * @version  $Revision: 1.5 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -47,7 +47,7 @@ function writeFormMenuCache( $pMenuHash ) {
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
 	$menu_file = $pMenuHash->mInfo['cache']['file'];
-	if ( $pMenuHash->mInfo['type'] != 'qdd' ) {
+	if ( $pMenuHash->mInfo['menu_type'] != 'qdd' ) {
 		$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
 	}
 	else {
@@ -63,26 +63,26 @@ function writeFormMenuCache( $pMenuHash ) {
 		}
 		if( $item['first'] ) {
 			$data .= '<form id="menu_nexus'.$pMenuHash->mInfo['menu_id'].'" action="">';
-			if ( $pMenuHash->mInfo['type'] == 'qdd' ) {
+			if ( $pMenuHash->mInfo['menu_type'] == 'qdd' ) {
 				$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/formelements/start_center.tpl' );
 			}
 			$data .= '<select ';
-			if ( $pMenuHash->mInfo['type'] == 's3' ) {
+			if ( $pMenuHash->mInfo['menu_type'] == 's3' ) {
 				$data .= 'size="3" ';
 			}
-			if ( $pMenuHash->mInfo['type'] == 's5' ) {
+			if ( $pMenuHash->mInfo['menu_type'] == 's5' ) {
 				$data .= 'size="5" ';
 			}
-			if ( $pMenuHash->mInfo['type'] == 'sal' ) {
+			if ( $pMenuHash->mInfo['menu_type'] == 'sal' ) {
 				$data .= 'size="$pMenuHash->sizeof()" ';
 			}
 			if( $key == 0 ) {
 				$data .= ' onchange="go(this.form.elements[0]);" ';
 				$data .= ' name="menu_nexus'.$pMenuHash->mInfo['menu_id'].'" >';
-				if ( $pMenuHash->mInfo['type'] == 'sdd' ) {
+				if ( $pMenuHash->mInfo['menu_type'] == 'sdd' ) {
 					$data .= '<option value=""></option>';
 				}
-				if ( $pMenuHash->mInfo['type'] == 'qdd' ) {
+				if ( $pMenuHash->mInfo['menu_type'] == 'qdd' ) {
 					$data .= '<option value="">'.$pMenuHash->mInfo['title'].'</option>' ;
 				} 
 			} else {
@@ -104,7 +104,7 @@ function writeFormMenuCache( $pMenuHash ) {
 		}
 		if( $item['last'] ) {
 			$data .= '</select>' ;
-			if ( $pMenuHash->mInfo['type'] == 'qdd' ) {
+			if ( $pMenuHash->mInfo['menu_type'] == 'qdd' ) {
 				$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/formelements/finish_center.tpl' );
 			}
 			$data .= '</form>' ;

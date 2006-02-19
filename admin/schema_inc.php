@@ -14,7 +14,7 @@ $tables = array(
 	plugin_guid C(16) NOTNULL,
 	title C(128),
 	description C(255),
-	type C(16),
+	menu_type C(16),
 	editable I4 DEFAULT 0
 ",
 

@@ -61,10 +61,10 @@
 										&nbsp;
 										<select name="type_{$plugin.plugin_guid}" id="type_{$plugin.plugin_guid}">
 											{foreach from=$plugin.menu_types key=type item=menu_type}
-												{if $type eq hor and $use_custom_top_bar and !$editMenu.type eq 'hor'}
+												{if $type eq hor and $use_custom_top_bar and !$editMenu.menu_type eq 'hor'}
 													<option value="">{tr}Only one horizontal menu can exist.{/tr}</option>
 												{else}
-													<option value="{$type}"{if $type eq $editMenu.type} selected="selected"{/if}>{$menu_type.label}</option>
+													<option value="{$type}"{if $type eq $editMenu.menu_type} selected="selected"{/if}>{$menu_type.label}</option>
 												{/if}
 											{/foreach}
 										</select>
@@ -139,7 +139,7 @@
 					<td>
 						{assign var=plugin_guid value=$menu.plugin_guid}
 						{foreach from=$gNexusSystem->mPlugins.$plugin_guid.menu_types item=menu_type key=m_type}
-							{if $m_type eq $menu.type}{$menu_type.label}{/if}
+							{if $m_type eq $menu.menu_type}{$menu_type.label}{/if}
 						{/foreach}
 					</td>
 					<td style="text-align:right;">{$menu.items|@count}</td>

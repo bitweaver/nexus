@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.16 $
+* @version  $Revision: 1.17 $
 * @package  nexus
 */
 
@@ -209,10 +209,10 @@ class Nexus extends NexusSystem {
 		}
 		$type_name = 'type_' . $pParamHash['plugin_guid'];
 		if ( empty( $pParamHash[$type_name] )) {
-			$pParamHash['type'] = 'nor';
+			$pParamHash['menu_type'] = 'nor';
 		}
 		else {
-			$pParamHash['type'] = $pParamHash[$type_name];
+			$pParamHash['menu_type'] = $pParamHash[$type_name];
 		}
 		if( empty( $pParamHash['editable'][0] ) || !is_numeric( $pParamHash['editable'][0] ) ) {
 			$pParamHash['editable'][0] = 0;
@@ -226,7 +226,7 @@ class Nexus extends NexusSystem {
 	* @param menu_id if set, will update given menu - if not set, we create a new entry in the db
 	* @param title title of menu
 	* @param description description of menu
-	* @param type type of menu
+	* @param menu_type type of menu
 	* @param editable if menu is editable by other users - takes 0 or 1
 	* @return new menu menu_id or FALSE if not created
 	*/
@@ -234,13 +234,13 @@ class Nexus extends NexusSystem {
 		$ret = FALSE;
 		if( $this->verifyMenu( $pParamHash ) ) {
 			if( !@BitBase::verifyId( $pParamHash['menu_id'] ) ) {
-				$query = "INSERT INTO `".BIT_DB_PREFIX."nexus_menus`( `title`,`description`,`type`,`plugin_guid`,`editable` ) VALUES(?,?,?,?,?)";
-				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['type'], $pParamHash['plugin_guid'], $pParamHash['editable'] ) );
+				$query = "INSERT INTO `".BIT_DB_PREFIX."nexus_menus`( `title`,`description`,`menu_type`,`plugin_guid`,`editable` ) VALUES(?,?,?,?,?)";
+				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['menu_type'], $pParamHash['plugin_guid'], $pParamHash['editable'] ) );
 				$query = "SELECT MAX(`menu_id`) FROM `".BIT_DB_PREFIX."nexus_menus`";
 				$ret = $this->mDb->getOne( $query, array() );
 			} else {
-				$query = "UPDATE `".BIT_DB_PREFIX."nexus_menus` SET `title`=?,`description`=?,`type`=?,`plugin_guid`=?,`editable`=? WHERE `".BIT_DB_PREFIX."nexus_menus`.`menu_id`=?";
-				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['type'], $pParamHash['plugin_guid'], $pParamHash['editable'], $pParamHash['menu_id'] ) );
+				$query = "UPDATE `".BIT_DB_PREFIX."nexus_menus` SET `title`=?,`description`=?,`menu_type`=?,`plugin_guid`=?,`editable`=? WHERE `".BIT_DB_PREFIX."nexus_menus`.`menu_id`=?";
+				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['menu_type'], $pParamHash['plugin_guid'], $pParamHash['editable'], $pParamHash['menu_id'] ) );
 				$ret = $pParamHash['menu_id'];
 			}
 			$this->writeModuleCache( $ret );

@@ -37,7 +37,7 @@
 		{forminput}
 			{assign var=plugin_guid value=$gNexus->mInfo.plugin_guid}
 			{foreach from=$gNexusSystem->mPlugins.$plugin_guid.menu_types item=menu_type key=m_type}
-				{if $m_type eq $gNexus->mInfo.type}{$menu_type.label}{/if}
+				{if $m_type eq $gNexus->mInfo.menu_type}{$menu_type.label}{/if}
 			{/foreach}
 		{/forminput}
 	</div>

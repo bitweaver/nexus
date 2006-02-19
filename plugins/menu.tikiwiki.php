@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.5 $
+ * @version  $Revision: 1.6 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -52,7 +52,7 @@ function writeTikiWikiCache( $pMenuHash ) {
 	$permCloseIds = array();
 	$perm_close = FALSE;
 	$perm_cycle = FALSE;
-	$type = $pMenuHash->mInfo['type'];
+	$type = $pMenuHash->mInfo['menu_type'];
 	foreach( $pMenuHash->mInfo['tree'] as $key => $item ) {
 		if( $item['first'] ) {
 			$data .= '<div id="togid'.$item['item_id'].'">';
