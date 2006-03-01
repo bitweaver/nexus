@@ -14,7 +14,7 @@
 
 	{if $item.head}
 		<script type="text/javascript">
-			setfoldericonstate('{$tog_next}');
+			flipIcon('{$tog_next}');
 		</script>
 	{/if}
 {elseif $type eq 'iho' or $type eq 'ihc'}
@@ -32,7 +32,7 @@
 
 	{if $item.head}
 		<script type="text/javascript">
-			setfoldericonstate('{$tog_next}');
+			flipIcon('{$tog_next}');
 		</script>
 	{/if}
 {else}
