@@ -94,9 +94,9 @@
 						{formlabel label="Position" for="top_bar_position"}
 						{forminput}
 							<select name="top_bar_position" id="top_bar_position">
-								<option value="right" {if $gBitSystemPrefs.top_bar_position eq 'right'}selected="selected"{/if}>{tr}To the right of the bitweaver menu{/tr}</option>
-								<option value="left" {if $gBitSystemPrefs.top_bar_position eq 'left'}selected="selected"{/if}>{tr}To the left of the bitweaver menu{/tr}</option>
-								<option value="replace" {if $gBitSystemPrefs.top_bar_position eq 'replace'}selected="selected"{/if}>{tr}Replace the bitweaver menu{/tr}</option>
+								<option value="right" {if $gBitSystem->getConfig('top_bar_position') eq 'right'}selected="selected"{/if}>{tr}To the right of the bitweaver menu{/tr}</option>
+								<option value="left" {if $gBitSystem->getConfig('top_bar_position') eq 'left'}selected="selected"{/if}>{tr}To the left of the bitweaver menu{/tr}</option>
+								<option value="replace" {if $gBitSystem->getConfig('top_bar_position') eq 'replace'}selected="selected"{/if}>{tr}Replace the bitweaver menu{/tr}</option>
 							</select>
 							{formhelp note="Here you can set the position of where your custom top bar menu should be. This setting is only used when you are using a horizontal suckerfish menu."}
 						{/forminput}

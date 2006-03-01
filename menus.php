@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.6 $
+ * @version  $Revision: 1.7 $
  * @package  nexus
  * @subpackage functions
  */
@@ -99,7 +99,7 @@ if( is_file( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' ) ) {
 
 	if( !empty( $_REQUEST['store_pos'] ) ) {
 		$gBitSmarty->assign( 'use_custom_top_bar', TRUE );
-		$gBitSystem->storePreference( 'top_bar_position', !empty( $_REQUEST['top_bar_position'] ) ? $_REQUEST['top_bar_position'] : NULL, NEXUS_PKG_NAME );
+		$gBitSystem->storeConfig( 'top_bar_position', !empty( $_REQUEST['top_bar_position'] ) ? $_REQUEST['top_bar_position'] : NULL, NEXUS_PKG_NAME );
 	}
 }
 
