@@ -12,7 +12,7 @@
 				<a href="{$smarty.const.NEXUS_PKG_URL}menu_sort.php?sort_menu={$menuId}&amp;menu_id={$item.menu_id}&amp;item_id={$item.item_id}&amp;move_item=n&amp;tab=organise">{biticon iforce=icon ipackage=liberty iname="nav_up" iexplain="move up" style="float:right"}</a>
 				<a href="{$smarty.const.NEXUS_PKG_URL}menu_sort.php?sort_menu={$menuId}&amp;menu_id={$item.menu_id}&amp;item_id={$item.item_id}&amp;move_item=w&amp;tab=organise">{biticon iforce=icon ipackage=liberty iname="nav_prev" iexplain="move left" style="float:right"}</a>
 
-				{$item.title}
+				{$item.title|escape}
 				{biticon iforce=icon ipackage=liberty iname="spacer" iexplain=""}
 			</div>
 	{/if}

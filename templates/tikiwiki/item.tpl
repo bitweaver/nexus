@@ -8,7 +8,7 @@
 		{/if}
 
 		<a class="{if $item.head}head{else}item{/if}{if $item.rsrc_type eq 'ext'} external{/if}" title="{$item.hint}" {if $item.display_url}href="{$item.display_url}{/if}">
-			{$item.title}
+			{$item.title|escape}
 		</a>
 	</span>
 
@@ -21,11 +21,11 @@
 	<span style="display:block;">
 		{if $item.expand_url}
 			<a style="float:left;padding:0 3px;" href="{$item.expand_url}">
-				{biticon ipackage=liberty iname=folder id="`$tog_next`img" iexplain="expand menu"} {$item.title}
+				{biticon ipackage=liberty iname=folder id="`$tog_next`img" iexplain="expand menu"} {$item.title|escape}
 			</a>
 		{else}
 			<a class="{if $item.head}head{else}item{/if}{if $item.rsrc_type eq 'ext'} external{/if}" title="{$item.hint}" {if $item.display_url}href="{$item.display_url}{/if}">
-				{$item.title}
+				{$item.title|escape}
 			</a>
 		{/if}
 	</span>
@@ -37,7 +37,7 @@
 	{/if}
 {else}
 	<a class="{if $item.head}head{else}item{/if}{if $item.rsrc_type eq 'ext'} external{/if}" title="{$item.hint}" {if $item.display_url}href="{$item.display_url}{/if}">
-		{$item.title}
+		{$item.title|escape}
 	</a>
 {/if}
 {/strip}

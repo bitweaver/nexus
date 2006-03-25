@@ -3,14 +3,14 @@
 	<div class="row">
 		{formlabel label="Title"}
 		{forminput}
-			{$gNexus->mInfo.title}
+			{$gNexus->mInfo.title|escape}
 		{/forminput}
 	</div>
 
 	<div class="row">
 		{formlabel label="Description"}
 		{forminput}
-			{$gNexus->mInfo.description}
+			{$gNexus->mInfo.description|escape}
 		{/forminput}
 	</div>
 

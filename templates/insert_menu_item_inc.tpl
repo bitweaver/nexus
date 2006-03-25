@@ -8,7 +8,7 @@
 						<div class="row">
 							{formlabel label="Menu"}
 							{forminput}
-								{$menu.title} {if $menu.description}<small>( {$menu.description} )</small>{/if}
+								{$menu.title|escape} {if $menu.description}<small>( {$menu.description|escape} )</small>{/if}
 							{/forminput}
 						</div>
 
@@ -19,7 +19,7 @@
 								&nbsp; {tr}after{/tr} &nbsp;
 								<select name="nexus[after_ref_id]" id="after_ref_id{$menu.menu_id}">
 									{foreach from=$menu.tree item=item}
-										{if !$item.last}<option {if $item.head}style="font-weight:bold;" {/if}value="{$item.item_id}">{$item.title}</option>{/if}
+										{if !$item.last}<option {if $item.head}style="font-weight:bold;" {/if}value="{$item.item_id}">{$item.title|escape}</option>{/if}
 									{foreachelse}
 										<option value="">{tr}no items found{/tr}</option>
 									{/foreach}
@@ -39,7 +39,7 @@
 				</div>
 			{else}
 				<div class="row">
-					<p>{tr}This {$gContent->mType.content_description} is already part of the menu <strong>{$inNexusMenu.title}</strong>.{/tr}</p>
+					<p>{tr}This {$gContent->mType.content_description} is already part of the menu <strong>{$inNexusMenu.title|escape}</strong>.{/tr}</p>
 					{formlabel label="Remove" for="nexusRemove"}
 					{forminput}
 						<input type="checkbox" name="nexus[remove_item]" id="nexusRemove" value="{$inNexusMenuItem.item_id}" />
