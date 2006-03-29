@@ -13,6 +13,11 @@ array( 'DATADICT' => array(
 		'tiki_nexus_menus' => 'nexus_menus',
 		'tiki_nexus_menu_items' => 'nexus_menu_items',
 	)),
+	array( 'RENAMECOLUMN' => array(
+		'nexus_menus' => array(
+			'`type`' => 'menu_type'
+		),
+	)),
 )),
 
 		)
