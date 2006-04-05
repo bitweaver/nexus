@@ -15,7 +15,7 @@ array( 'DATADICT' => array(
 	)),
 	array( 'RENAMECOLUMN' => array(
 		'nexus_menus' => array(
-			'`type`' => 'menu_type'
+			'`type`' => '`menu_type` C(16)'
 		),
 	)),
 )),
