@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.3 $
+ * @version  $Revision: 1.4 $
  * @package  nexus
  * @subpackage functions
  */
@@ -14,7 +14,7 @@ global $gBitSystem;
 require_once( NEXUS_PKG_PATH.'Nexus.php');
 include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
 
-$gBitSystem->verifyPermission( 'bit_p_create_nexus_menus' );
+$gBitSystem->verifyPermission( 'p_nexus_create_menus' );
 
 if( empty( $_REQUEST['menu_id'] ) ) {
 	header( 'Location:'.NEXUS_PKG_URL.'index.php' );

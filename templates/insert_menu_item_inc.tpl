@@ -1,5 +1,5 @@
 {strip}
-{if $gBitUser->hasPermission( 'bit_p_insert_nexus_item' ) and $nexusList}
+{if $gBitUser->hasPermission( 'p_nexus_insert_item' ) and $nexusList}
 	{jstab title="Menu"}
 		{legend legend="Insert in Menu"}
 			{if !$inNexusMenu}

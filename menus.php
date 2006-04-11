@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.7 $
+ * @version  $Revision: 1.8 $
  * @package  nexus
  * @subpackage functions
  */
@@ -15,7 +15,7 @@ require_once( NEXUS_PKG_PATH.'Nexus.php');
 include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
 
 $formfeedback = '';
-$gBitSystem->verifyPermission( 'bit_p_create_nexus_menus' );
+$gBitSystem->verifyPermission( 'p_nexus_create_menus' );
 
 if( isset( $_REQUEST['action'] ) ) {
 	if( $_REQUEST['action'] == 'edit' ) {

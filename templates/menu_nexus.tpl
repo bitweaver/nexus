@@ -10,7 +10,7 @@
 	{else}
 		<li><a class="item" href="{$smarty.const.NEXUS_PKG_URL}menus.php">{biticon ipackage="nexus" iname="menu" iexplain="menus" iforce=icon} Menus</a></li>
 	{/if}
-	{if $gBitUser->hasPermission('bit_p_admin')}
+	{if $gBitUser->hasPermission('p_admin')}
 		<li><a class="item" href="{$smarty.const.NEXUS_PKG_URL}admin/nexus_plugins.php">{biticon ipackage="liberty" iname="plugin" iexplain="menus" iforce=icon} Nexus Plugins</a></li>
 	{/if}
 </ul>
