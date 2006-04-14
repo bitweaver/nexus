@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.10 $
+ * @version  $Revision: 1.11 $
  * @package  Nexus
  * @subpackage functions
  */
@@ -25,7 +25,7 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	// include service functions
 	require_once( NEXUS_PKG_PATH.'servicefunctions_inc.php' );
 
-	if( $gBitUser->isAdmin() ) {
+	if( $gBitUser->hasPermission( 'p_nexus_create_menus' ) ) {
 		$gBitSystem->registerAppMenu( NEXUS_PKG_NAME, ucfirst( NEXUS_PKG_DIR ), NEXUS_PKG_URL.'index.php', 'bitpackage:nexus/menu_nexus.tpl', 'Nexus menus');
 	}
 
