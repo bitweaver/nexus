@@ -91,12 +91,12 @@
 			{jstab title="Advanced Settings"}
 				{form legend="Top Bar Menu Position"}
 					<div class="row">
-						{formlabel label="Position" for="top_bar_position"}
+						{formlabel label="Position" for="nexus_top_bar"}
 						{forminput}
-							<select name="top_bar_position" id="top_bar_position">
-								<option value="right" {if $gBitSystem->getConfig('top_bar_position') eq 'right'}selected="selected"{/if}>{tr}To the right of the bitweaver menu{/tr}</option>
-								<option value="left" {if $gBitSystem->getConfig('top_bar_position') eq 'left'}selected="selected"{/if}>{tr}To the left of the bitweaver menu{/tr}</option>
-								<option value="replace" {if $gBitSystem->getConfig('top_bar_position') eq 'replace'}selected="selected"{/if}>{tr}Replace the bitweaver menu{/tr}</option>
+							<select name="nexus_top_bar" id="nexus_top_bar">
+								<option value="right" {if $gBitSystem->getConfig('nexus_top_bar') eq 'right'}selected="selected"{/if}>{tr}To the right of the bitweaver menu{/tr}</option>
+								<option value="left" {if $gBitSystem->getConfig('nexus_top_bar') eq 'left'}selected="selected"{/if}>{tr}To the left of the bitweaver menu{/tr}</option>
+								<option value="replace" {if $gBitSystem->getConfig('nexus_top_bar') eq 'replace'}selected="selected"{/if}>{tr}Replace the bitweaver menu{/tr}</option>
 							</select>
 							{formhelp note="Here you can set the position of where your custom top bar menu should be. This setting is only used when you are using a horizontal suckerfish menu."}
 						{/forminput}
