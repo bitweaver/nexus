@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.1.1.1.2.7 $
+ * @version  $Revision: 1.1.1.1.2.8 $
  * @package  nexus
  * @subpackage functions
  */
@@ -88,8 +88,9 @@ $gBitSmarty->assign( 'formfeedback', $formfeedback );
 if( is_file( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' ) ) {
 	// if the top bar is set and we don't need it, remove it.
 	foreach( $menuList as $menu ) {
-		if( !( $menu['plugin_guid'] == NEXUS_PLUGIN_GUID_SUCKERFISH && $menu['type'] == 'hor' ) ) {
-			$nuke_top_bar = TRUE;
+		$nuke_top_bar = TRUE;
+		if( $menu['plugin_guid'] == NEXUS_PLUGIN_GUID_SUCKERFISH && $menu['type'] == 'hor' ) {
+			$nuke_top_bar = FALSE;
 		}
 	}
 
