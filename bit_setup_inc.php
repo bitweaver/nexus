@@ -1,11 +1,11 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.11 $
+ * @version  $Revision: 1.12 $
  * @package  Nexus
  * @subpackage functions
  */
-global $gBitSystem, $gBitUser;
+global $gBitSystem, $gBitUser, $gLibertySystem;
 
 $registerHash = array(
 	'package_name' => 'nexus',
