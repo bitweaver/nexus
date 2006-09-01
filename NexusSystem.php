@@ -5,7 +5,7 @@
 * @abstract
 * @author   xing <xing@synapse.plus.com>
 * copied   copied from LibertySystem.php
-* @version  $Revision: 1.1.1.1.2.5 $
+* @version  $Revision: 1.1.1.1.2.6 $
 * @package  nexus
 */
 
@@ -132,7 +132,6 @@ class NexusSystem extends BitBase {
 			$settings[] = $rs->fields;
 			$rs->MoveNext();
 		}
-		vd($settings);
 	}
 }
 
