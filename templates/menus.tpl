@@ -1,6 +1,6 @@
 {strip}
 {if $editMenu.menu_id}
-	<div class="floaticon"><a href="{$smarty.const.PKG_NEXUS_URL}menus.php">{biticon ipackage=liberty iname=new iexplain="create new menu"}</a></div>
+	<div class="floaticon"><a href="{$smarty.const.PKG_NEXUS_URL}menus.php">{biticon ipackage="icons" iname="document-new" iexplain="create new menu"}</a></div>
 {/if}
 <div class="display nexus">
 	<div class="header">
@@ -145,18 +145,18 @@
 					<td style="text-align:right;">{$menu.items|@count}</td>
 					<td style="text-align:center;">
 						{if $menu.editable}
-							{biticon ipackage=liberty iname=active iexplain="menu is editable"}
+							{biticon ipackage="icons" iname="face-smile" iexplain="menu is editable"}
 						{else}
-							{biticon ipackage=liberty iname=inactive iexplain="menu is not editable"}
+							{biticon ipackage="icons" iname="face-sad" iexplain="menu is not editable"}
 						{/if}
 					</td>
 					<td class="actionicon">
-						<a href="{$smarty.const.NEXUS_PKG_URL}menu_sort.php?menu_id={$menu.menu_id}">{biticon ipackage=nexus iname=organise iexplain='sort menu items'}</a>
-						<a href="{$smarty.const.NEXUS_PKG_URL}menu_items.php?menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=edit iexplain='create and edit menu items'}</a>
-						<a href="{$smarty.const.KERNEL_PKG_URL}admin/index.php?page=layout&amp;module_name=bitpackage%3Atemp%2Fnexus%2Fmod_{$menu.title|escape|replace:' ':'_'|lower}_{$menu.menu_id}.tpl">{biticon ipackage=liberty iname=assign iexplain=assign}</a>
-						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=remove_dead&amp;menu_id={$menu.menu_id}">{biticon ipackage=nexus iname=remove_dead iexplain='remove dead links'}</a>
-						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=edit&amp;menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=config iexplain='configure menu'}</a>
-						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=remove&amp;menu_id={$menu.menu_id}">{biticon ipackage=liberty iname=delete iexplain='remove menu'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menu_sort.php?menu_id={$menu.menu_id}">{biticon ipackage="icons" iname="view-refresh" iexplain='sort menu items'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menu_items.php?menu_id={$menu.menu_id}">{biticon ipackage="icons" iname="accessories-text-editor" iexplain='create and edit menu items'}</a>
+						<a href="{$smarty.const.KERNEL_PKG_URL}admin/index.php?page=layout&amp;module_name=bitpackage%3Atemp%2Fnexus%2Fmod_{$menu.title|escape|replace:' ':'_'|lower}_{$menu.menu_id}.tpl">{biticon ipackage="icons" iname="mail-attachment" iexplain=assign}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=remove_dead&amp;menu_id={$menu.menu_id}">{biticon ipackage="icons" iname="mail-mark-junk" iexplain='remove dead links'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=edit&amp;menu_id={$menu.menu_id}">{biticon ipackage="icons" iname="document-properties" iexplain='configure menu'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=remove&amp;menu_id={$menu.menu_id}">{biticon ipackage="icons" iname="edit-delete" iexplain='remove menu'}</a>
 					</td>
 				</tr>
 			{foreachelse}

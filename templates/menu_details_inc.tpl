@@ -18,9 +18,9 @@
 		{formlabel label="Editable"}
 		{forminput}
 			{if $gNexus->mInfo.editable}
-				{biticon ipackage=liberty iname=active iexplain="Editable"}
+				{biticon ipackage="icons" iname="face-smile" iexplain="Editable"}
 			{else}
-				{biticon ipackage=liberty iname=inactive iexplain="Not editable"}
+				{biticon ipackage="icons" iname="face-sad" iexplain="Not editable"}
 			{/if}
 		{/forminput}
 	</div>
