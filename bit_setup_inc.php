@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.14 $
+ * @version  $Revision: 1.15 $
  * @package  Nexus
  * @subpackage functions
  */
@@ -26,11 +26,13 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	}
 	$gBitSmarty->assign_by_ref( 'gNexusSystem', $gNexusSystem );
 
-	require_once( NEXUS_PKG_PATH.'Nexus.php' );
+	// include service functions
+	require_once( NEXUS_PKG_PATH.'servicefunctions_inc.php' );
+
 	$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
-		'content_store_function'   => 'nexus_store_content',
-		'content_edit_function'    => 'nexus_input_content',
-		'content_preview_function' => 'nexus_preview_content',
+		'content_store_function'   => 'nexus_content_store',
+		'content_edit_function'    => 'nexus_content_edit',
+		'content_preview_function' => 'nexus_content_preview',
 		'content_edit_tab_tpl'     => 'bitpackage:nexus/insert_menu_item_inc.tpl',
 	) );
 
