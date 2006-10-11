@@ -8,8 +8,10 @@ $upgrades = array(
 		'BWR2' => array(
 // de-tikify tables
 array( 'DATADICT' => array(
+	array( 'DROPTABLE' => array(
+		'tiki_nexus_plugins'
+	)),
 	array( 'RENAMETABLE' => array(
-		'tiki_nexus_plugins' => 'nexus_plugins',
 		'tiki_nexus_menus' => 'nexus_menus',
 		'tiki_nexus_menu_items' => 'nexus_menu_items',
 	)),

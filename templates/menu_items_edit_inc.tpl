@@ -68,7 +68,7 @@
 		{formlabel label="Resource link" for="rsrc"}
 		{forminput}
 			<input type="text" name="rsrc" id="rsrc" size="50" value="{$editItem.rsrc|escape}" />
-			{formhelp note="<dl><dt>External URL</dt><dd>enter full link. e.g.: <strong>http://www.example.com</strong></dd><dt>Internal URL</dt><dd>enter link beginning from your bitweaver installation directory. e.g.: <strong>wiki/rankings.php</strong></dd><dt>Content ID</dt><dd>enter the number referring to some content (e.g. the number assoctiated with each item in the content dropdown is a content ID). e.g.: <strong>3</strong></dd><dt>Menu ID</dt><dd>Enter the menu ID of the menu you wish to insert.</dd></dl>"}
+			{formhelp note="<dl><dt>External URL</dt><dd>enter full link. e.g.: <strong>http://www.example.com</strong></dd><dt>Internal URL</dt><dd>enter link beginning from your bitweaver installation directory. e.g.: <strong>wiki/rankings.php</strong></dd><dt>Content ID</dt><dd>enter the number referring to some content (e.g. the number assoctiated with each item in the content dropdown is a content ID). e.g.: <strong>3</strong></dd><dt>Structure ID</dt><dd>Enter the structure ID that you want to use.</dd></dl>"}
 		{/forminput}
 	</div>
 

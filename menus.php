@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.10 $
+ * @version  $Revision: 1.11 $
  * @package  nexus
  * @subpackage functions
  */
@@ -31,12 +31,6 @@ if( isset( $_REQUEST['action'] ) ) {
 			'warning' => 'This will remove this menu including all menu items associated with it.<br />This cannot be undone!',
 		);
 		$gBitSystem->confirmDialog( $formHash,$msgHash );
-	}
-
-	if( $_REQUEST['action'] == 'rewrite_cache' ) {
-		if( $gNexus->rewriteMenuCache() ) {
-			$formfeedback['success'] = tra( 'The complete menu cache has been rewritten.' );
-		}
 	}
 
 	if( $_REQUEST['action'] == 'remove_dead' ) {

@@ -1,14 +1,6 @@
 <?php
 
 $tables = array(
-'nexus_plugins' => "
-	plugin_guid C(16) PRIMARY,
-	plugin_type C(16) NOTNULL,
-	is_active C(1) NOTNULL DEFAULT 'y',
-	plugin_description C(250),
-	maintainer_url C(250)
-",
-
 'nexus_menus' => "
 	menu_id I4 AUTO PRIMARY,
 	plugin_guid C(16) NOTNULL,

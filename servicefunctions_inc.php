@@ -1,6 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_nexus/servicefunctions_inc.php,v 1.3 2006/01/10 21:14:10 squareing Exp $
+ * $Header: /cvsroot/bitweaver/_bit_nexus/servicefunctions_inc.php,v 1.4 2006/10/11 10:15:23 squareing Exp $
  *
  * @package nexus
  * @subpackage functions
@@ -9,7 +9,7 @@
 /**
  * Nexus edit template service
  */
-function nexus_input_content( $pObject=NULL ) {
+function nexus_content_edit( $pObject=NULL ) {
 	global $gBitSmarty;
 	require_once( NEXUS_PKG_PATH.'Nexus.php' );
 	$nexus = new Nexus();
@@ -31,14 +31,14 @@ function nexus_input_content( $pObject=NULL ) {
  * Nexus preview service
  * when we hit preview, we make the selections persistent
  */
-function nexus_preview_content( $pObject=NULL ) {
+function nexus_content_preview( $pObject=NULL ) {
 }
 
 /**
  * Nexus store service
  * store the content as part of an existing menu
  */
-function nexus_store_content( $pObject, $pParamHash ) {
+function nexus_content_store( $pObject, $pParamHash ) {
 	global $gBitSystem, $gBitUser, $gBitSmarty;
 	require_once( NEXUS_PKG_PATH.'Nexus.php' );
 	$nexus = new Nexus();

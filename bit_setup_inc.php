@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.13 $
+ * @version  $Revision: 1.14 $
  * @package  Nexus
  * @subpackage functions
  */
@@ -10,20 +10,29 @@ global $gBitSystem, $gBitUser, $gLibertySystem;
 $registerHash = array(
 	'package_name' => 'nexus',
 	'package_path' => dirname( __FILE__ ).'/',
-	'service' => LIBERTY_SERVICE_MENU,
+	'service'      => LIBERTY_SERVICE_MENU,
 );
 $gBitSystem->registerPackage( $registerHash );
 
 if( $gBitSystem->isPackageActive( 'nexus' ) ) {
-	$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
-		'content_store_function' => 'nexus_store_content',
-		'content_edit_function' => 'nexus_input_content',
-		'content_preview_function' => 'nexus_preview_content',
-		'content_edit_tab_tpl' => 'bitpackage:nexus/insert_menu_item_inc.tpl',
-	) );
+	// load nexus plugins
+	require_once( NEXUS_PKG_PATH.'NexusSystem.php' );
+	global $gNexusSystem;
+	$gNexusSystem = new NexusSystem();
+	if( !$gBitSystem->isFeatureActive( NEXUS_PKG_NAME.'_plugin_file_suckerfish' ) ) {
+		$gNexusSystem->scanAllPlugins( NEXUS_PKG_PATH.'plugins/' );
+	} else {
+		$gNexusSystem->loadActivePlugins();
+	}
+	$gBitSmarty->assign_by_ref( 'gNexusSystem', $gNexusSystem );
 
-	// include service functions
-	require_once( NEXUS_PKG_PATH.'servicefunctions_inc.php' );
+	require_once( NEXUS_PKG_PATH.'Nexus.php' );
+	$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
+		'content_store_function'   => 'nexus_store_content',
+		'content_edit_function'    => 'nexus_input_content',
+		'content_preview_function' => 'nexus_preview_content',
+		'content_edit_tab_tpl'     => 'bitpackage:nexus/insert_menu_item_inc.tpl',
+	) );
 
 	if( $gBitUser->hasPermission( 'p_nexus_create_menus' ) ) {
 		$menuHash = array(

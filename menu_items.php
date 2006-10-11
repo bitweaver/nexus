@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.5 $
+ * @version  $Revision: 1.6 $
  * @package  nexus
  * @subpackage functions
  */
@@ -88,7 +88,7 @@ $rsrcTypes = array(
 	'external' => 'URL',
 	'content_id' => 'Content ID',
 	'structure_id' => 'Structure ID',
-	'menu_id' => 'Menu ID',
+	//'menu_id' => 'Menu ID',
 //	'gallery_list' => 'Gallery List', // this is not in use yet - xing
 );
 $gBitSmarty->assign( 'rsrcTypes', $rsrcTypes );

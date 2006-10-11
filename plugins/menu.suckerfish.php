@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.7 $
+ * @version  $Revision: 1.8 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -18,18 +18,19 @@ global $gNexusSystem;
 define( 'NEXUS_PLUGIN_GUID_SUCKERFISH', 'suckerfish' );
 
 $pluginParams = array(
-	'write_cache_function' => 'writeSuckerfishCache',
-	'description' => 'Sophisticated and flexible CSS driven dropdown menus',
-	'web_link' => '<a class="external" href="http://www.htmldog.com/articles/suckerfish/">Sons of Suckerfish Menus</a>',
+	'auto_activate'        => TRUE,
+	'write_cache_function' => 'write_suckerfish_cache',
+	'title'                => 'Suckerfish Menus',
+	'description'          => 'Sophisticated and flexible CSS driven dropdown menus',
+	'web_link'             => '<a class="external" href = "http: // www.htmldog.com/articles/suckerfish/">Sons of Suckerfish Menus</a>',
 	'browser_requirements' => 'Many modern browsers support suckerfish menus inherently using CSS. MSIE requires javascript to be ON for them to work.',
-	'edit_label' => 'CSS based menus',
-	'menu_types' => array(
-		'nor' => array( 'label' => 'Normal', 'note' => 'Nested list of menu items using "ul" and "li" HTML tags.' ),
-		'ver' => array( 'label' => 'Vertical', 'note' => 'Vertical dropdown menu that usually resides in one of the side modules.' ),
+	'edit_label'           => 'CSS based menus',
+	'plugin_type'          => 'nexus_plugin',
+	'menu_types'           => array(
+		'nor' => array( 'label' => 'Normal',     'note' => 'Nested list of menu items using "ul" and "li" HTML tags.' ),
+		'ver' => array( 'label' => 'Vertical',   'note' => 'Vertical dropdown menu that usually resides in one of the side modules.' ),
 		'hor' => array( 'label' => 'Horizontal', 'note' => 'Horizontal menu which you can use to insert in or replace the top menu bar.' ),
 	),
-	'plugin_type' => NEXUS_HTML_PLUGIN,
-	'include_js_in_head' => FALSE,
 );
 
 $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_SUCKERFISH, $pluginParams );
@@ -39,7 +40,7 @@ $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_SUCKERFISH, $pluginParams );
 * @param $pMenuHash full menu hash
 * @return full menu string ready for printing (key serves as cache file path)
 */
-function writeSuckerfishCache( $pMenuHash ) {
+function write_suckerfish_cache( $pMenuHash ) {
 	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );

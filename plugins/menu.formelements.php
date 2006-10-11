@@ -6,7 +6,7 @@
  * @abstract implements javascript menu using form elements
  * @author   william@elan.net
  * copied   copied from menu.suckerfish.php originally by xing
- * @version  $Revision: 1.5 $
+ * @version  $Revision: 1.6 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -18,20 +18,22 @@ global $gNexusSystem;
 define( 'NEXUS_PLUGIN_GUID_FORMELEMENTSMENU', 'formelements' );
 
 $pluginParams = array(
-	'write_cache_function' => 'writeFormMenuCache',
-	'description' => 'Menus using form elements',
-	'web_link' => '',
+	'auto_activate'        => FALSE,
+	'write_cache_function' => 'write_form_menu_cache',
+	'title'                => 'Formelements menu',
+	'description'          => 'Menus using form elements',
+	'web_link'             => '',
 	'browser_requirements' => 'This menu should work in all browsers that support javascript',
-	'edit_label' => 'Menus using form elements',
-	'menu_types' => array(
+	'edit_label'           => 'Menus using form elements',
+	'include_js_in_head'   => '/nexus/plugins/menu.formelements.js',
+	'plugin_type'          => 'nexus_plugin',
+	'menu_types'           => array(
 		'sdd' => array( 'label' => 'Standard DropDown', 'note' => 'drop-down menu using select with menu name on top' ),
-		'qdd' => array( 'label' => 'Quick DropDown', 'note' => 'drop-down menu using select with menu name in drop-down select box'),
-		's3' => array( 'label' => '3-Line Box', 'note' => 'select menu with 3 lines showing' ),
-		's5' => array( 'label' => '5-Line Box', 'note' => 'select menu with 5 lines showing' ),
-		'sal' => array( 'label' => 'Full Text Box', 'note' => 'select menu with all menu items showing' ),
+		'qdd' => array( 'label' => 'Quick DropDown',    'note' => 'drop-down menu using select with menu name in drop-down select box'),
+		's3'  => array( 'label' => '3-Line Box',        'note' => 'select menu with 3 lines showing' ),
+		's5'  => array( 'label' => '5-Line Box',        'note' => 'select menu with 5 lines showing' ),
+		'sal' => array( 'label' => 'Full Text Box',     'note' => 'select menu with all menu items showing' ),
 	),
-	'plugin_type' => NEXUS_HTML_PLUGIN,
-	'include_js_in_head' => '/nexus/plugins/menu.formelements.js',
 );
 
 $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_FORMELEMENTSMENU, $pluginParams );
@@ -42,7 +44,7 @@ $gNexusSystem->registerPlugin( NEXUS_PLUGIN_GUID_FORMELEMENTSMENU, $pluginParams
 * @return number of errors encountered
 * @public
 */
-function writeFormMenuCache( $pMenuHash ) {
+function write_form_menu_cache( $pMenuHash ) {
 	global $gBitSmarty;
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
