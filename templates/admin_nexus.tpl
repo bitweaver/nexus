@@ -10,36 +10,30 @@
 	</div>
 {/legend}
 
-{form}
+{form legend="Nexus Menu Plugins"}
 	<input type="hidden" name="page" value="{$page}" />
 
-	<table class="panel">
-		<caption>{tr}Nexus Plugins{/tr}</caption>
-		<tr>
-			<th style="width:70%;">{tr}Plugin{/tr}</th>
-			<th style="width:20%;">{tr}GUID{/tr}</th>
-			<th style="width:10%;">{tr}Active{/tr}</th>
-		</tr>
-
-		{foreach from=$gNexusSystem->mPlugins item=plugin key=guid}
-			<tr class="{cycle values="odd,even"}">
-				<td>
-					<h3>{$plugin.title|escape}</h3>
-					<label for="{$guid}">
-						{$plugin.description|escape}
-					</label>
-				</td>
-				<td>{$guid}</td>
-				<td align="center">
-					{if $plugin.is_active == 'x'}
-						{tr}Missing{/tr}
-					{else}
-						{html_checkboxes name="plugins[`$guid`]" values="y" checked=`$plugin.is_active` labels=false id=$guid}
-					{/if}
-				</td>
-			</tr>
+	<ul class="data">
+		{foreach from=$gNexusSystem->mPlugins item=plugin}
+			<li class="item {cycle values='even,odd'}">
+				<div class="floaticon">
+					<input type="checkbox" name="plugins[{$plugin.plugin_guid}]" id="{$plugin.plugin_guid}" value="y" {if $plugin.is_active eq 'y'}checked="checked"{/if} />
+				</div>
+				<h3><label for="{$plugin.plugin_guid}">{$plugin.plugin_guid}</label></h3>
+				{$plugin.plugin_description}<br />
+				{tr}Menu subtypes{/tr}
+				<ul class="small">
+					{foreach from=$plugin.menu_types item=menu_type}
+						<li>{$menu_type.note}</li>
+					{/foreach}
+				</ul>
+				<small>
+				{if $plugin.web_link}<strong>{tr}Online Resource{/tr}:</strong> {$plugin.web_link}<br />{/if}
+					<strong>{tr}Browser Requirements{/tr}:</strong> {$plugin.browser_requirements}
+				</small>
+			</li>
 		{/foreach}
-	</table>
+	</ul>
 
 	<div class="row submit">
 		<input type="submit" name="pluginsave" value="{tr}Save Plugin Settings{/tr}" />

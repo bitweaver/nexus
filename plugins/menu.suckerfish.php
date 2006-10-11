@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.8 $
+ * @version  $Revision: 1.9 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -23,7 +23,7 @@ $pluginParams = array(
 	'title'                => 'Suckerfish Menus',
 	'description'          => 'Sophisticated and flexible CSS driven dropdown menus',
 	'web_link'             => '<a class="external" href = "http: // www.htmldog.com/articles/suckerfish/">Sons of Suckerfish Menus</a>',
-	'browser_requirements' => 'Many modern browsers support suckerfish menus inherently using CSS. MSIE requires javascript to be ON for them to work.',
+	'browser_requirements' => 'Many modern browsers support suckerfish menus inherently using CSS.',
 	'edit_label'           => 'CSS based menus',
 	'plugin_type'          => 'nexus_plugin',
 	'menu_types'           => array(
