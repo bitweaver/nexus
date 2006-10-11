@@ -9,3 +9,39 @@
 		{/forminput}
 	</div>
 {/legend}
+
+{form}
+	<input type="hidden" name="page" value="{$page}" />
+
+	<table class="panel">
+		<caption>{tr}Nexus Plugins{/tr}</caption>
+		<tr>
+			<th style="width:70%;">{tr}Plugin{/tr}</th>
+			<th style="width:20%;">{tr}GUID{/tr}</th>
+			<th style="width:10%;">{tr}Active{/tr}</th>
+		</tr>
+
+		{foreach from=$gNexusSystem->mPlugins item=plugin key=guid}
+			<tr class="{cycle values="odd,even"}">
+				<td>
+					<h3>{$plugin.title|escape}</h3>
+					<label for="{$guid}">
+						{$plugin.description|escape}
+					</label>
+				</td>
+				<td>{$guid}</td>
+				<td align="center">
+					{if $plugin.is_active == 'x'}
+						{tr}Missing{/tr}
+					{else}
+						{html_checkboxes name="plugins[`$guid`]" values="y" checked=`$plugin.is_active` labels=false id=$guid}
+					{/if}
+				</td>
+			</tr>
+		{/foreach}
+	</table>
+
+	<div class="row submit">
+		<input type="submit" name="pluginsave" value="{tr}Save Plugin Settings{/tr}" />
+	</div>
+{/form}
