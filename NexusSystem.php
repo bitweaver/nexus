@@ -1,21 +1,25 @@
 <?php
 /**
- * @version:      $Header: /cvsroot/bitweaver/_bit_nexus/NexusSystem.php,v 1.7 2006/10/11 10:15:23 squareing Exp $
+ * @version      $Header: /cvsroot/bitweaver/_bit_nexus/NexusSystem.php,v 1.8 2006/10/13 12:46:07 lsces Exp $
  *
- * @author:       xing  <xing@synapse.plus.com>
- * @version:      $Revision: 1.7 $
- * @created:      Monday Jul 03, 2006   11:06:47 CEST
- * @package:      nexus
- * @copyright:    2003-2006 bitweaver
- * @license:      LGPL {@link http://www.gnu.org/licenses/lgpl.html}
+ * @author       xing  <xing@synapse.plus.com>
+ * @version      $Revision: 1.8 $
+ * created      Monday Jul 03, 2006   11:06:47 CEST
+ * @package      nexus
+ * @copyright    2003-2006 bitweaver
+ * @license      LGPL {@link http://www.gnu.org/licenses/lgpl.html}
  **/
-require_once( LIBERTY_PKG_PATH.'LibertySystem.php' );
 
+/**
+ * Setup
+ */
+require_once( LIBERTY_PKG_PATH.'LibertySystem.php' );
 define( 'NEXUS_DEFAULT_MENU', 'suckerfish' );
 
 /**
  *   NexusSystem 
  * 
+ * @package nexus
  * @uses LibertySystem
  */
 class NexusSystem extends LibertySystem {
@@ -43,7 +47,7 @@ class NexusSystem extends LibertySystem {
 #* @abstract
 #* @author   xing <xing@synapse.plus.com>
 #* copied   copied from LibertySystem.php
-#* @version  $Revision: 1.7 $
+#* @version  $Revision: 1.8 $
 #* @package  nexus
 #*/
 #
