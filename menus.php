@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.11 $
+ * @version  $Revision: 1.12 $
  * @package  nexus
  * @subpackage functions
  */
@@ -81,8 +81,8 @@ $gBitSmarty->assign( 'formfeedback', $formfeedback );
 // options only available if there is a top bar menu
 if( is_file( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' ) ) {
 	// if the top bar is set and we don't need it, remove it.
+	$nuke_top_bar = TRUE;
 	foreach( $menuList as $menu ) {
-		$nuke_top_bar = TRUE;
 		if(  $menu['plugin_guid'] == NEXUS_PLUGIN_GUID_SUCKERFISH && $menu['menu_type'] == 'hor'  ) {
 			$nuke_top_bar = FALSE;
 		}
