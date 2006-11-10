@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.8 $
+ * @version  $Revision: 1.9 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -91,6 +91,7 @@ function write_tikiwiki_cache( $pMenuHash ) {
 					$item['expand_url'] = "javascript:flipIcon('".$tog_next."');";
 				}
 				$gBitSmarty->assign( 'tog_next', $tog_next );
+				$gBitSmarty->assign( 'togid', $tog_next );
 			}
 			$gBitSmarty->assign( 'item', $item );
 			$gBitSmarty->assign( 'type', $type );
