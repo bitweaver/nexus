@@ -8,9 +8,9 @@
 		{if $item.expand_url}
 			<a style="float:left;padding:0 3px;" href="{$item.expand_url}">
 				{ldelim}if $smarty.cookies.{$tog_next} == 'c' or (!$smarty.cookies.{$tog_next} and '{$type}' == 'iec'){rdelim}
-					{biticon ipackage="icons" iname="list-add" id="`$tog_next`img" iexplain="expand menu"}
+					{biticon ipackage="liberty" iname="collapsed" id="`$tog_next`img" iexplain="Collapsed menu"}
 				{ldelim}else{rdelim}
-					{biticon ipackage="icons" iname="list-remove" id="`$tog_next`img" iexplain="expand menu"}
+					{biticon ipackage="liberty" iname="expanded" id="`$tog_next`img" iexplain="Expanded menu"}
 				{ldelim}/if{rdelim}
 			</a>
 		{/if}
@@ -24,9 +24,9 @@
 		{if $item.expand_url}
 			<a style="float:left;padding:0 3px;" href="{$item.expand_url}">
 				{ldelim}if $smarty.cookies.{$tog_next} == 'c' or (!$smarty.cookies.{$tog_next} and '{$type}' == 'ihc'){rdelim}
-					{biticon ipackage="icons" iname="list-add" id="`$tog_next`img" iexplain="expand menu"}
+					{biticon ipackage="liberty" iname="collapsed" id="`$tog_next`img" iexplain="Collapsed menu"}
 				{ldelim}else{rdelim}
-					{biticon ipackage="icons" iname="list-remove" id="`$tog_next`img" iexplain="expand menu"}
+					{biticon ipackage="liberty" iname="expanded" id="`$tog_next`img" iexplain="Expanded menu"}
 				{ldelim}/if{rdelim}
 				&nbsp;&nbsp;{$item.title|escape}
 			</a>
