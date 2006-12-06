@@ -56,12 +56,7 @@
 							<br />
 							<select name="type_{$plugin.plugin_guid}" id="type_{$plugin.plugin_guid}">
 								{foreach from=$plugin.menu_types key=type item=menu_type}
-									{if $type eq hor and $use_custom_top_bar and !$editMenu.menu_type eq 'hor'}
-										{assign var=has_horizontal_menu value=1}
-										<option value="">{tr}Only one horizontal menu can exist.{/tr}</option>
-									{else}
 										<option value="{$type}"{if $type eq $editMenu.menu_type} selected="selected"{/if}>{$menu_type.label}</option>
-									{/if}
 								{/foreach}
 							</select>
 
@@ -98,7 +93,7 @@
 			</div>
 		{/form}
 
-		{if $has_horizontal_menu}
+		{if $use_custom_top_bar and $editMenu.menu_type eq 'hor'}
 			{form legend="Top Bar Menu Position"}
 				<div class="row">
 					{formlabel label="Position" for="nexus_top_bar"}
