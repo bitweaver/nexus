@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.17 $
+* @version  $Revision: 1.18 $
 * @package  nexus
 */
 
@@ -84,7 +84,7 @@ class Nexus extends NexusSystem {
 			$bindVars[] = '%'.strtoupper( $pFindString ).'%';
 		}
 		if( $pSortMode ) {
-			$mid .= " ORDER BY ".$this->mDb->convert_sortmode( $pSortMode )." ";
+			$mid .= " ORDER BY ".$this->mDb->convertSortmode( $pSortMode )." ";
 		}
 
 		$query = 'SELECT nm.`menu_id` FROM `'.BIT_DB_PREFIX.'nexus_menus` nm'.$mid;
