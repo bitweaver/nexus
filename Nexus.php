@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.18 $
+* @version  $Revision: 1.19 $
 * @package  nexus
 */
 
@@ -329,7 +329,9 @@ class Nexus extends NexusSystem {
 					$ret .= $pItemHash['rsrc'];
 					break;
 				case 'content_id':
-					$ret .= BIT_ROOT_URL.'index.php?content_id='.$pItemHash['rsrc'];
+					if( $obj = LibertyBase::getLibertyObject( $pItemHash['rsrc'] ) ) {
+						$ret = $obj->getDisplayUrl();
+					}
 					break;
 				case 'structure_id':
 					$ret .= BIT_ROOT_URL.'index.php?structure_id='.$pItemHash['rsrc'];
