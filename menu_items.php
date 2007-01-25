@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.6 $
+ * @version  $Revision: 1.7 $
  * @package  nexus
  * @subpackage functions
  */
@@ -54,7 +54,7 @@ if( isset( $_REQUEST['remove_item'] ) && is_array( $_REQUEST['remove_item'] ) ) 
 		$gBitSmarty->assign( 'delList', $delList );
 	}
 	$gNexus->load();
-	$gNexus->writeModuleCache();
+	$gNexus->writeMenuCache();
 }
 
 if( !empty( $_REQUEST['item_id'] ) ) {

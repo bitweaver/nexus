@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.19 $
+* @version  $Revision: 1.20 $
 * @package  nexus
 */
 
@@ -89,9 +89,9 @@ class Nexus extends NexusSystem {
 
 		$query = 'SELECT nm.`menu_id` FROM `'.BIT_DB_PREFIX.'nexus_menus` nm'.$mid;
 		if( $pMaxRows && is_numeric( $pMaxRows ) ) {
-		  $result = $this->mDb->query( $query, $bindVars, $pOffset, $pMaxRows );
+			$result = $this->mDb->query( $query, $bindVars, $pOffset, $pMaxRows );
 		} else {
-		  $result = $this->mDb->query( $query, $bindVars );
+			$result = $this->mDb->query( $query, $bindVars );
 		}
 		$menuIds = $result->getRows();
 		$menus = array();
@@ -110,41 +110,45 @@ class Nexus extends NexusSystem {
 	* @param $pStripped if set to true, removes all permissions, user isn't part of
 	* @return menu with all menu items sorted with first and last items of each 'level' marked. items that contain siblings are marked with 'head' = TRUE;
 	*/
-	function createMenuTree( $pMenuHash, $pStripped=FALSE, $parent_id=0 ) {
+	function createMenuTree( $pMenuHash, $pStripped=FALSE, $parent_id=0, $pForceBuild=FALSE ) {
 		$ret = array();
-		if( $pStripped && $parent_id == 0 ) {
-			$pMenuHash = $this->checkUserPermission( $pMenuHash );
-		}
-		// get all child menu items for this item_id
-		$children = $this->getChildItems( $pMenuHash, $parent_id );
-		$pos = 1;
-		$row_max = count( $children );
-		foreach( $children as $item ) {
-			$aux = $item;
-			$aux['first']       = ( $pos == 1 );
-			$aux['last']        = FALSE;
-			$aux['head']        = FALSE;
-			$ret[] = $aux;
-			//Recursively add any children
-			$subs = $this->createMenuTree( $pMenuHash, $pStripped, $item['item_id'] );
-			if( !empty( $subs ) ) {
-				// mark items that have children
-				$row_last = count( $ret );
-				$ret[$row_last - 1]['head'] = TRUE;
-				$ret = array_merge( $ret, $subs );
+		if( $pForceBuild || $this->isValid() && empty( $this->mInfo['tree'] )) {
+			if( $pStripped && $parent_id == 0 ) {
+				$pMenuHash = $this->checkUserPermission( $pMenuHash );
 			}
-			if( $pos == $row_max ) {
-				if( @BitBase::verifyId( $item['parent_id'] ) ) {
-					$tmpItem = $this->getItemList( NULL, $item['parent_id'] );
-					$aux = $tmpItem[$item['parent_id']];
-				} else {
-					$aux['item_id'] = $item['item_id'];
-				}
-				$aux['first'] = FALSE;
-				$aux['last']  = TRUE;
+			// get all child menu items for this item_id
+			$children = $this->getChildItems( $pMenuHash, $parent_id );
+			$pos = 1;
+			$row_max = count( $children );
+			foreach( $children as $item ) {
+				$aux = $item;
+				$aux['first']       = ( $pos == 1 );
+				$aux['last']        = FALSE;
+				$aux['head']        = FALSE;
 				$ret[] = $aux;
+				//Recursively add any children
+				$subs = $this->createMenuTree( $pMenuHash, $pStripped, $item['item_id'], TRUE );
+				if( !empty( $subs ) ) {
+					// mark items that have children
+					$row_last = count( $ret );
+					$ret[$row_last - 1]['head'] = TRUE;
+					$ret = array_merge( $ret, $subs );
+				}
+				if( $pos == $row_max ) {
+					if( @BitBase::verifyId( $item['parent_id'] ) ) {
+						$tmpItem = $this->getItemList( NULL, $item['parent_id'] );
+						$aux = $tmpItem[$item['parent_id']];
+					} else {
+						$aux['item_id'] = $item['item_id'];
+					}
+					$aux['first'] = FALSE;
+					$aux['last']  = TRUE;
+					$ret[] = $aux;
+				}
+				$pos++;
 			}
-			$pos++;
+		} else {
+			$ret = $this->mInfo['tree'];
 		}
 		return $ret;
 	}
@@ -243,7 +247,7 @@ class Nexus extends NexusSystem {
 				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['menu_type'], $pParamHash['plugin_guid'], $pParamHash['editable'], $pParamHash['menu_id'] ) );
 				$ret = $pParamHash['menu_id'];
 			}
-			$this->writeModuleCache( $ret );
+			$this->writeMenuCache( $ret );
 		} else {
 			vd( $this->mErrors );
 		}
@@ -321,17 +325,27 @@ class Nexus extends NexusSystem {
 	* @return url
 	*/
 	function printUrl( $pItemHash ) {
+		global $gLibertySystem, $gBitSystem;
+		$contentTypes = $gLibertySystem->mContentTypes;
 		$ret = NULL;
-		if( isset( $pItemHash['rsrc'] ) && isset( $pItemHash['rsrc_type'] ) ) {
+
+		if( isset( $pItemHash['rsrc'] ) && isset( $pItemHash['rsrc_type'] )) {
 			switch( $pItemHash['rsrc_type'] ) {
 				case 'external':
 				case 'internal':
 					$ret .= $pItemHash['rsrc'];
 					break;
 				case 'content_id':
-					if( $obj = LibertyBase::getLibertyObject( $pItemHash['rsrc'] ) ) {
-						$ret = $obj->getDisplayUrl();
+					// create *one* object for each object *type* to  call virtual methods.
+					$guid = $this->mDb->getOne( "SELECT `content_type_guid` FROM `".BIT_DB_PREFIX."liberty_content` WHERE `content_id`=?", array( $pItemHash['rsrc'] ));
+					$type = &$contentTypes[$guid];
+
+					if( empty( $type['content_object'] )) {
+						include_once( $gBitSystem->mPackages[$type['handler_package']]['path'].$type['handler_file'] );
+						$type['content_object'] = new $type['handler_class']();
 					}
+
+					$ret = $type['content_object']->getDisplayUrl( $pItemHash['rsrc'] );
 					break;
 				case 'structure_id':
 					$ret .= BIT_ROOT_URL.'index.php?structure_id='.$pItemHash['rsrc'];
@@ -479,7 +493,7 @@ class Nexus extends NexusSystem {
 				$result = $this->mDb->query( $query, array( $pItemId ) );
 				$this->mDb->CompleteTrans();
 				if( $pWriteCache ) {
-					$this->writeModuleCache( $remItem['menu_id'] );
+					$this->writeMenuCache( $remItem['menu_id'] );
 				}
 				return $remItem;
 			} else {
@@ -512,7 +526,7 @@ class Nexus extends NexusSystem {
 					$deathList[] = $item['title'];
 				}
 			}
-			$this->writeModuleCache( $pMenuId );
+			$this->writeMenuCache( $pMenuId );
 		}
 		return $deathList;
 	}
@@ -542,7 +556,7 @@ class Nexus extends NexusSystem {
 				$query = "UPDATE `".BIT_DB_PREFIX."nexus_menu_items` SET `parent_id`=?, `pos`=(? + 1) WHERE `item_id`=?";
 				$this->mDb->query($query, array( (int)$parentItem["parent_id"], (int)$parentItem["pos"], $pItemId ) );
 				$this->mDb->CompleteTrans();
-				$this->writeModuleCache( $item['menu_id'] );
+				$this->writeMenuCache( $item['menu_id'] );
 			}
 		}
 	}
@@ -573,7 +587,7 @@ class Nexus extends NexusSystem {
 				$query = "UPDATE `".BIT_DB_PREFIX."nexus_menu_items` SET `pos`=`pos`-1 WHERE `pos`>? AND `parent_id`=? AND `menu_id`=?";
 				$this->mDb->query( $query, array( $item["pos"], $item["parent_id"], $item["menu_id"] ) );
 				$this->mDb->CompleteTrans();
-				$this->writeModuleCache( $item['menu_id'] );
+				$this->writeMenuCache( $item['menu_id'] );
 			}
 		}
 	}
@@ -596,7 +610,7 @@ class Nexus extends NexusSystem {
 				$this->mDb->query( $query, array( (int)$res["pos"], (int)$item["item_id"] ) );
 			}
 			$this->mDb->CompleteTrans();
-			$this->writeModuleCache( $item['menu_id'] );
+			$this->writeMenuCache( $item['menu_id'] );
 		}
 	}
 
@@ -618,7 +632,7 @@ class Nexus extends NexusSystem {
 				$this->mDb->query( $query, array( (int)$item["pos"], (int)$res["item_id"] ) );
 			}
 			$this->mDb->CompleteTrans();
-			$this->writeModuleCache( $item['menu_id'] );
+			$this->writeMenuCache( $item['menu_id'] );
 		}
 	}
 
@@ -710,7 +724,7 @@ class Nexus extends NexusSystem {
 			$menuList = $this->getMenuList();
 			if( !empty( $menuList ) ) {
 				foreach( $menuList as $menu ) {
-					$this->writeModuleCache( $menu['menu_id'] );
+					$this->writeMenuCache( $menu['menu_id'] );
 				}
 			}
 		} else {
@@ -724,24 +738,27 @@ class Nexus extends NexusSystem {
 	* @param $pMenuId menu id of the menu for which we want to create a cache file
 	* @return number of errors encountered
 	*/
-	function writeModuleCache( $pMenuId=NULL ) {
-		if( $this->isValid() && !isset( $pMenuId ) ) {
+	function writeMenuCache( $pMenuId=NULL ) {
+		if( $this->isValid() && !@BitBase::verifyId( $pMenuId )) {
 			$pMenuId = $this->mInfo['menu_id'];
 		}
-		// load the menu to make sure we have the latest version
+
+		// load the menu if need be
 		$cacheMenu = new Nexus( $pMenuId );
 		$cacheMenu->load();
-		if( !empty( $cacheMenu->mInfo['plugin_guid'] ) ) {
+
+		if( !empty( $cacheMenu->mInfo['plugin_guid'] )) {
 			global $gNexusSystem;
 			if( $func = $gNexusSystem->getPluginFunction( $cacheMenu->mInfo['plugin_guid'], 'write_cache_function' ) ) {
 				$moduleCache = $func( $cacheMenu );
 			}
 		}
+
 		if( !empty( $moduleCache ) ) {
 			foreach( $moduleCache as $cache_file => $cache_string ) {
 				$h = fopen( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules/'.$cache_file, 'w' );
 				if( isset( $h ) ) {
-			        fwrite( $h, $cache_string );
+					fwrite( $h, $cache_string );
 					fclose( $h );
 				} else {
 					$this->mErrors['write_module_cache'] = tra( "Unable to write to" ).': '.realpath( $cache_file );
