@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.20 $
+* @version  $Revision: 1.21 $
 * @package  nexus
 */
 
@@ -337,15 +337,15 @@ class Nexus extends NexusSystem {
 					break;
 				case 'content_id':
 					// create *one* object for each object *type* to  call virtual methods.
-					$guid = $this->mDb->getOne( "SELECT `content_type_guid` FROM `".BIT_DB_PREFIX."liberty_content` WHERE `content_id`=?", array( $pItemHash['rsrc'] ));
-					$type = &$contentTypes[$guid];
+					$row = $this->mDb->getRow( "SELECT `title`,`content_id`,`content_type_guid` FROM `".BIT_DB_PREFIX."liberty_content` WHERE `content_id`=?", array( $pItemHash['rsrc'] ));
+					$type = &$contentTypes[$row['content_type_guid']];
 
 					if( empty( $type['content_object'] )) {
 						include_once( $gBitSystem->mPackages[$type['handler_package']]['path'].$type['handler_file'] );
 						$type['content_object'] = new $type['handler_class']();
 					}
 
-					$ret = $type['content_object']->getDisplayUrl( $pItemHash['rsrc'] );
+					$ret = $type['content_object']->getDisplayUrl( NULL, $row );
 					break;
 				case 'structure_id':
 					$ret .= BIT_ROOT_URL.'index.php?structure_id='.$pItemHash['rsrc'];
