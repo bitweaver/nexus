@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.9 $
+ * @version  $Revision: 1.10 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -96,7 +96,11 @@ function write_suckerfish_cache( $pMenuHash ) {
 					$permCloseIds[] = $item['item_id'];
 				}
 			}
-			$data .= '<li>';
+			if( $item['rsrc_type'] == 'content_id' ) {
+				$data .= '<li{if $gContent->mContentId == '.$item['rsrc'].'} class="selected"{/if}>';
+			} else {
+				$data .= '<li>';
+			}
 			$gBitSmarty->assign( 'item', $item );
 			$data .= $gBitSmarty->fetch( NEXUS_PKG_PATH.'templates/'.NEXUS_PLUGIN_GUID_SUCKERFISH.'/item.tpl' );
 		}
