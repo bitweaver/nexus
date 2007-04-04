@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.15 $
+ * @version  $Revision: 1.16 $
  * @package  Nexus
  * @subpackage functions
  */
@@ -45,12 +45,8 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 		$gBitSystem->registerAppMenu( $menuHash );
 	}
 
-	// check if there is a js file for MSIE
 	if( is_dir( TEMP_PKG_PATH.'nexus/modules/' ) ) {
-		if( is_file( TEMP_PKG_PATH.'nexus/modules/hoverfix_array.js' ) ) {
-			$gBitSmarty->assign( 'hoverfix', TEMP_PKG_PATH.'nexus/modules/hoverfix_array.js' );
-		}
-
+		// make sure the template knows about the custom top bar
 		if( is_file( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' ) ) {
 			$gBitSmarty->assign( 'use_custom_top_bar', TRUE );
 		}
