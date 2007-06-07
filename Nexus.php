@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.21 $
+* @version  $Revision: 1.22 $
 * @package  nexus
 */
 
@@ -361,7 +361,7 @@ class Nexus extends NexusSystem {
 	*/
 	function verifyRsrc( &$pParamHash ) {
 		$bit_root_pattern = "/^".preg_replace( "/\//", "\/", BIT_ROOT_URL )."/i";
-		if( preg_match( "/^(http:\/\/)/i", $pParamHash['rsrc'] ) ) {
+		if( preg_match( "/^([a-zA-Z]{2,8}:\/\/)/i", $pParamHash['rsrc'] ) ) {
 			$pParamHash['rsrc_type'] = 'external';
 		} elseif( is_numeric( $pParamHash['rsrc'] ) ) {
 			// if the resource type is numeric but we don't know what type it is, assume that it's a content_id
