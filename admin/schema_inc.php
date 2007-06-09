@@ -43,7 +43,7 @@ $gBitInstaller->registerUserPermissions( NEXUS_PKG_NAME, array(
 
 // ### Default Preferences
 $gBitInstaller->registerPreferences( NEXUS_PKG_NAME, array(
-//	array(NEXUS_PKG_NAME, 'pref','value'),
+	array( NEXUS_PKG_NAME, 'nexus_menu_text', 'Menus' ),
 ) );
 
 ?>
