@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.22 $
+* @version  $Revision: 1.23 $
 * @package  nexus
 */
 
@@ -345,13 +345,16 @@ class Nexus extends NexusSystem {
 						$type['content_object'] = new $type['handler_class']();
 					}
 
-					$ret = $type['content_object']->getDisplayUrl( NULL, $row );
+					$type['content_object']->mContentId = $row['content_id'];
+					$type['content_object']->load();
+					$ret = $type['content_object']->getDisplayUrl();
 					break;
 				case 'structure_id':
 					$ret .= BIT_ROOT_URL.'index.php?structure_id='.$pItemHash['rsrc'];
 					break;
 			}
 		}
+		vd($ret);
 		return $ret;
 	}
 
