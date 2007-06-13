@@ -3,7 +3,7 @@
 	{if $item.first}<ul{if $key eq 0} class="toc"{/if}>{else}</li>{/if}
 	{if $item.last}</ul>{else}
 		<li>
-			<div class="{cycle values='even,odd'}">
+			<div class="{cycle values='even,odd'} clear">
 				<a href="{$smarty.const.NEXUS_PKG_URL}menu_items.php?sort_menu={$menuId}&amp;menu_id={$item.menu_id}&amp;item_id={$item.item_id}&amp;tab=edit">{biticon iforce=icon ipackage="icons" iname="accessories-text-editor" iexplain="edit item" style="float:right"}</a>
 				{biticon iforce=icon ipackage=liberty iname="spacer" iexplain="" style="float:right"}
 
