@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.23 $
+* @version  $Revision: 1.24 $
 * @package  nexus
 */
 
@@ -354,7 +354,6 @@ class Nexus extends NexusSystem {
 					break;
 			}
 		}
-		vd($ret);
 		return $ret;
 	}
 
