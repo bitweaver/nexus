@@ -91,27 +91,9 @@
 			<div class="row submit">
 				<input type="submit" name="store_menu" value="Save Settings" />
 			</div>
+
+			{formhelp note="If you want to insert a menu in the top bar, please create the menu and then assign it to the top bar in the <em>Manage Layouts</em> screen. We recommend the <em>horizontal suckerfish</em> menu for top bar menus." link="kernel/admin/index.php?page=layout/Manage Layouts"}
 		{/form}
-
-		{if $use_custom_top_bar and $editMenu.menu_type eq 'hor'}
-			{form legend="Top Bar Menu Position"}
-				<div class="row">
-					{formlabel label="Position" for="nexus_top_bar"}
-					{forminput}
-						<select name="nexus_top_bar" id="nexus_top_bar">
-							<option value="right"   {if $gBitSystem->getConfig('nexus_top_bar') eq 'right'  }selected="selected"{/if}>{tr}To the right of the bitweaver menu{/tr}</option>
-							<option value="left"    {if $gBitSystem->getConfig('nexus_top_bar') eq 'left'   }selected="selected"{/if}>{tr}To the left of the bitweaver menu{/tr}</option>
-							<option value="replace" {if $gBitSystem->getConfig('nexus_top_bar') eq 'replace'}selected="selected"{/if}>{tr}Replace the bitweaver menu{/tr}</option>
-						</select>
-						{formhelp note="Here you can set the position of where your custom top bar menu should be. This setting is only used when you are using a horizontal suckerfish menu."}
-					{/forminput}
-				</div>
-
-				<div class="row submit">
-					<input type="submit" name="store_pos" value="Save Settings" />
-				</div>
-			{/form}
-		{/if}
 
 		<table class="data" summary="{tr}List of menus that can be used on this site{/tr}">
 			<caption>{tr}Existing menus{/tr}</caption>

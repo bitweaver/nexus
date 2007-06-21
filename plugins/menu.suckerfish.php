@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.11 $
+ * @version  $Revision: 1.12 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -45,14 +45,10 @@ function write_suckerfish_cache( $pMenuHash ) {
 	$menu_name = preg_replace( "/ +/", "_", trim( $pMenuHash->mInfo['title'] ) );
 	$menu_name = strtolower( $menu_name );
 
-	if( $pMenuHash->mInfo['menu_type'] != 'hor' ) {
-		$menu_file = $pMenuHash->mInfo['cache']['file'];
-		$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
-		$data .= '<div class="suckerfish">';
-	} else {
-		$data = '';
-		$menu_file = 'top_bar_inc.tpl';
-	}
+	$menu_file = $pMenuHash->mInfo['cache']['file'];
+	$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
+	$data .= '<div class="suckerfish">';
+
 	// if a permission has been set, we need to work out when to close the {if} clause
 	$permCloseIds = array();
 	$perm_close = FALSE;
@@ -61,10 +57,7 @@ function write_suckerfish_cache( $pMenuHash ) {
 	foreach( $pMenuHash->mInfo['tree'] as $key => $item ) {
 		if( $item['first'] ) {
 			if( $key == 0 ) {
-				// don't print the first ul if it's a horizontal menu - needed to insert in top bar
-				if( $pMenuHash->mInfo['menu_type'] != 'hor' ) {
-					$data .= '<ul id="nexus'.$pMenuHash->mInfo['menu_id'].'" class="menu '.$pMenuHash->mInfo['menu_type'].'">';
-				}
+				$data .= '<ul id="nexus'.$pMenuHash->mInfo['menu_id'].'" class="menu '.$pMenuHash->mInfo['menu_type'].'">';
 			} else {
 				$data .= '<ul>';
 			}
@@ -106,19 +99,9 @@ function write_suckerfish_cache( $pMenuHash ) {
 		}
 	}
 
-	// remove last </ul>
-	if( $pMenuHash->mInfo['menu_type'] == 'hor' ) {
-		$data = preg_replace( "/<\/ul>$/", '', $data );
-	}
-
-	if( $pMenuHash->mInfo['menu_type'] == 'ver' ) {
-		$data .= '<div class="clear"></div>';
-	}
-
-	if( $pMenuHash->mInfo['menu_type'] != 'hor' ) {
-		$data .= '</div>';
-		$data .= '{/bitmodule}';
-	}
+	$data .= '<div class="clear"></div>';
+	$data .= '</div>';
+	$data .= '{/bitmodule}';
 
 	$ret[$menu_file] = $data;
 

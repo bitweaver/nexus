@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.12 $
+ * @version  $Revision: 1.13 $
  * @package  nexus
  * @subpackage functions
  */
@@ -90,11 +90,6 @@ if( is_file( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' ) ) {
 
 	if( !empty( $nuke_top_bar ) ) {
 		unlink( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' );
-	}
-
-	if( !empty( $_REQUEST['store_pos'] ) ) {
-		$gBitSmarty->assign( 'use_custom_top_bar', TRUE );
-		$gBitSystem->storeConfig( 'nexus_top_bar', !empty( $_REQUEST['nexus_top_bar'] ) ? $_REQUEST['nexus_top_bar'] : NULL, NEXUS_PKG_NAME );
 	}
 }
 
