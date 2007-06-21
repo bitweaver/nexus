@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.9 $
+ * @version  $Revision: 1.10 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -21,7 +21,7 @@ $pluginParams = array(
 	'write_cache_function' => 'write_tikiwiki_cache',
 	'title'                => 'TikiWiki menus',
 	'description'          => 'expandable menu reminiscent of the tikiwiki menu',
-	'web_link'             => '<a class="external" href = "http: // www.tikiwiki.org">TikiWiki</a>',
+	'web_link'             => '<a class="external" href = "http://www.tikiwiki.org">TikiWiki</a>',
 	'browser_requirements' => 'Most browsers that support javascript should support these menus.',
 	'edit_label'           => 'TikiWiki menus',
 	'plugin_type'          => 'nexus_plugin',

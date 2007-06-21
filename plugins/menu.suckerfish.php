@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.10 $
+ * @version  $Revision: 1.11 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -22,7 +22,7 @@ $pluginParams = array(
 	'write_cache_function' => 'write_suckerfish_cache',
 	'title'                => 'Suckerfish Menus',
 	'description'          => 'Sophisticated and flexible CSS driven dropdown menus',
-	'web_link'             => '<a class="external" href = "http: // www.htmldog.com/articles/suckerfish/">Sons of Suckerfish Menus</a>',
+	'web_link'             => '<a class="external" href = "http://www.htmldog.com/articles/suckerfish/">Sons of Suckerfish Menus</a>',
 	'browser_requirements' => 'Many modern browsers support suckerfish menus inherently using CSS.',
 	'edit_label'           => 'CSS based menus',
 	'plugin_type'          => 'nexus_plugin',
