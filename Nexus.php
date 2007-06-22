@@ -4,19 +4,18 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.24 $
+* @version  $Revision: 1.25 $
 * @package  nexus
 */
 
 /**
-* required setup
-*/
+ * required setup
+ */
 require_once( NEXUS_PKG_PATH.'NexusSystem.php' );
 
 /**
-* @package  nexus
-* @subpackage  Nexus
-*/
+ * @package  nexus
+ */
 class Nexus extends NexusSystem {
 	/**
 	* Primary key for the menu
