@@ -92,7 +92,7 @@
 				<input type="submit" name="store_menu" value="Save Settings" />
 			</div>
 
-			{formhelp note="If you want to insert a menu in the top bar, please create the menu and then assign it to the top bar in the <em>Manage Layouts</em> screen. We recommend the <em>horizontal suckerfish</em> menu for top bar menus." link="kernel/admin/index.php?page=layout/Manage Layouts"}
+			{formhelp note="If you want to insert a menu in the top bar, please create the menu and then assign it to the top bar in the <em>Manage Layouts</em> screen. We recommend the <em>horizontal suckerfish</em> menu for top bar menus." link="kernel/admin/index.php?page=layout/Manage Layouts" page="NexusPackage"}
 		{/form}
 
 		<table class="data" summary="{tr}List of menus that can be used on this site{/tr}">
