@@ -13,9 +13,9 @@
 						</div>
 
 						<div class="row">
-							{formlabel label="Insert here" for="nexus`$menu.menu_id`"}
+							{formlabel label="Insert here" for="nexus_menu_`$menu.menu_id`"}
 							{forminput}
-								<input type="radio" value="{$menu.menu_id}" name="nexus[menu_id]" id="nexus{$menu.menu_id}" />
+								<input type="radio" value="{$menu.menu_id}" name="nexus[menu_id]" id="nexus_menu_{$menu.menu_id}" />
 								&nbsp; {tr}after{/tr} &nbsp;
 								<select name="nexus[after_ref_id]" id="after_ref_id{$menu.menu_id}">
 									{foreach from=$menu.tree item=item}
