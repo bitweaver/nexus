@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.14 $
+ * @version  $Revision: 1.15 $
  * @package  nexus
  * @subpackage functions
  */
@@ -50,7 +50,7 @@ if( isset( $_REQUEST['action'] ) ) {
 		if( $gNexus->importStructure( $_REQUEST['structure_id'] ) ) {
 			$formfeedback['success'] = tra( 'The structure was successfully imported as menu.' );
 		} else {
-			$gBitSystem->fatalError( "Error Importing Structure", "There was an error importing the structure: " . vc($gNexus->mErrors ) );
+			$gBitSystem->fatalError( "There was an error importing the structure: ".vc( $gNexus->mErrors ));
 		}
 	}
 }
@@ -60,7 +60,7 @@ if( isset( $_REQUEST['confirm'] ) ) {
 		header ("Location: ".NEXUS_PKG_URL."menus.php");
 		die;
 	} else {
-		$gBitSystem->fatalError( "Error Deleting Menu", "There was an error deleting the menu: " . vc($gNexus->mErrors) );
+		$gBitSystem->fatalError( "There was an error deleting the menu: ".vc( $gNexus->mErrors ));
 	}
 }
 
