@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.25 $
+* @version  $Revision: 1.26 $
 * @package  nexus
 */
 
@@ -248,7 +248,7 @@ class Nexus extends NexusSystem {
 			}
 			$this->writeMenuCache( $ret );
 		} else {
-			vd( $this->mErrors );
+			error_log( "Error storing menu: " . vc($this->mErrors) );
 		}
 		return $ret;
 	}

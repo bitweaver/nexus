@@ -1,6 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_nexus/servicefunctions_inc.php,v 1.4 2006/10/11 10:15:23 squareing Exp $
+ * $Header: /cvsroot/bitweaver/_bit_nexus/servicefunctions_inc.php,v 1.5 2007/10/25 17:14:15 nickpalmer Exp $
  *
  * @package nexus
  * @subpackage functions
@@ -51,7 +51,7 @@ function nexus_content_store( $pObject, $pParamHash ) {
 		$nexusHash['rsrc'] = $pParamHash['content_id'];
 		$nexusHash['rsrc_type'] = 'content_id';
 		if( !$nexus->storeItem( $nexusHash ) ) {
-			vd( $nexus->mErrors );
+			$gBitSystem->fatalError("Error Storing Item", "There was an error storing the item: " . vc( $nexus->mErrors );
 		}
 		$nexus->load();
 	} elseif( !empty( $pParamHash['nexus']['remove_item'] ) ) {
