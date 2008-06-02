@@ -13,11 +13,12 @@
 		{forminput}
 			<input type="text" name="find_objects" value="{$smarty.request.find_objects}" /> 
 			<input type="submit" value="{tr}filter{/tr}" name="search_objects" />
-			{formhelp note=""}
+			{formhelp note="You can select the content type you want to limit the dropdown to and/or a word filter."}
 		{/forminput}
 
 		{forminput}
 			{html_options name="content" options=$contentList onchange="document.getElementById('rsrc').value=options[selectedIndex].value;document.getElementById('title').value=options[selectedIndex].label.replace(/ \[id.*?\]/,'');document.getElementById('rsrc_type').value='content_id';"}
+			{formhelp note="When you pick an item from the dropdown list, it will fill in some of the fields in the form below using suggested values."}
 			<noscript>
 				{formhelp note="Since you don't have javascript (enabled), please insert the appropriate information from the dropdown manually. The content ID is the number associated with the item in the dropdown list."}
 			</noscript>
