@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.4 $
+ * @version  $Revision: 1.5 $
  * @package  nexus
  * @subpackage functions
  */
@@ -43,5 +43,5 @@ if( isset( $_REQUEST['tab'] ) ) {
 $gBitSmarty->assign( 'nexus_file', strtolower( 'mod_'.preg_replace( "/ /", "_", $gNexus->mInfo['title'] ).'_'.$gNexus->mInfo['menu_id'].'.tpl' ) );
 
 $gBitSystem->setBrowserTitle( 'Nexus Menus' );
-$gBitSystem->display( 'bitpackage:nexus/menu_sort.tpl' );
+$gBitSystem->display( 'bitpackage:nexus/menu_sort.tpl' , NULL, array( 'display_mode' => 'display' ));
 ?>

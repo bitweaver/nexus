@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.7 $
+ * @version  $Revision: 1.8 $
  * @package  nexus
  * @subpackage functions
  */
@@ -107,5 +107,5 @@ if( count( $menuList ) > 1 ) {
 }
 
 $gBitSystem->setBrowserTitle( 'Nexus Menus' );
-$gBitSystem->display( 'bitpackage:nexus/menu_items.tpl' );
+$gBitSystem->display( 'bitpackage:nexus/menu_items.tpl' , NULL, array( 'display_mode' => 'display' ));
 ?>

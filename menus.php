@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.15 $
+ * @version  $Revision: 1.16 $
  * @package  nexus
  * @subpackage functions
  */
@@ -94,5 +94,5 @@ if( is_file( TEMP_PKG_PATH.'nexus/modules/top_bar_inc.tpl' ) ) {
 }
 
 $gBitSystem->setBrowserTitle( 'Nexus Menus' );
-$gBitSystem->display( 'bitpackage:nexus/menus.tpl' );
+$gBitSystem->display( 'bitpackage:nexus/menus.tpl' , NULL, array( 'display_mode' => 'display' ));
 ?>
