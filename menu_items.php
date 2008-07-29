@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.8 $
+ * @version  $Revision: 1.9 $
  * @package  nexus
  * @subpackage functions
  */
@@ -26,7 +26,7 @@ $gBitSmarty->assign( 'contentSelect', $contentSelect );
 $gBitSmarty->assign( 'contentTypes', $contentTypes );
 
 $cList[''] = '';
-foreach( $contentList['data'] as $cItem ) {
+foreach( $contentList as $cItem ) {
 	$cList[$contentTypes[$cItem['content_type_guid']]][$cItem['content_id']] = $cItem['title'].' [id: '.$cItem['content_id'].']';
 }
 $gBitSmarty->assign( 'contentList', $cList );

@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.26 $
+* @version  $Revision: 1.27 $
 * @package  nexus
 */
 
@@ -517,7 +517,7 @@ class Nexus extends NexusSystem {
 		if( isset( $pMenuId ) && is_numeric( $pMenuId ) ) {
 			// get $contentList
 			include_once( LIBERTY_PKG_PATH.'get_content_list_inc.php' );
-			foreach( $contentList['data'] as $contentItem ) {
+			foreach( $contentList as $contentItem ) {
 				$contentIds[] = $contentItem['content_id'];
 			}
 			$deathList = FALSE;
