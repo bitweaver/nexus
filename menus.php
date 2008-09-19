@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.16 $
+ * @version  $Revision: 1.17 $
  * @package  nexus
  * @subpackage functions
  */
@@ -26,9 +26,10 @@ if( isset( $_REQUEST['action'] ) ) {
 		$formHash['remove'] = TRUE;
 		$formHash['menu_id'] = $menuId;
 		$msgHash = array(
-			'label' => 'Delete Menu',
+			'label' => tra('Delete Menu'),
 			'confirm_item' => $gNexus->mInfo['title'],
-			'warning' => 'This will remove this menu including all menu items associated with it.<br />This cannot be undone!',
+			'warning' => tra('Remove this menu including all menu items associated with it.'),
+			'error' => tra('This cannot be undone!'),
 		);
 		$gBitSystem->confirmDialog( $formHash,$msgHash );
 	}
@@ -50,7 +51,7 @@ if( isset( $_REQUEST['action'] ) ) {
 		if( $gNexus->importStructure( $_REQUEST['structure_id'] ) ) {
 			$formfeedback['success'] = tra( 'The structure was successfully imported as menu.' );
 		} else {
-			$gBitSystem->fatalError( "There was an error importing the structure: ".vc( $gNexus->mErrors ));
+			$gBitSystem->fatalError( tra("There was an error importing the structure ").vc( $gNexus->mErrors ));
 		}
 	}
 }
@@ -60,7 +61,7 @@ if( isset( $_REQUEST['confirm'] ) ) {
 		header ("Location: ".NEXUS_PKG_URL."menus.php");
 		die;
 	} else {
-		$gBitSystem->fatalError( "There was an error deleting the menu: ".vc( $gNexus->mErrors ));
+		$gBitSystem->fatalError( tra("There was an error deleting the menu ").vc( $gNexus->mErrors ));
 	}
 }
 
