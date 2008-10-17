@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.27 $
+* @version  $Revision: 1.28 $
 * @package  nexus
 */
 
@@ -295,7 +295,7 @@ class Nexus extends NexusSystem {
 			$bindVars = array( $pMenuId );
 		}
 		$query .= ' ORDER BY nmi.`pos`';
-		$result = $this->mDb->query( $query,array( $bindVars ) );
+		$result = $this->mDb->query( $query, array( $bindVars ) );
 		while( !$result->EOF ) {
 			$item = $result->fields;
 			$item['display_url'] = $this->printUrl( $item );
@@ -331,8 +331,11 @@ class Nexus extends NexusSystem {
 		if( isset( $pItemHash['rsrc'] ) && isset( $pItemHash['rsrc_type'] )) {
 			switch( $pItemHash['rsrc_type'] ) {
 				case 'external':
-				case 'internal':
 					$ret .= $pItemHash['rsrc'];
+					break;
+				case 'internal':
+					// annoying duplicate BIT_ROOT_URL removal and then adding is for people who add the leading section of the URL as well.
+					$ret .= str_replace( "//", "/", BIT_ROOT_URL. str_replace( BIT_ROOT_URL, "", $pItemHash['rsrc'] ));
 					break;
 				case 'content_id':
 					// create *one* object for each object *type* to  call virtual methods.
@@ -361,21 +364,20 @@ class Nexus extends NexusSystem {
 	* @return fixed rsrc and corresponding rsrc_type
 	*/
 	function verifyRsrc( &$pParamHash ) {
-		$bit_root_pattern = "/^".preg_replace( "/\//", "\/", BIT_ROOT_URL )."/i";
+		// if we have something like http:// or ftp:// in the url, we know it's external
 		if( preg_match( "/^([a-zA-Z]{2,8}:\/\/)/i", $pParamHash['rsrc'] ) ) {
 			$pParamHash['rsrc_type'] = 'external';
+		} elseif( substr( $pParamHash['rsrc'], 0, 1 ) == '/' && substr( $pParamHash['rsrc'], 0, strlen( BIT_ROOT_URL )) != BIT_ROOT_URL ) {
+			// if the first character is a / and it doesn't match BIT_ROOT_URL, we know it's external even though it's in the same domain
+			$pParamHash['rsrc_type'] = 'external';
 		} elseif( is_numeric( $pParamHash['rsrc'] ) ) {
+			// if we have a numeric rsrc, we know it's either a content_id or a structure_id
 			// if the resource type is numeric but we don't know what type it is, assume that it's a content_id
-			if( !isset( $pParamHash['rsrc_type'] ) ) {
+			if( empty( $pParamHash['rsrc_type'] ) ) {
 				$pParamHash['rsrc_type'] = 'content_id';
 			}
-		} elseif( preg_match( $bit_root_pattern, $pParamHash['rsrc'] ) ) {
-			// if BIT_ROOT_URL can be found at the beginning of the string, assume it's an internal link
-			// in most cases this will only be a '/' but hopefully that's enough
-			$pParamHash['rsrc_type'] = 'internal';
 		} else {
-			// if we haven't caught this resource yet, we just prepend it with BIT_ROOT_URL and hope for the best
-			$pParamHash['rsrc'] = BIT_ROOT_URL.$pParamHash['rsrc'];
+			// any other URL will be considered as internal
 			$pParamHash['rsrc_type'] = 'internal';
 		}
 	}

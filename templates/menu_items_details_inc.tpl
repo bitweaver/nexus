@@ -19,8 +19,8 @@
 						<small>
 							{foreach from=$rsrcTypes key=key item=rsrc_type}
 								{if $item.rsrc_type eq $key}{$rsrc_type}{/if}
-							{/foreach}
-							: {$item.rsrc|escape}
+							{/foreach}: {$item.rsrc|escape}<br />
+							Final link: <a{if $item.rsrc_type == 'external'} class="external"{/if}{if $item.hint} title="{$item.hint}"{/if} href="{$item.display_url}">{$item.title}</a>
 							{if $item.perm}&nbsp;&bull;&nbsp;{tr}Permission{/tr}: {$item.perm}{/if}
 						</small>
 					</div>

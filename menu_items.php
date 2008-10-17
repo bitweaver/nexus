@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.9 $
+ * @version  $Revision: 1.10 $
  * @package  nexus
  * @subpackage functions
  */
@@ -85,6 +85,7 @@ $gBitSmarty->assign( 'perms', $perms );
 
 // get a list of available resource types
 $rsrcTypes = array(
+	'internal' => 'URL',
 	'external' => 'URL',
 	'content_id' => 'Content ID',
 	'structure_id' => 'Structure ID',
