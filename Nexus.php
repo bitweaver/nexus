@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.29 $
+* @version  $Revision: 1.30 $
 * @package  nexus
 */
 
@@ -335,7 +335,7 @@ class Nexus extends NexusSystem {
 					break;
 				case 'internal':
 					// annoying duplicate BIT_ROOT_URL removal and then adding is for people who add the leading section of the URL as well.
-					$ret .= str_replace( "//", "/", BIT_ROOT_URL. str_replace( BIT_ROOT_URL, "", $pItemHash['rsrc'] ));
+					$ret .= str_replace( "//", "/", BIT_ROOT_URL.str_replace( rtrim( BIT_ROOT_URL, '/' ), "", $pItemHash['rsrc'] ));
 					break;
 				case 'content_id':
 					// create *one* object for each object *type* to  call virtual methods.
