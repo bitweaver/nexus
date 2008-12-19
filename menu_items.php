@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.10 $
+ * @version  $Revision: 1.11 $
  * @package  nexus
  * @subpackage functions
  */
@@ -10,7 +10,6 @@
 * required setup
 */
 require_once( '../bit_setup_inc.php' );
-global $gBitSystem;
 require_once( NEXUS_PKG_PATH.'Nexus.php');
 include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
 
@@ -107,6 +106,5 @@ if( count( $menuList ) > 1 ) {
 	$gBitSmarty->assign( 'menuList', $menuList );
 }
 
-$gBitSystem->setBrowserTitle( 'Nexus Menus' );
-$gBitSystem->display( 'bitpackage:nexus/menu_items.tpl' , NULL, array( 'display_mode' => 'display' ));
+$gBitSystem->display( 'bitpackage:nexus/menu_items.tpl' , 'Nexus Menus', array( 'display_mode' => 'display' ));
 ?>
