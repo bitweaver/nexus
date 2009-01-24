@@ -11,7 +11,7 @@
 		{/forminput}
 
 		{forminput}
-			<input type="text" name="find_objects" value="{$smarty.request.find_objects}" /> 
+			<input type="text" name="find" value="{$smarty.request.find}" /> 
 			<input type="submit" value="{tr}filter{/tr}" name="search_objects" />
 			{formhelp note="You can select the content type you want to limit the dropdown to and/or a word filter."}
 		{/forminput}

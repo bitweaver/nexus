@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.11 $
+ * @version  $Revision: 1.12 $
  * @package  nexus
  * @subpackage functions
  */
@@ -60,7 +60,7 @@ if( !empty( $_REQUEST['item_id'] ) ) {
 	$gBitSmarty->assign( 'editItem', $gNexus->mInfo['items'][$_REQUEST['item_id']] );
 }
 // when we use the content type dropdown or the filter, we need to pass back the information to the tpl
-if( isset( $_REQUEST['find_objects'] ) && !isset( $_REQUEST['store_item'] ) ) {
+if( isset( $_REQUEST['find'] ) && !isset( $_REQUEST['store_item'] ) ) {
 	$gBitSmarty->assign( 'editItem', $_REQUEST );
 }
 if( isset( $_REQUEST['tab'] ) ) {
