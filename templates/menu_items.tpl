@@ -5,7 +5,8 @@
 
 <div class="display nexus">
 	<div class="header">
-		<h1>{tr}Create / Edit Menu Items{/tr}</h1>
+		<h1>{tr}Menu{/tr}: {$gNexus->mInfo.title|escape}</h1>
+		<h2>{tr}Create / Edit Menu Items{/tr}</h2>
 	</div>
 
 	<div class="body">
