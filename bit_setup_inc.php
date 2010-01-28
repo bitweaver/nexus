@@ -1,11 +1,11 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.16 $
+ * @version  $Revision: 1.17 $
  * @package  Nexus
  * @subpackage functions
  */
-global $gBitSystem, $gBitUser, $gLibertySystem;
+global $gBitSystem, $gBitUser, $gLibertySystem, $gBitThemes;
 
 $registerHash = array(
 	'package_name' => 'nexus',
@@ -51,5 +51,7 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 			$gBitSmarty->assign( 'use_custom_top_bar', TRUE );
 		}
 	}
+
+	$gBitThemes->loadCss( NEXUS_PKG_PATH.'css/nexus.css' );
 }
 ?>

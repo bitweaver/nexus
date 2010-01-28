@@ -1,0 +1,23 @@
+ul.hor,
+ul.hor ul       {line-height:18px; padding:0; margin:0; list-style:none;}
+ul.hor a,
+ul.hor li>span  {display:block; padding:0 6px;}
+ul.hor li       {float:left; text-align:left; width:auto;}
+ul.hor li ul    {position:absolute; left:-999em; border:1px solid #999999; background:#FFFFFF; display:block; margin:0; text-align:left;}
+ul.hor ul li    {width:13em; float:none;}
+ul.hor li li:hover,
+ul.hor li li li:hover {background:#eeeeee;}
+ul.hor li:hover ul,
+ul.hor li.iemenuhover ul,
+ul.hor li li:hover ul,
+ul.hor li li.iemenuhover ul,
+ul.hor li li li:hover ul,
+ul.hor li li li.iemenuhover ul {left:auto;}
+
+/* Special styles for horizontal nexus menus in the header */
+div#header div.nexus-menu {margin:0; padding:0;}
+div#header div.nexus-menu h3 {display:none;}
+div#header div.nexus-menu div.boxcontent {padding:0;}
+div#header div.nexus-menu ul.hor {height:26px;}
+div#header div.nexus-menu ul.hor a,
+div#header div.nexus-menu ul.hor li>span {padding:2px 3px; width:auto;}

@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.12 $
+ * @version  $Revision: 1.13 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -46,18 +46,19 @@ function write_suckerfish_cache( $pMenuHash ) {
 	$menu_name = strtolower( $menu_name );
 
 	$menu_file = $pMenuHash->mInfo['cache']['file'];
-	$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'"}';
+	$data = '{bitmodule title="{tr}'.$pMenuHash->mInfo['title'].'{/tr}" name="'.$menu_name.'" classplus="nexus-menu"}';
 	$data .= '<div class="suckerfish">';
 
 	// if a permission has been set, we need to work out when to close the {if} clause
 	$permCloseIds = array();
 	$perm_close = FALSE;
 	$next_cycle = FALSE;
+	$menu_id = 'nexus'.$pMenuHash->mInfo['menu_id'];
 
 	foreach( $pMenuHash->mInfo['tree'] as $key => $item ) {
 		if( $item['first'] ) {
 			if( $key == 0 ) {
-				$data .= '<ul id="nexus'.$pMenuHash->mInfo['menu_id'].'" class="menu '.$pMenuHash->mInfo['menu_type'].'">';
+				$data .= '<ul id="'.$menu_id.'" class="menu '.$pMenuHash->mInfo['menu_type'].'">';
 			} else {
 				$data .= '<ul>';
 			}
@@ -99,6 +100,7 @@ function write_suckerfish_cache( $pMenuHash ) {
 		}
 	}
 
+	$data .= '<!--[if lt IE 8]><script type="text/javascript">BitBase.fixIEDropMenu("'.$menu_id.'");</script><![endif]-->';
 	$data .= '<div class="clear"></div>';
 	$data .= '</div>';
 	$data .= '{/bitmodule}';
