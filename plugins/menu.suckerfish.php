@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.13 $
+ * @version  $Revision: 1.14 $
  * @package  nexus
  * @subpackage plugins
  */
@@ -53,7 +53,7 @@ function write_suckerfish_cache( $pMenuHash ) {
 	$permCloseIds = array();
 	$perm_close = FALSE;
 	$next_cycle = FALSE;
-	$menu_id = 'nexus'.$pMenuHash->mInfo['menu_id'];
+	$menu_id = 'nexus'.$pMenuHash->mInfo['menu_id'].'-{$moduleParams.layout_area}{$moduleParams.pos}';
 
 	foreach( $pMenuHash->mInfo['tree'] as $key => $item ) {
 		if( $item['first'] ) {
