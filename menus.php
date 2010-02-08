@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.17 $
+ * @version  $Revision: 1.18 $
  * @package  nexus
  * @subpackage functions
  */
@@ -9,7 +9,7 @@
 /**
 * required setup
 */
-require_once( '../bit_setup_inc.php' );
+require_once( '../kernel/setup_inc.php' );
 global $gBitSystem;
 require_once( NEXUS_PKG_PATH.'Nexus.php');
 include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
