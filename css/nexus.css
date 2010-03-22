@@ -13,6 +13,10 @@ ul.hor li li:hover ul,
 ul.hor li li.iemenuhover ul,
 ul.hor li li li:hover ul,
 ul.hor li li li.iemenuhover ul {left:auto;}
+/* IE7 sticky menu fix */
+ul.hor li:hover,
+ul.hor li li:hover,
+ul.hor li li li:hover {position:static;}
 
 /* Special styles for horizontal nexus menus in the header */
 div#header div.nexus-menu {margin:0; padding:0;}
