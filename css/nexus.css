@@ -3,7 +3,7 @@ ul.hor ul       {line-height:18px; padding:0; margin:0; list-style:none;}
 ul.hor a,
 ul.hor li>span  {display:block; padding:0 6px;}
 ul.hor li       {float:left; text-align:left; width:auto;}
-ul.hor li ul    {position:absolute; left:-999em; border:1px solid #999999; background:#FFFFFF; display:block; margin:0; text-align:left;}
+ul.hor li ul    {position:absolute; left:-999em; border:1px solid #999999; background:#FFFFFF; display:block; margin:0; text-align:left; z-index:50;}
 ul.hor ul li    {width:13em; float:none;}
 ul.hor li li:hover,
 ul.hor li li li:hover {background:#eeeeee;}
