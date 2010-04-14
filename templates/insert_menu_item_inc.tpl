@@ -42,7 +42,7 @@
 					<p>{tr}This {$gContent->mType.content_description} is already part of the menu <strong>{$inNexusMenu.title|escape}</strong>.{/tr}</p>
 					{formlabel label="Remove" for="nexusRemove"}
 					{forminput}
-						<input type="checkbox" name="nexus[remove_item]" id="nexusRemove" value="{$inNexusMenuItem.item_id}" />
+						<input type="checkbox" name="nexus[remove_item]" id="nexusRemove" value="{$inNexusMenuItem}" />
 						{formhelp note="Check the box if you wish to remove this page from the menu. This will also allow you to insert the menu item in a different menu when editing the menu next time."}
 					{/forminput}
 				</div>
