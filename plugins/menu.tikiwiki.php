@@ -4,7 +4,7 @@
  *
  * @abstract creates a javascript expandable menu
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.10 $
+ * @version  $Revision$
  * @package  nexus
  * @subpackage plugins
  */

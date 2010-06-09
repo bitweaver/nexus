@@ -4,7 +4,7 @@
 *
 * @abstract
 * @author   xing <xing@synapse.plus.com>
-* @version  $Revision: 1.30 $
+* @version  $Revision$
 * @package  nexus
 */
 

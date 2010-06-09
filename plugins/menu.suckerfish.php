@@ -5,7 +5,7 @@
  *
  * @abstract creates a simple &lt;ul&gt; and &lt;li&gt; based list of items
  * @author   xing@synapse.plus.com
- * @version  $Revision: 1.14 $
+ * @version  $Revision$
  * @package  nexus
  * @subpackage plugins
  */

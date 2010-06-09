@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   xing <xing@synapse.plus.com>
- * @version  $Revision: 1.17 $
+ * @version  $Revision$
  * @package  Nexus
  * @subpackage functions
  */

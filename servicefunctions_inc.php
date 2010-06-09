@@ -1,6 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_nexus/servicefunctions_inc.php,v 1.7 2007/10/25 20:43:02 squareing Exp $
+ * $Header$
  *
  * @package nexus
  * @subpackage functions

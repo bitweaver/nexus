@@ -6,7 +6,7 @@
  * @abstract implements javascript menu using form elements
  * @author   william@elan.net
  * copied   copied from menu.suckerfish.php originally by xing
- * @version  $Revision: 1.6 $
+ * @version  $Revision$
  * @package  nexus
  * @subpackage plugins
  */
