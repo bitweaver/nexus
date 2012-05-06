@@ -37,7 +37,7 @@ class NexusSystem extends LibertySystem {
 		$this->mSystem     = NEXUS_PKG_NAME;
 		$this->mPluginPath = NEXUS_PKG_PATH."plugins/";
 
-		LibertySystem::LibertySystem( FALSE );
+		parent::__construct( FALSE );
 	}
 }
 ?>
