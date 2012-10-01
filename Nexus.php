@@ -295,7 +295,7 @@ class Nexus extends NexusSystem {
 			$bindVars = array( $pMenuId );
 		}
 		$query .= ' ORDER BY nmi.`pos`';
-		$result = $this->mDb->query( $query, array( $bindVars ) );
+		$result = $this->mDb->query( $query, $bindVars );
 		while( !$result->EOF ) {
 			$item = $result->fields;
 			$item['display_url'] = $this->printUrl( $item );
