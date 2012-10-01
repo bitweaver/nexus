@@ -16,7 +16,7 @@ include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
 $gBitSystem->verifyPermission( 'p_nexus_create_menus' );
 
 if( empty( $_REQUEST['menu_id'] ) ) {
-	header( 'Location:'.NEXUS_PKG_URL.'index.php' );
+	bit_redirect( NEXUS_PKG_URL.'index.php' );
 }
 
 // get content and pass it on
@@ -37,7 +37,7 @@ if( isset( $_REQUEST['store_item'] ) ) {
 	} else {
 		$formfeedback['error'] = $gNexus->mErrors;
 	}
-	$gNexus->load();
+	bit_redirect( NEXUS_PKG_URL.'menu_items.php?menu_id='.$_REQUEST['menu_id'] );
 }
 
 if( isset( $_REQUEST['remove_item'] ) && is_array( $_REQUEST['remove_item'] ) ) {
@@ -52,8 +52,8 @@ if( isset( $_REQUEST['remove_item'] ) && is_array( $_REQUEST['remove_item'] ) ) 
 		$formfeedback['success'] = tra( 'The following items were successfully removed from the menu' ).': ';
 		$gBitSmarty->assign( 'delList', $delList );
 	}
-	$gNexus->load();
 	$gNexus->writeMenuCache();
+	bit_redirect( NEXUS_PKG_URL.'menu_items.php?menu_id='.$_REQUEST['menu_id'] );
 }
 
 if( !empty( $_REQUEST['item_id'] ) ) {
