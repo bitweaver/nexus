@@ -26,7 +26,7 @@ class Nexus extends NexusSystem {
 	* Initialisation of this class
 	*/
 	function Nexus( $pMenuId=NULL ) {
-		NexusSystem::NexusSystem();
+		parent::__construct();
 		$this->mMenuId = $pMenuId;
 		// if the cache folder doesn't exist yet, create it
 		if( !is_dir( TEMP_PKG_PATH.NEXUS_PKG_NAME.'/modules' ) ) {
@@ -62,7 +62,7 @@ class Nexus extends NexusSystem {
 			$query .= ' WHERE nm.`menu_id`=?';
 			$bindVars = array( $pMenuId );
 		}
-		if( $result = $this->mDb->query( $query, array( $bindVars ) ) ) {
+		if( $result = $this->mDb->query( $query, $bindVars ) ) {
 			$ret = $result->fields;
 			$ret['cache']['file'] = 'mod_'.preg_replace( "/ /", "_", $ret['title'] ).'_'.$pMenuId.'.tpl';
 			$ret['cache']['path'] = TEMP_PKG_PATH.NEXUS_PKG_NAME."/modules/".$ret['cache']['file'];
