@@ -236,6 +236,7 @@ class Nexus extends NexusSystem {
 	function storeMenu( &$pParamHash ) {
 		$ret = FALSE;
 		if( $this->verifyMenu( $pParamHash ) ) {
+			$this->mDb->StartTrans();
 			if( !@BitBase::verifyId( $pParamHash['menu_id'] ) ) {
 				$query = "INSERT INTO `".BIT_DB_PREFIX."nexus_menus`( `title`,`description`,`menu_type`,`plugin_guid`,`editable` ) VALUES(?,?,?,?,?)";
 				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['menu_type'], $pParamHash['plugin_guid'], $pParamHash['editable'] ) );
@@ -246,6 +247,7 @@ class Nexus extends NexusSystem {
 				$result = $this->mDb->query( $query, array( $pParamHash['title'], $pParamHash['description'], $pParamHash['menu_type'], $pParamHash['plugin_guid'], $pParamHash['editable'], $pParamHash['menu_id'] ) );
 				$ret = $pParamHash['menu_id'];
 			}
+			$this->mDb->CompleteTrans();
 			$this->writeMenuCache( $ret );
 		} else {
 			error_log( "Error storing menu: " . vc($this->mErrors) );
