@@ -1,6 +1,6 @@
 {strip}
 {if $editItem.menu_id}
-	<div class="floaticon"><a href="{$smarty.const.PKG_NEXUS_URL}menu_items.php?tab=edit&amp;menu_id={$editItem.menu_id}">{biticon ipackage="icons" iname="document-new" iexplain="create new menu"}</a></div>
+	<div class="floaticon"><a href="{$smarty.const.PKG_NEXUS_URL}menu_items.php?tab=edit&amp;menu_id={$editItem.menu_id}">{booticon iname="icon-file" ipackage="icons" iexplain="create new menu"}</a></div>
 {/if}
 
 <div class="display nexus">
