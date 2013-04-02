@@ -128,7 +128,7 @@
 					</td>
 					<td class="actionicon">
 						<a href="{$smarty.const.NEXUS_PKG_URL}menu_sort.php?menu_id={$menu.menu_id}">{booticon iname="icon-recycle"  ipackage="icons"  iexplain='sort menu items'}</a>
-						<a href="{$smarty.const.NEXUS_PKG_URL}menu_items.php?menu_id={$menu.menu_id}">{biticon ipackage="icons" iname="list-add" iexplain='create and edit menu items'}</a>
+						<a href="{$smarty.const.NEXUS_PKG_URL}menu_items.php?menu_id={$menu.menu_id}">{booticon iname="icon-plus-sign"  ipackage="icons"  iexplain='create and edit menu items'}</a>
 						<a href="{$smarty.const.KERNEL_PKG_URL}admin/index.php?page=layout&amp;module_name=bitpackage%3Atemp%2Fnexus%2Fmod_{$menu.title|escape|replace:' ':'_'|lower}_{$menu.menu_id}.tpl">{booticon iname="icon-paperclip"  ipackage="icons"  iexplain=assign}</a>
 						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=remove_dead&amp;menu_id={$menu.menu_id}">{biticon ipackage="icons" iname="mail-mark-junk" iexplain='remove dead links'}</a>
 						<a href="{$smarty.const.NEXUS_PKG_URL}menus.php?action=edit&amp;menu_id={$menu.menu_id}">{booticon iname="icon-edit" ipackage="icons" iexplain='configure menu'}</a>
