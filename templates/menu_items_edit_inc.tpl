@@ -4,7 +4,7 @@
 	<input type="hidden" name="item_id" value="{$editItem.item_id}" />
 	<input type="hidden" name="tab" value="edit" />
 
-	<div class="row">
+	<div class="control-group">
 		{formlabel label="Link to content" for="content_type_guid"}
 		{forminput}
 			{html_options options=$contentTypes name=content_type_guid id=content_type_guid selected=$smarty.request.content_type_guid}
@@ -26,7 +26,7 @@
 	</div>
 
 	{if $menuList}
-		<div class="row">
+		<div class="control-group">
 			{formlabel label="Insert menu" for="menu_list"}
 			{forminput}
 				{html_options name="menu_list" options=$menuList onchange="document.getElementById('rsrc').value=options[selectedIndex].value;document.getElementById('title').value=options[selectedIndex].label.replace(/ \[id.*?\]/,'');document.getElementById('rsrc_type').value='menu_id';"}
@@ -37,11 +37,11 @@
 		</div>
 	{/if}
 
-	<div class="row">
+	<div class="control-group">
 		<hr />
 	</div>
 
-	<div class="row">
+	<div class="control-group">
 		{formlabel label="Title" for="title"}
 		{forminput}
 			<input type="text" name="title" id="title" size="50" value="{$editItem.title|escape}" />
@@ -49,7 +49,7 @@
 		{/forminput}
 	</div>
 
-	<div class="row">
+	<div class="control-group">
 		{formlabel label="Hint" for="hint"}
 		{forminput}
 			<textarea name="hint" id="hint" cols="50" rows="2">{$editItem.hint|escape}</textarea>
@@ -57,7 +57,7 @@
 		{/forminput}
 	</div>
 
-	<div class="row">
+	<div class="control-group">
 		{formlabel label="Resource type" for="rsrc_type"}
 		{forminput}
 			{html_options name="rsrc_type" id="rsrc_type" options=$rsrcTypes selected=`$editItem.rsrc_type`}
@@ -65,7 +65,7 @@
 		{/forminput}
 	</div>
 
-	<div class="row">
+	<div class="control-group">
 		{formlabel label="Resource link" for="rsrc"}
 		{forminput}
 			<input type="text" name="rsrc" id="rsrc" size="50" value="{$editItem.rsrc|escape}" />
@@ -73,7 +73,7 @@
 		{/forminput}
 	</div>
 
-	<div class="row">
+	<div class="control-group">
 		{formlabel label="Permission" for="perm"}
 		{forminput}
 			{html_options name="perm" id="perm" options=$perms selected=`$editItem.perm`}
@@ -82,7 +82,7 @@
 	</div>
 
 	{if !$editItem.item_id}
-		<div class="row">
+		<div class="control-group">
 			{formlabel label="Insert after" for="after_ref_id"}
 			{forminput}
 				<select name="after_ref_id" id="after_ref_id">
@@ -97,7 +97,7 @@
 		</div>
 	{/if}
 
-	<div class="row submit">
+	<div class="control-group submit">
 		<input type="submit" name="store_item" value="{tr}Save Item{/tr}" />
 	</div>
 {/form}

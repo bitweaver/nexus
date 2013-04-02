@@ -5,14 +5,14 @@
 			{if !$inNexusMenu}
 				{foreach from=$nexusList item=menu}
 					{if $menu.editable or $gBitUser->isAdmin()}
-						<div class="row">
+						<div class="control-group">
 							{formlabel label="Menu"}
 							{forminput}
 								{$menu.title|escape} {if $menu.description}<small>( {$menu.description|escape} )</small>{/if}
 							{/forminput}
 						</div>
 
-						<div class="row">
+						<div class="control-group">
 							{formlabel label="Insert here" for="nexus_menu_`$menu.menu_id`"}
 							{forminput}
 								<input type="radio" value="{$menu.menu_id}" name="nexus[menu_id]" id="nexus_menu_{$menu.menu_id}" />
@@ -31,14 +31,14 @@
 					{/if}
 				{/foreach}
 
-				<div class="row">
+				<div class="control-group">
 					{formlabel label="Don't insert" for="nexus-no-insert"}
 					{forminput}
 						<input type="radio" value="" name="nexus[menu_id]" id="nexus-no-insert" checked="checked" />
 					{/forminput}
 				</div>
 			{else}
-				<div class="row">
+				<div class="control-group">
 					<p>{tr}This {$gContent->getContentTypeName()} is already part of the menu <strong>{$inNexusMenu.title|escape}</strong>.{/tr}</p>
 					{formlabel label="Remove" for="nexusRemove"}
 					{forminput}

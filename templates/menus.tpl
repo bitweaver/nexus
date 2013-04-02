@@ -14,7 +14,7 @@
 		{form legend="Create / Edit Menus"}
 			<input type="hidden" name="menu_id" value="{$editMenu.menu_id}" />
 
-			<div class="row">
+			<div class="control-group">
 				{if $editMenu}
 					{formfeedback warning="{tr}Renaming an assigned menu will cause an error because the cache file will be renamed as well. You will have to make appropriate modifications in the layout page as well.{/tr}"}
 				{/if}
@@ -25,7 +25,7 @@
 				{/forminput}
 			</div>
 
-			<div class="row">
+			<div class="control-group">
 				{formlabel label="Description" for="description"}
 				{forminput}
 					<textarea name="description" id="description" cols="50" rows="3">{$editMenu.description|escape}</textarea>
@@ -33,7 +33,7 @@
 				{/forminput}
 			</div>
 
-			<div class="row">
+			<div class="control-group">
 				{formlabel label="Editable menu" for="editable"}
 				{forminput}
 					{html_checkboxes name="editable" values="1" checked=`$editMenu.editable` labels=false id="editable"}
@@ -41,7 +41,7 @@
 				{/forminput}
 			</div>
 
-			<div class="row">
+			<div class="control-group">
 				{formlabel label="Pick menu type"}
 				{forminput}
 					{foreach from=$gNexusSystem->mPlugins item=plugin name=foo}
@@ -88,7 +88,7 @@
 				{/forminput}
 			</div>
 
-			<div class="row submit">
+			<div class="control-group submit">
 				<input type="submit" name="store_menu" value="Save Settings" />
 			</div>
 
