@@ -12,7 +12,7 @@
 
 		{forminput}
 			<input type="text" name="find" value="{$smarty.request.find}" /> 
-			<input type="submit" value="{tr}filter{/tr}" name="search_objects" />
+			<input type="submit" class="btn" value="{tr}filter{/tr}" name="search_objects" />
 			{formhelp note="You can select the content type you want to limit the dropdown to and/or a word filter."}
 		{/forminput}
 
@@ -98,7 +98,7 @@
 	{/if}
 
 	<div class="control-group submit">
-		<input type="submit" name="store_item" value="{tr}Save Item{/tr}" />
+		<input type="submit" class="btn" name="store_item" value="{tr}Save Item{/tr}" />
 	</div>
 {/form}
 {/strip}
