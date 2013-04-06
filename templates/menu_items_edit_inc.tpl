@@ -60,7 +60,7 @@
 	<div class="control-group">
 		{formlabel label="Resource type" for="rsrc_type"}
 		{forminput}
-			{html_options name="rsrc_type" id="rsrc_type" options=$rsrcTypes selected=`$editItem.rsrc_type`}
+			{html_options name="rsrc_type" id="rsrc_type" options=$rsrcTypes selected=$editItem.rsrc_type}
 			{formhelp note="Here you can pick the resource type you wish to link to."}
 		{/forminput}
 	</div>
@@ -76,7 +76,7 @@
 	<div class="control-group">
 		{formlabel label="Permission" for="perm"}
 		{forminput}
-			{html_options name="perm" id="perm" options=$perms selected=`$editItem.perm`}
+			{html_options name="perm" id="perm" options=$perms selected=$editItem.perm}
 			{formhelp note="Permission required to view this item and any children associated with it. If no permission is selected, the menu is visible to all users."}
 		{/forminput}
 	</div>

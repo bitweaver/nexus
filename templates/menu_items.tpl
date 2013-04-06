@@ -12,7 +12,8 @@
 	<div class="body">
 		{formfeedback hash=$formfeedback}
 		{if $delList}
-			<ul>
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>
+<ul class="{$packageMenuClass}">
 				{foreach from=$delList item=delItem}
 					<li>{$delItem}</li>
 				{/foreach}

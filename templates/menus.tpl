@@ -36,7 +36,7 @@
 			<div class="control-group">
 				{formlabel label="Editable menu" for="editable"}
 				{forminput}
-					{html_checkboxes name="editable" values="1" checked=`$editMenu.editable` labels=false id="editable"}
+					{html_checkboxes name="editable" values="1" checked=$editMenu.editable labels=false id="editable"}
 					{formhelp note="Checking this will allow users with the correct permission (p_nexus_insert_item) to add menu items when they are editing content such as a wiki page or a fisheye gallery."}
 				{/forminput}
 			</div>

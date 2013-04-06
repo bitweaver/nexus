@@ -2,7 +2,8 @@
 {if $gNexus->mInfo.tree}
 	{form legend="Item Details"}
 		{foreach from=$gNexus->mInfo.tree item=item key=key}
-			{if $item.first}<ul>{else}</li>{/if}
+			{if $item.first}<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>
+<ul class="{$packageMenuClass}">{else}</li>{/if}
 			{if $item.last}</ul>{else}
 				<li>
 					<div class="{cycle values='even,odd'}">
