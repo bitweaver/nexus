@@ -1,5 +1,5 @@
 {strip}
-<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>
+{if $packageMenuTitle}<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>{/if}
 <ul class="{$packageMenuClass}">
 	<li><a class="head" href="{$smarty.const.NEXUS_PKG_URL}menus.php">{booticon ipackage="icons" iname="icon-sitemap" iexplain="Menus" ilocation=menu}</a></li>
 	{if $gNexus->mInfo.menu_id}
