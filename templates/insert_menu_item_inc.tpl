@@ -40,11 +40,10 @@
 			{else}
 				<div class="control-group">
 					<p>{tr}This {$gContent->getContentTypeName()} is already part of the menu <strong>{$inNexusMenu.title|escape}</strong>.{/tr}</p>
-					{formlabel label="Remove" for="nexusRemove"}
-					{forminput}
-						<input type="checkbox" name="nexus[remove_item]" id="nexusRemove" value="{$inNexusMenuItem}" />
+					<label class="checkbox">
+						<input type="checkbox" name="nexus[remove_item]" id="nexusRemove" value="{$inNexusMenuItem}" />Remove
 						{formhelp note="Check the box if you wish to remove this page from the menu. This will also allow you to insert the menu item in a different menu when editing the menu next time."}
-					{/forminput}
+					</label>
 				</div>
 			{/if}
 		{/legend}
