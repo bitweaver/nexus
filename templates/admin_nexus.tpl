@@ -36,6 +36,6 @@
 	</ul>
 
 	<div class="control-group submit">
-		<input type="submit" class="btn" name="pluginsave" value="{tr}Save Plugin Settings{/tr}" />
+		<input type="submit" class="btn btn-default" name="pluginsave" value="{tr}Save Plugin Settings{/tr}" />
 	</div>
 {/form}
