@@ -1,7 +1,7 @@
 {formfeedback hash=$feedback}
 
 {legend legend="Menu Cache"}
-	<div class="control-group">
+	<div class="form-group">
 		{formlabel label="Menu Cache" for=""}
 		{forminput}
 		{smartlink ititle="Rewrite Menu Cache" rewrite_cache=1 page=$page}
@@ -35,7 +35,7 @@
 		{/foreach}
 	</ul>
 
-	<div class="control-group submit">
+	<div class="form-group submit">
 		<input type="submit" class="btn btn-default" name="pluginsave" value="{tr}Save Plugin Settings{/tr}" />
 	</div>
 {/form}

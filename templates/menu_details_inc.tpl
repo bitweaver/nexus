@@ -1,20 +1,20 @@
 {strip}
 {legend legend="Menu settings"}
-	<div class="control-group">
+	<div class="form-group">
 		{formlabel label="Title"}
 		{forminput}
 			{$gNexus->mInfo.title|escape}
 		{/forminput}
 	</div>
 
-	<div class="control-group">
+	<div class="form-group">
 		{formlabel label="Description"}
 		{forminput}
 			{$gNexus->mInfo.description|escape}
 		{/forminput}
 	</div>
 
-	<div class="control-group">
+	<div class="form-group">
 		{formlabel label="Editable"}
 		{forminput}
 			{if $gNexus->mInfo.editable}
@@ -25,14 +25,14 @@
 		{/forminput}
 	</div>
 
-	<div class="control-group">
+	<div class="form-group">
 		{formlabel label="Menu Type"}
 		{forminput}
 			{$gNexus->mInfo.plugin_guid}
 		{/forminput}
 	</div>
 
-	<div class="control-group">
+	<div class="form-group">
 		{formlabel label="Menu subtype"}
 		{forminput}
 			{assign var=plugin_guid value=$gNexus->mInfo.plugin_guid}
