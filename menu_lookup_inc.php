@@ -16,6 +16,6 @@ if( @BitBase::verifyId( $_REQUEST['menu_id'] ) ) {
 }
 $gNexus -> load();
 
-$gBitSmarty->assign_by_ref( 'gNexus', $gNexus );
-$gBitSmarty->assign_by_ref( 'menuId', $menuId );
+$gBitSmarty->assignByRef( 'gNexus', $gNexus );
+$gBitSmarty->assignByRef( 'menuId', $menuId );
 ?>
