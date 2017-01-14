@@ -24,7 +24,7 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	} else {
 		$gNexusSystem->loadActivePlugins();
 	}
-	$gBitSmarty->assign_by_ref( 'gNexusSystem', $gNexusSystem );
+	$gBitSmarty->assignByRef( 'gNexusSystem', $gNexusSystem );
 
 	// include service functions
 	require_once( NEXUS_PKG_PATH.'servicefunctions_inc.php' );
