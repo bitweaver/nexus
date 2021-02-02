@@ -27,7 +27,7 @@ if( $gBitSystem->isPackageActive( 'nexus' ) ) {
 	$gBitSmarty->assignByRef( 'gNexusSystem', $gNexusSystem );
 
 	// include service functions
-	require_once( NEXUS_PKG_PATH.'servicefunctions_inc.php' );
+	require_once( NEXUS_PKG_INCLUDE_PATH.'servicefunctions_inc.php' );
 
 	$gLibertySystem->registerService( LIBERTY_SERVICE_MENU, NEXUS_PKG_NAME, array(
 		'content_store_function'   => 'nexus_content_store',

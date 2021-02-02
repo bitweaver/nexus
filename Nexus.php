@@ -522,7 +522,7 @@ class Nexus extends NexusSystem {
 	function expungeDeadItems( $pMenuId=NULL ) {
 		if( isset( $pMenuId ) && is_numeric( $pMenuId ) ) {
 			// get $contentList
-			include_once( LIBERTY_PKG_PATH.'get_content_list_inc.php' );
+			include_once( LIBERTY_PKG_INCLUDE_PATH.'get_content_list_inc.php' );
 			foreach( $contentList as $contentItem ) {
 				$contentIds[] = $contentItem['content_id'];
 			}
@@ -649,7 +649,7 @@ class Nexus extends NexusSystem {
 	*/
 	function importStructure( $pStructureId=NULL ) {
 		if( $pStructureId || !is_numeric( $pStructureId ) ) {
-			include_once( LIBERTY_PKG_PATH.'LibertyStructure.php');
+			include_once( LIBERTY_PKG_CLASS_PATH.'LibertyStructure.php');
 			$structure = new LibertyStructure( $pStructureId );
 			$structure->load();
 

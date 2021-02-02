@@ -11,7 +11,7 @@
 */
 require_once( '../kernel/setup_inc.php' );
 require_once( NEXUS_PKG_PATH.'Nexus.php');
-include_once( NEXUS_PKG_PATH.'menu_lookup_inc.php' );
+include_once( NEXUS_PKG_INCLUDE_PATH.'menu_lookup_inc.php' );
 
 $gBitSystem->verifyPermission( 'p_nexus_create_menus' );
 
@@ -20,7 +20,7 @@ if( empty( $_REQUEST['menu_id'] ) ) {
 }
 
 // get content and pass it on
-include_once( LIBERTY_PKG_PATH.'get_content_list_inc.php' );
+include_once( LIBERTY_PKG_INCLUDE_PATH.'get_content_list_inc.php' );
 $gBitSmarty->assign( 'contentSelect', $contentSelect );
 $gBitSmarty->assign( 'contentTypes', $contentTypes );
 

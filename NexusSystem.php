@@ -13,7 +13,7 @@
 /**
  * Setup
  */
-require_once( LIBERTY_PKG_PATH.'LibertySystem.php' );
+require_once( LIBERTY_PKG_CLASS_PATH.'LibertySystem.php' );
 define( 'NEXUS_DEFAULT_MENU', 'suckerfish' );
 
 /**
