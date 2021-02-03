@@ -9,7 +9,7 @@
 /**
 * required setup
 */
-require_once( '../kernel/setup_inc.php' );
+require_once( '../kernel/includes/setup_inc.php' );
 global $gBitSystem;
 require_once( NEXUS_PKG_PATH.'Nexus.php');
 include_once( NEXUS_PKG_INCLUDE_PATH.'menu_lookup_inc.php' );
