@@ -9,7 +9,7 @@ global $gBitSystem, $gBitUser, $gLibertySystem, $gBitThemes;
 
 $registerHash = array(
 	'package_name' => 'nexus',
-	'package_path' => dirname( __FILE__ ).'/',
+	'package_path' => dirname( dirname( __FILE__ ) ).'/',
 	'service'      => LIBERTY_SERVICE_MENU,
 );
 $gBitSystem->registerPackage( $registerHash );
